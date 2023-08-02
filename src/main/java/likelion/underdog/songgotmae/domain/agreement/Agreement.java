@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -28,4 +29,10 @@ public class Agreement {
 
     @Column(nullable = false)
     private Boolean isSupport;
+
+    public Agreement(Member member, Post post, Boolean isSupport) {
+        this.member = member;
+        this.post = post;
+        this.isSupport = isSupport;
+    }
 }
