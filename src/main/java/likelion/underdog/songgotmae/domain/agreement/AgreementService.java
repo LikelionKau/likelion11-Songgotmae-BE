@@ -10,5 +10,4 @@ public interface AgreementService {
     AgreementDto.Response getAgreementById(Long agreementId);
 
 
-    void submitAgreement(AgreementDto agreementDto);
 }

@@ -4,10 +4,7 @@ import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.MemberRepository;
 import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.domain.post.PostRepository;
-import likelion.underdog.songgotmae.domain.agreement.AgreementRepository;
-import likelion.underdog.songgotmae.domain.agreement.Agreement;
 import likelion.underdog.songgotmae.web.dto.AgreementDto;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +31,7 @@ public class AgreementServiceImpl implements AgreementService {
     }
 
     @Override
+    @Transactional(readOnly = true  )
     public AgreementDto.Response getAgreementById(Long agreementId) {
         return new AgreementDto.Response("대찬성");
     }

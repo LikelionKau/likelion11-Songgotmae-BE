@@ -1,18 +1,19 @@
 package likelion.underdog.songgotmae.web.dto;
 
+
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AgreementDto {
 
+    public static String Response;
     private Long memberId;
     private Long postId;
 
     @Data
-    public static class Create {
+    public class Create {
         private Boolean isSupport;
 
         public Long getPostId() {
@@ -22,6 +23,7 @@ public class AgreementDto {
         public Long getMemberId() {
             return memberId;
         }
+        public Boolean getIsSupport() {return isSupport;}
     }
     @Data
     public static class Response {
