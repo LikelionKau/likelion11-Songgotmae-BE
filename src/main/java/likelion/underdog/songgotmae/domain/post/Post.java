@@ -2,12 +2,11 @@ package likelion.underdog.songgotmae.domain.post;
 
 import jakarta.persistence.*;
 import likelion.underdog.songgotmae.domain.member.Member;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import likelion.underdog.songgotmae.web.dto.PostDto;
 
 import java.time.LocalDateTime;
 
@@ -15,8 +14,8 @@ import java.time.LocalDateTime;
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "post_tb")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
@@ -38,7 +37,20 @@ public class Post {
     @CreatedDate
     @Column(nullable = false)
     private LocalDateTime createdAt;
+
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime modifiedAt;
+
+    public Post() {
+    }
+
+    public static Post from(PostDto postDto) {
+        Post post = new Post();
+        post.setNumber(postDto.getNumber());
+        post.setUserId(postDto.getUserId());
+        post.setTitle(postDto.getTitle());
+        post.setContent(postDto.getContents());
+        return post;
+    }
 }
