@@ -1,0 +1,9 @@
+# swagger configuration
+springdoc:
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  api-docs:
+    groups:
+      enabled: true
+spring.config.import: optional:file:.env
+

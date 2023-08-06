@@ -1,6 +1,6 @@
 package likelion.underdog.songgotmae.domain.post;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
