@@ -39,13 +39,21 @@ public class SecurityConfig {
         http
                 .headers().frameOptions().disable() // h2-console 화면 사용 위해 disable
                 .and()
-                .httpBasic().disable() //
+                .httpBasic().disable() // 브라우저가 지 멋대로 팝업창을 이용하여 사용자 인증을 하려고 하는 기능 -> disabled
                 .cors().configurationSource(configurationSource())
                 .and()
-                .csrf().disable() //
+                .csrf().disable() // enable하면 postman 동작 x
                 .formLogin().disable() // 기본 로그인 방식 사용 x
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // session id를 서버에서 관리 x (jwt 사용에정)
 
+        /*
+        * Exception 가로채기
+        **/
+//        http
+//                .exceptionHandling().authenticationEntryPoint((request, response, authException) ->
+//                {
+//                    CustomResponseUtil.unAuthentication(response, "로그인을 진행해 주세요");
+//                });
         http
                 .authorizeRequests()
                 .antMatchers(SwaggerUrlPatterns)
@@ -85,7 +93,7 @@ public class SecurityConfig {
         log.debug("DEBUG : CorsConfigurationSource CORS 설정이 filterchain에 등록");
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*"); // GET, POST, PUT, DELETE (javascript 요청 허용)
         configuration.addAllowedOriginPattern("*"); // 모든 IP 주소 허용 (항후 프론트엔트 IP만 허용해야함)
         configuration.setAllowCredentials(true);
