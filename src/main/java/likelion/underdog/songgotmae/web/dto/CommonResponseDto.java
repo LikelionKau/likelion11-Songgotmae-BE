@@ -1,5 +1,4 @@
 package likelion.underdog.songgotmae.web.dto;
-import likelion.underdog.songgotmae.domain.post.Post;
 public class CommonResponseDto {
     private Long id;
     private String response;

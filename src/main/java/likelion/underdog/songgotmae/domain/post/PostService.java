@@ -1,5 +1,6 @@
 package likelion.underdog.songgotmae.domain.post;
 
+import likelion.underdog.songgotmae.web.dto.PostDto;
 import org.springframework.stereotype.Service;
 import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 
@@ -13,9 +14,12 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public CommonResponseDto newPost(Post postDto) {
-        Post post = Post.from(postDto);
-        postRepository.save(post); // postRepository.save(post)를 실행하여 post를 저장
+    public CommonResponseDto newPost(PostDto postDto) {
+        Post post = new Post();
+        post.setUserId(postDto.getUserId());
+        // 필요한 다른 값을 post 객체에 설정해야 할 수도 있습니다.
+
+        postRepository.save(post);
 
         // 저장한 post의 id 값을 가져와서 CommonResponseDto에 설정
         CommonResponseDto responseDto = new CommonResponseDto();
