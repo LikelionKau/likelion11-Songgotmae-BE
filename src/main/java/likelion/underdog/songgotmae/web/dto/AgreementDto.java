@@ -9,7 +9,7 @@ public class AgreementDto {
 
     @Data
     public static class Create {
-        private final Long memberId;
+        private Long memberId;
         private Long postId;
         private Boolean isAgree;
     }
