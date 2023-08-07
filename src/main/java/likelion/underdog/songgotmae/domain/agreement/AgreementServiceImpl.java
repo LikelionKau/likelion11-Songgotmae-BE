@@ -33,7 +33,7 @@ public class AgreementServiceImpl implements AgreementService {
     @Override
     @Transactional(readOnly = true  )
     public AgreementDto.Response getAgreementById(Long agreementId) {
-        return new AgreementDto.Response("대찬성");
+        return new AgreementDto.Response("hello");
     }
 
 }
