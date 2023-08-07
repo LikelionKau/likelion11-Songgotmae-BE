@@ -44,8 +44,6 @@ public class Post {
 
     // 생성자
     public Post() {
-        // 생성자에서 객체의 속성 초기화
-        this.userId = userId;
     }
 
     // set 메서드
