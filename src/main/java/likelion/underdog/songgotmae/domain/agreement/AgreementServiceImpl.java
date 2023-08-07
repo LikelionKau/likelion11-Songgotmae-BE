@@ -20,20 +20,44 @@ public class AgreementServiceImpl implements AgreementService {
 
     @Override
     @Transactional
-    public void submitAgreement(AgreementDto.Create agreementDto) {
-        if (Boolean.TRUE.equals(agreementDto.getIsSupport())) {
-            Post post = postRepository.findById(agreementDto.getPostId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
-            Member member = memberRepository.findById(agreementDto.getMemberId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
+    public AgreementDto.Response submitAgreement(AgreementDto.Create request) {
+        if (request.getIsAgree() == null) {
+            AgreementDto.Response response = AgreementDto.Response.builder()
+                    .msg("문제가 있다.")
+                    .build();
+            return response;
+        }
 
-            Agreement agreement = new Agreement(member, post, true);
-            agreementRepository.save(agreement);
+        if (request.getIsAgree()) {
+            Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
+            Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
+
+            Agreement saveAgreement = agreementRepository.save(new Agreement(member, post, true));
+
+            AgreementDto.Response response = AgreementDto.Response.builder()
+                    .agreementId(saveAgreement.getId())
+                    .build();
+            return response;
+        } else {
+            Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
+            Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
+
+            Agreement saveAgreement = agreementRepository.save(new Agreement(member, post, false));
+
+            AgreementDto.Response response = AgreementDto.Response.builder()
+                    .agreementId(saveAgreement.getId())
+                    .build();
+            return response;
         }
     }
 
     @Override
-    @Transactional(readOnly = true  )
+    @Transactional(readOnly = true)
     public AgreementDto.Response getAgreementById(Long agreementId) {
-        return new AgreementDto.Response("hello");
+        AgreementDto.Response response = AgreementDto.Response.builder()
+                .agreementId(agreementId)
+                .build();
+        return response;
     }
 
 }

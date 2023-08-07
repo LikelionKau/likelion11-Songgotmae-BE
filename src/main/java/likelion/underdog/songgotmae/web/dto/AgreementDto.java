@@ -5,19 +5,25 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public  class AgreementDto {
+public class AgreementDto {
 
     @Data
     public static class Create {
         private final Long memberId;
         private Long postId;
-        private Boolean isSupport;
-
+        private Boolean isAgree;
     }
+
     @Data
-    @AllArgsConstructor
     public static class Response {
-        private String message;
+        private Long agreementId;
+        private String msg;
+
+        @Builder
+        public Response(Long agreementId, String msg) {
+            this.agreementId = agreementId;
+            this.msg = msg;
+        }
 
     }
 }

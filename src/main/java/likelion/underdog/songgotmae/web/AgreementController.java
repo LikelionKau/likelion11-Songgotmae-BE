@@ -16,11 +16,7 @@ public class AgreementController {
 
     @PostMapping
     public AgreementDto.Response create(@RequestBody AgreementDto.Create agreementDto) {
-        agreementService.submitAgreement(agreementDto);
-        AgreementDto.Response response = new AgreementDto.Response("성공");
+        AgreementDto.Response response = agreementService.submitAgreement(agreementDto);
         return response;
     }
-
-
-
 }

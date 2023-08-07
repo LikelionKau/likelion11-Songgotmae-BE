@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 public interface AgreementService {
-     void submitAgreement(AgreementDto.Create agreementDto);
+     AgreementDto.Response submitAgreement(AgreementDto.Create agreementDto);
 
     AgreementDto.Response getAgreementById(Long agreementId);
 
