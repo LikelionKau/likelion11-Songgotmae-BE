@@ -27,5 +27,11 @@ public class Agreement {
     private Post post;
 
     @Column(nullable = false)
-    private Boolean isSupport;
+    private Boolean isAgree;
+
+    public Agreement(Member member, Post post, Boolean isAgree) {
+        this.member = member;
+        this.post = post;
+        this.isAgree = isAgree;
+    }
 }
