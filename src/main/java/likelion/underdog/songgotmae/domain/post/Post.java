@@ -35,6 +35,13 @@ public class Post {
     @Column(nullable = false)
     private Long viewCount;
 
+    @Column(nullable = false)
+    private Boolean isApproved;
+
+    public void updateApprovedStatus(Boolean newApprovedStatus) {
+        this.isApproved = newApprovedStatus;
+    }
+
 //    @CreatedDate
 //    @Column(nullable = false)
 //    private LocalDateTime createdAt;
