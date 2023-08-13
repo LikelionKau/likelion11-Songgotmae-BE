@@ -1,37 +1,48 @@
 package likelion.underdog.songgotmae.config.security;
 
-import likelion.underdog.songgotmae.domain.member.UserType;
-import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import likelion.underdog.songgotmae.config.jwt.JwtAuthenticationFilter;
+import likelion.underdog.songgotmae.config.jwt.JwtAuthorizationFilter;
+import likelion.underdog.songgotmae.domain.member.MemberRole;
+import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static likelion.underdog.songgotmae.constant.StaticValue.SwaggerUrlPatterns;
+import static likelion.underdog.songgotmae.util.constant.URL_PATTERNS.*;
 
 
-@Configuration
-@RequiredArgsConstructor
+@Slf4j
 @EnableWebSecurity
-public class SecurityConfig {
-    private final FilterConfig filterConfig;
-    private final Logger log = LoggerFactory.getLogger(getClass());
+@Configuration
+public class SecurityConfig{
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         log.debug("DEBUG : BCryptPasswordEncoder 빈 등록");
         return new BCryptPasswordEncoder();
     }
+
+    public class CustomSecurityFilterManager extends AbstractHttpConfigurer<CustomSecurityFilterManager, HttpSecurity> {
+        @Override
+        public void configure(HttpSecurity builder) throws Exception {
+            AuthenticationManager authManager = builder.getSharedObject(AuthenticationManager.class);
+            builder.addFilter(new JwtAuthenticationFilter(authManager));
+            builder.addFilter(new JwtAuthorizationFilter(authManager));
+            super.configure(builder);
+        }
+    }
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -44,47 +55,43 @@ public class SecurityConfig {
                 .and()
                 .csrf().disable() // enable하면 postman 동작 x
                 .formLogin().disable() // 기본 로그인 방식 사용 x
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // session id를 서버에서 관리 x (jwt 사용에정)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session id를 서버에서 관리 x (jwt 사용에정)
+                .and()
+                .apply(new CustomSecurityFilterManager()); // 커스텀 필터 (JWT 필터 등) 적용
 
         /*
-        * Exception 가로채기
+        * 시큐리티 컨텍스트 내 예외 핸들링
         **/
-//        http
-//                .exceptionHandling().authenticationEntryPoint((request, response, authException) ->
-//                {
-//                    CustomResponseUtil.unAuthentication(response, "로그인을 진행해 주세요");
-//                });
         http
-                .authorizeRequests()
-                .antMatchers(SwaggerUrlPatterns)
-                .permitAll()
-                .antMatchers("/api/v1/**").authenticated() // public api는 인증 필요
-                .antMatchers("/admin/v1/**").hasRole(String.valueOf(UserType.ADMIN)) // admin api는 권한 필요
-                .anyRequest().authenticated()
+                .exceptionHandling()
+                    .authenticationEntryPoint(((request, response, authException) -> {
+                        CustomResponseFormatter.fail(response, "로그인을 진행해 주세요.", authException, HttpStatus.UNAUTHORIZED);
+                    }))
+                .and()
+                    .exceptionHandling().accessDeniedHandler(((request, response, accessDeniedException) -> {
+                        CustomResponseFormatter.fail(response, "관리자 권한이 없습니다.", accessDeniedException, HttpStatus.FORBIDDEN);
+                    }));
+
+
+        http
+                .authorizeHttpRequests() // 5.6 버전 이후 authorizeRequests 보다 authorizeHttpRequests 권장
+                    .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
+                    .antMatchers(H2_URL_PATTERNS).permitAll()
+                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
+                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
+                    .anyRequest().permitAll()
+
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/")
+
 //                .and()
-//                .logout()
-//                .logoutSuccessUrl("/")
-//                .and()
-//                .oauth2Login()
-//                .userInfoEndpoint()
-//                .userService(customOAuth2UserService)
+//                    .oauth2Login()
+//                    .userInfoEndpoint()
+//                    .userService(customOAuth2UserService)
         ;
 
         return http.build();
-    }
-
-    @Bean
-    public RoleHierarchyImpl roleHierarchy() {
-        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-        roleHierarchy.setHierarchy("ROLE_ADMIN > ROLE_USER");
-        return roleHierarchy;
-    }
-
-    @Bean
-    public DefaultWebSecurityExpressionHandler expressionHandler() {
-        DefaultWebSecurityExpressionHandler expressionHandler = new DefaultWebSecurityExpressionHandler();
-        expressionHandler.setRoleHierarchy(roleHierarchy());
-        return expressionHandler;
     }
 
 
