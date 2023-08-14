@@ -53,11 +53,6 @@ public class Post {
         this.content = content;
         this.viewCount = 0L;
         this.isApproved = null;  //생성자 생성 후 초기화
-        this.message = null;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public void setApprovedTrue() {
@@ -67,5 +62,9 @@ public class Post {
     public void setApprovedFalse() {
         isApproved = false;
     }                              //파라미터 없이 함수 설정
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
 
