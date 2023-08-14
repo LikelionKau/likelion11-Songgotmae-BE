@@ -9,8 +9,8 @@ public class PostDto {
     private String title;
     private String content;
     private Boolean approved;
-
     private String message;
+    private Boolean isApproved;
 
     public PostDto(Post post) {
         this.id = post.getId();
@@ -38,5 +38,14 @@ public class PostDto {
 
     public Boolean getApproved() {
         return approved;
+    }
+    public void setApprovedTrue() {
+        isApproved = true;
+    }
+    public void setApprovedFalse() {
+        isApproved = false;
+    }
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

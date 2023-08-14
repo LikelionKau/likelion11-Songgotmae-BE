@@ -44,27 +44,12 @@ public class Post {
     @Column(nullable = false)
     private Boolean isApproved;  // isApproved 필드 추가
 
-    @Column(nullable = false)
-    private String message;  // message 필드 추가
-
     public Post(Member author, String title, String content) {
         this.author = author;
         this.title = title;
         this.content = content;
         this.viewCount = 0L;
         this.isApproved = null;  //생성자 생성 후 초기화
-    }
-
-    public void setApprovedTrue() {
-        isApproved = true;
-    }
-
-    public void setApprovedFalse() {
-        isApproved = false;
-    }                              //파라미터 없이 함수 설정
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
+    }     //파라미터 없이 함수 설정
 }
 
