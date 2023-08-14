@@ -39,7 +39,7 @@ public class Member {
 
     @Comment("이메일 형식")
     @Column(unique = true, length = 30)
-    private String gmail;
+    private String socialEmail;
 
 
     @Enumerated(EnumType.STRING)
@@ -55,12 +55,12 @@ public class Member {
     private LocalDateTime modifiedAt;
 
     @Builder
-    public Member(Long id, String nickname, String password, String kauEmail, String gmail, MemberRole role) {
+    public Member(Long id, String nickname, String password, String kauEmail, String socialEmail, MemberRole role) {
         this.id = id;
         this.nickname = nickname;
         this.password = password;
         this.kauEmail = kauEmail;
-        this.gmail = gmail;
+        this.socialEmail = socialEmail;
         this.role = role;
     }
 

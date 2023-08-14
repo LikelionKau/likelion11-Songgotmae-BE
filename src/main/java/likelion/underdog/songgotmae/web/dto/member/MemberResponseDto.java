@@ -21,12 +21,12 @@ public class MemberResponseDto {
     @Data
     public static class LoginResponseDto {
         private Long id;
-        private String kauEmail;
+//        private String kauEmail;
         private String createdAt;
 
         public LoginResponseDto(Member member) {
             this.id = member.getId();
-            this.kauEmail = member.getKauEmail();
+//            this.kauEmail = member.getKauEmail();
             this.createdAt = CustomDateFormatter.toStringFormat(member.getCreatedAt());
         }
     }

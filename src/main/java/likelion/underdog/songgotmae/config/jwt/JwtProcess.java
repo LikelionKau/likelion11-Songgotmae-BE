@@ -6,8 +6,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import likelion.underdog.songgotmae.config.auth.LoginMember;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.MemberRole;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
@@ -23,6 +23,8 @@ public class JwtProcess {
                 .sign(Algorithm.HMAC512(JwtVO.SECRET_KEY));
         return JwtVO.TOKEN_PREFIX + jwtToken;
     }
+
+
 
     public static LoginMember verify(String token) {
         DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(JwtVO.SECRET_KEY)).build().verify(token);

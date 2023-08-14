@@ -24,4 +24,5 @@ public class URL_PATTERNS {
     public static final String[] ADMIN_PAGE_URL_PATTERNS = {
             "/admin/v1/**",
     };
+
 }
