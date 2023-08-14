@@ -42,17 +42,13 @@ public class Post {
 
     private Long userId;
 
-    // 생성자
     public Post() {
     }
 
-    // set 메서드
     public void setUserId(Long userId) {
-        // 객체의 속성 값을 변경하는 set 메서드
         this.userId = userId;
     }
 
-    // get 메서드 (선택적으로 추가하여 값을 가져올 수도 있습니다.)
     public Long getUserId() {
         return this.userId;
     }

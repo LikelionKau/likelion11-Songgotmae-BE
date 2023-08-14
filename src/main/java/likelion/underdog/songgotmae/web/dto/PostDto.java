@@ -13,4 +13,5 @@ public class PostDto {
     private String contents;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private String response;
 }
