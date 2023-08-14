@@ -26,32 +26,32 @@ public class Member {
     private Long id;
 
     @Comment("영문/숫자 2~20자 이내")
-    @Column(unique = true, nullable = false, length = 20)
+    @Column(name = "nickname", unique = true, nullable = false, length = 20)
     private String nickname;
 
     @Comment("길이 4~20자 이내") // 인코딩 이후 60자
-    @Column(nullable = false, length = 60)
+    @Column(name = "password", nullable = false, length = 60)
     private String password;
 
     @Comment("이메일 형식")
-    @Column(unique = true, nullable = false, length = 30)
+    @Column(name = "kau_email", unique = true, nullable = false, length = 30)
     private String kauEmail;
 
     @Comment("이메일 형식")
-    @Column(unique = true, length = 30)
+    @Column(name = "social_email", length = 30)
     private String socialEmail;
 
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "role", nullable = false)
     private MemberRole role;
 
     @CreatedDate
-    @Column(nullable = false)
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
+    @Column(name = "modified_at", nullable = false)
     private LocalDateTime modifiedAt;
 
     @Builder
