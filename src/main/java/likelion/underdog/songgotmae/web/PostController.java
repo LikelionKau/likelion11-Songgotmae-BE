@@ -23,9 +23,9 @@ public class PostController {
     @PatchMapping("{postId}")
     public PostDto.UpdateResponseDto updatePostStatus(
             @PathVariable Long postId,
-            @RequestBody PostDto.newApprovedStatus newApprovedStatus) {
+            @RequestBody PostDto.approvalStatusDto approvalStatusDto) {
 
-        PostDto.UpdateResponseDto updateResponseDto = postService.updatePostApprovedStatus(postId, newApprovedStatus);
+        PostDto.UpdateResponseDto updateResponseDto = postService.updatePostApprovedStatus(postId, approvalStatusDto);
 
         return updateResponseDto;
     }

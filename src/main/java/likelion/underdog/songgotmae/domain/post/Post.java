@@ -5,11 +5,7 @@ import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -38,8 +34,8 @@ public class Post {
     @Column(nullable = false)
     private Boolean isApproved;
 
-    public void updateApprovedStatus(Boolean newApprovedStatus) {
-        this.isApproved = newApprovedStatus;
+    public void updateApprovedTrue() {
+        this.isApproved = true;
     }
 
 //    @CreatedDate

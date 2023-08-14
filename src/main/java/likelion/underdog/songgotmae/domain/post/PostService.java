@@ -14,14 +14,14 @@ public class PostService {
     public final PostRepository postRepository;
 
     @Transactional
-    public PostDto.UpdateResponseDto updatePostApprovedStatus(Long postId, PostDto.newApprovedStatus newApprovedStatus) {
+    public PostDto.UpdateResponseDto updatePostApprovedStatus(Long postId, PostDto.approvalStatusDto approvalStatusDto) {
         Optional<Post> optionalPost = postRepository.findById(postId);
         if (optionalPost.isEmpty()) {
             throw new EntityNotFoundException("post not found.");
         }
 
         Post post = optionalPost.get();
-        post.updateApprovedStatus(newApprovedStatus.getABoolean());
+        post.updateApprovedTrue();
         postRepository.save(post);
 
         return PostDto.UpdateResponseDto.builder()

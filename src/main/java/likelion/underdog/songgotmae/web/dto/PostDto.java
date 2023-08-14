@@ -17,7 +17,7 @@ public class PostDto {
     }
 
     @Data
-    public static class newApprovedStatus {
-        private Boolean aBoolean;
+    public static class approvalStatusDto {
+        private Boolean approved;
     }
 }
