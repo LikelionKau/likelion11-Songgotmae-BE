@@ -1,16 +1,20 @@
 package likelion.underdog.songgotmae.domain.post;
+
 import likelion.underdog.songgotmae.web.dto.PostDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class PostService {
 
-    private final List<Post> posts = new ArrayList<>();
+    private final PostRepository postRepository;
+
     public List<Post> getPosts() {
-        return posts;
+        return postRepository.findAll();
     }
+
     public PostDto getPostDtoById(Long postId) {
         Post post = findPostById(postId);
         if (post != null) {
@@ -20,32 +24,29 @@ public class PostService {
         }
     }
 
-    public String approvePost(Long postId) {
+    public PostDto approvePostTrue(Long postId) {
         Post post = findPostById(postId);
         if (post != null) {
-            post.setApproved(true);
-            return "게시글이 승인되었습니다.";
+            post.setApprovedTrue();
+            post.setMessage("게시글이 승인되었습니다.");
+            return new PostDto(post);
         } else {
-            return "게시글을 찾을 수 없습니다.";
+            return null; // 게시글을 찾을 수 없을 때는 null 반환
         }
     }
 
-    public String disapprovePost(Long postId) {
+    public PostDto approvePostFalse(Long postId) {
         Post post = findPostById(postId);
         if (post != null) {
-            post.setApproved(false);
-            return "게시글이 거부되었습니다.";
+            post.setApprovedFalse();
+            post.setMessage("게시글이 거부되었습니다.");
+            return new PostDto(post);
         } else {
-            return "게시글을 찾을 수 없습니다.";
+            return null; // 게시글을 찾을 수 없을 때는 null 반환
         }
     }
 
     private Post findPostById(Long postId) {
-        for (Post post : posts) {
-            if (post.getId().equals(postId)) {
-                return post;
-            }
-        }
-        return null;
+        return postRepository.findById(postId).orElse(null);
     }
 }

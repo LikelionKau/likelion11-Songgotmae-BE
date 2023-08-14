@@ -4,23 +4,18 @@ import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.domain.post.PostService;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class PostController {
-    private List<Post> posts;
     private final PostService postService;
 
-    public PostController() {
-        this.posts = new ArrayList<>();
-        this.postService = new PostService();
+    public PostController(PostService postService) {
+        this.postService = postService;
     }
 
     @PostMapping
     public PostDto createPost(@RequestBody PostDto postDto) {
         Post post = new Post(postDto.getAuthor(), postDto.getTitle(), postDto.getContent());
-        posts.add(post);
         return new PostDto(post);
     }
 
@@ -30,12 +25,12 @@ public class PostController {
     }
 
     @PatchMapping("/{postId}/approve")
-    public String approvePost(@PathVariable Long postId) {
-        return postService.approvePost(postId);
+    public PostDto approvePost(@PathVariable Long postId) {
+        return postService.approvePostTrue(postId);
     }
 
     @PatchMapping("/{postId}/disapprove")
-    public String disapprovePost(@PathVariable Long postId) {
-        return postService.disapprovePost(postId);
+    public PostDto disapprovePost(@PathVariable Long postId) {
+        return postService.approvePostFalse(postId);
     }
 }

@@ -10,11 +10,14 @@ public class PostDto {
     private String content;
     private Boolean approved;
 
+    private String message;
+
     public PostDto(Post post) {
         this.id = post.getId();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.approved = post.getIsApproved();
+        this.message = null;
     }
 
     public Long getId() {
