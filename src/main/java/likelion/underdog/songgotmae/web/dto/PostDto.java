@@ -1,16 +1,23 @@
 package likelion.underdog.songgotmae.web.dto;
 
+import lombok.Builder;
+import lombok.Data;
+
 public class PostDto {
+    @Data
     public static class UpdateResponseDto {
+        private Long postId;
         private String message;
 
-        public UpdateResponseDto(String message) {
+        @Builder
+        public UpdateResponseDto(Long postId, String message) {
+            this.postId = postId;
             this.message = message;
         }
+    }
 
-        public String getMessage() {
-            return message;
-        }
-
+    @Data
+    public static class newApprovedStatus {
+        private Boolean aBoolean;
     }
 }

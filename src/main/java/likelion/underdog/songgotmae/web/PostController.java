@@ -1,61 +1,33 @@
 package likelion.underdog.songgotmae.web;
 
-import jakarta.persistence.EntityNotFoundException;
-import likelion.underdog.songgotmae.domain.admin.AdminService;
-import likelion.underdog.songgotmae.domain.post.Post;
-import likelion.underdog.songgotmae.domain.post.PostRepository;
-import likelion.underdog.songgotmae.web.dto.PostDto;
-import lombok.Lombok;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.AccessDeniedException;
-import java.security.Principal;
-import java.util.Map;
-import java.util.Optional;
+import likelion.underdog.songgotmae.domain.post.PostRepository;
+import likelion.underdog.songgotmae.domain.post.PostService;
+import likelion.underdog.songgotmae.web.dto.PostDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/posts")
 public class PostController {
     public final PostRepository postRepository;
+    public PostService postService;
 
     @Autowired
-    public PostController(PostRepository postRepository) {
+    public PostController(PostService postService, PostRepository postRepository) {
         this.postRepository = postRepository;
+        this.postService = postService;
     }
 
-    @Autowired
-    private AdminService adminService;
 
     @PatchMapping("{postId}")
     public PostDto.UpdateResponseDto updatePostStatus(
             @PathVariable Long postId,
-            @RequestBody Map<String, Boolean> request,
-            Principal principal) throws AccessDeniedException {
+            @RequestBody PostDto.newApprovedStatus newApprovedStatus) {
 
-        String username = principal.getName();
+        PostDto.UpdateResponseDto updateResponseDto = postService.updatePostApprovedStatus(postId, newApprovedStatus);
 
-        if (!adminService.isAdmin(username)) {
-            throw new AccessDeniedException("Access denied");
-        }
-
-        if (!request.containsKey("approved")) {
-            throw new IllegalArgumentException("not provided");
-        }
-
-        Boolean newApprovedStatus = request.get("approved");
-
-        Optional<Post> optionalPost = postRepository.findById(postId);
-        if (optionalPost.isEmpty()) {
-            throw new EntityNotFoundException("post not found.");
-        }
-
-        Post post = optionalPost.get();
-        post.updateApprovedStatus(newApprovedStatus);
-        postRepository.save(post);
-
-        return new PostDto.UpdateResponseDto("Post status updated");
+        return updateResponseDto;
     }
 
 }
