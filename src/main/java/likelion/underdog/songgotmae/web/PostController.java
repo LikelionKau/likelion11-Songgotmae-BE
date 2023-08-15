@@ -38,7 +38,7 @@ public class PostController {
                 .body(response);
     }
 
-    @Operation(summary = "게시글 조회 api 입니다. - 테스트 완료 (황제철)")
+    @Operation(summary = "게시글 전체 조회 api 입니다. - 테스트 완료 (황제철)")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "게시글 조회 완료"),
             @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
