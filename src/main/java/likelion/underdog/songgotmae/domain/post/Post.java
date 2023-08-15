@@ -34,7 +34,6 @@ public class Post {
 
     @Column(nullable = false)
     private Long viewCount;
-
     @Comment("운영자가 검열했는지 여부 ~ null : in queue, true : 찬성, false : 반대")
     private Boolean isApproved;
 

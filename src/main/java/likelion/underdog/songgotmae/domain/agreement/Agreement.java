@@ -4,6 +4,7 @@ import javax.persistence.*;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,7 +32,7 @@ public class Agreement {
     private Post post;
 
     @Column(nullable = false)
-    private Boolean isSupport;
+    private Boolean isAgree;
 
     @CreatedDate
     @Column(nullable = false)
@@ -40,4 +41,11 @@ public class Agreement {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime modifiedAt;
+
+    @Builder
+    public Agreement(Member member, Post post, Boolean isAgree) {
+        this.member = member;
+        this.post = post;
+        this.isAgree = isAgree;
+    }
 }
