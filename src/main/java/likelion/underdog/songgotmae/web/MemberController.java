@@ -22,9 +22,9 @@ import javax.validation.Valid;
 
 @Tag(name = "Member API", description = "회원 관련 API입니다.")
 @Slf4j
-@RequestMapping("/api/v1")
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/api/v1")
 public class MemberController {
     private final MemberService memberService;
 

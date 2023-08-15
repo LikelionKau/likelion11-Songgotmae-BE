@@ -18,7 +18,7 @@ public class URL_PATTERNS {
     };
 
     public static final String[] NEED_LOGIN_URL_PATTERNS = {
-            "/api/v1/post/**", // 포스팅 관련
+            "/api/v1/posts/**", // 포스팅 관련
     };
 
     public static final String[] ADMIN_PAGE_URL_PATTERNS = {
