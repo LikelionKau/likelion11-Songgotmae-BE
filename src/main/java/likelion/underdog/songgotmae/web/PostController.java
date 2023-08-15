@@ -1,5 +1,6 @@
 package likelion.underdog.songgotmae.web;
 
+import org.springframework.web.bind.annotation.RestController;
 import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import org.springframework.web.bind.annotation.*;
