@@ -1,51 +1,24 @@
 package likelion.underdog.songgotmae.web.dto;
 
-import likelion.underdog.songgotmae.domain.member.Member;
-import likelion.underdog.songgotmae.domain.post.Post;
+import lombok.Builder;
+import lombok.Data;
 
 public class PostDto {
-    private Member author;
-    private Long id;
-    private String title;
-    private String content;
-    private Boolean approved;
-    private String message;
-    private Boolean isApproved;
 
-    public PostDto(Post post) {
-        this.id = post.getId();
-        this.title = post.getTitle();
-        this.content = post.getContent();
-        this.approved = post.getIsApproved();
-        this.message = null;
+    @Data
+    public static class UpdateResponseDto {
+        private Long postId;
+        private String message;
+
+        @Builder
+        public UpdateResponseDto(Long postId, String message) {
+            this.postId = postId;
+            this.message = message;
+        }
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public Member getAuthor() {
-        return author;
-    }
-
-    public Boolean getApproved() {
-        return approved;
-    }
-    public void setApprovedTrue() {
-        isApproved = true;
-    }
-    public void setApprovedFalse() {
-        isApproved = false;
-    }
-    public void setMessage(String message) {
-        this.message = message;
+    @Data
+    public static class approvalStatusDto {
+        private Boolean approved;
     }
 }

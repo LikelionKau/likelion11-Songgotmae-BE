@@ -1,36 +1,25 @@
 package likelion.underdog.songgotmae.web;
 
-import likelion.underdog.songgotmae.domain.post.Post;
-import likelion.underdog.songgotmae.domain.post.PostService;
+import likelion.underdog.songgotmae.domain.post.PostServiceImpl;
 import likelion.underdog.songgotmae.web.dto.PostDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/posts")
 public class PostController {
-    private final PostService postService;
-
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
-
-    @PostMapping
-    public PostDto createPost(@RequestBody PostDto postDto) {
-        Post post = new Post(postDto.getAuthor(), postDto.getTitle(), postDto.getContent());
-        return new PostDto(post);
-    }
-
-    @GetMapping("/{postId}")
-    public PostDto getPostDtoById(@PathVariable Long postId) {
-        return postService.getPostDtoById(postId);
-    }
+    private final PostServiceImpl postServiceImpl;
 
     @PatchMapping("/{postId}/approve")
-    public PostDto approvePost(@PathVariable Long postId) {
-        return postService.approvePostTrue(postId);
+    public PostDto.UpdateResponseDto approvePost(@PathVariable Long postId) {
+        return postServiceImpl.approvePostTrue(postId);
     }
 
     @PatchMapping("/{postId}/disapprove")
-    public PostDto disapprovePost(@PathVariable Long postId) {
-        return postService.approvePostFalse(postId);
+    public PostDto.UpdateResponseDto disapprovePost(@PathVariable Long postId) {
+        return postServiceImpl.approvePostFalse(postId);
     }
+
+
 }
