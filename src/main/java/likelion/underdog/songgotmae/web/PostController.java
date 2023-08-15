@@ -6,13 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import likelion.underdog.songgotmae.domain.post.PostService;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/board")
 public class PostController {
-    private PostService postService;
-
-    public PostController(PostService postService) {
-        this.postService = postService;
-    }
+    private final PostService postService;
 
     @PostMapping("/write")
     public CommonResponseDto createPost(PostDto postDto) {
