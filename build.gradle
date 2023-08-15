@@ -1,7 +1,8 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.1.2'
+    id 'org.springframework.boot' version '2.7.13'
     id 'io.spring.dependency-management' version '1.1.2'
+    id "org.springdoc.openapi-gradle-plugin" version "1.6.0" // swagger
 }
 
 group = 'likelion.underdog'
@@ -23,16 +24,25 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    // jwt
+    implementation group: 'com.auth0', name: 'java-jwt', version: '4.2.1'
+    // oauth 2.0 : 소셜 로그인 등 소셜 기능 구현시 필요
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    // swagger - 1.7.0이 springboot 2.x 을 지원하는 가장 최신 버전 (출처 : springdoc.org/#properties)
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }

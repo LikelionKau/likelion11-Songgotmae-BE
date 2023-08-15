@@ -9,5 +9,4 @@ public interface AgreementService {
 
     AgreementDto.Response getAgreementById(Long agreementId);
 
-
 }

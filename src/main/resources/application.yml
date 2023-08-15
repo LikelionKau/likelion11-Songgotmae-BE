@@ -1,15 +1,34 @@
-debug: true
 spring:
-  datasource:
-    url: jdbc:h2:tcp://localhost/~/test
-#    url: jdbc:h2:mem:test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        format_sql: true
+  profiles:
+    include: test
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${CLIENT_ID}
+            client-secret: ${CLIENT_SECRET}
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            scope:
+              - profile
+              - email
+              - openid
+
+# swagger configuration
+springdoc:
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  api-docs:
+    groups:
+      enabled: true
+
+# OIDC testing...
+#logging:
+#  level:
+#    org.springframework.web.client.RestTemplate: DEBUG
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+

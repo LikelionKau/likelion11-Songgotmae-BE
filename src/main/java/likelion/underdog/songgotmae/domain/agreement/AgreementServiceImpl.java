@@ -1,7 +1,7 @@
 package likelion.underdog.songgotmae.domain.agreement;
 
 import likelion.underdog.songgotmae.domain.member.Member;
-import likelion.underdog.songgotmae.domain.member.MemberRepository;
+import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
 import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.domain.post.PostRepository;
 import likelion.underdog.songgotmae.web.dto.AgreementDto;

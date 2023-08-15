@@ -1,10 +1,13 @@
 package likelion.underdog.songgotmae.domain.post;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
@@ -17,7 +20,6 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member author;
@@ -30,18 +32,18 @@ public class Post {
 
     @Column(nullable = false)
     private Long viewCount;
-
-    @Column(nullable = false)
+    @Comment("운영자가 검열했는지 여부 ~ null : in queue, true : 찬성, false : 반대")
     private Boolean isApproved;
 
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime modifiedAt;
+
+  
     public void updateApprovedTrue() {
         this.isApproved = true;
     }
-
-//    @CreatedDate
-//    @Column(nullable = false)
-//    private LocalDateTime createdAt;
-//    @LastModifiedDate
-//    @Column(nullable = false)
-//    private LocalDateTime modifiedAt;
 }
