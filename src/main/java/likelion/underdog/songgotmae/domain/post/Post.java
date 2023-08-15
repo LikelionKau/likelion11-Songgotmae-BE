@@ -3,6 +3,7 @@ package likelion.underdog.songgotmae.domain.post;
 import javax.persistence.*;
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
@@ -31,8 +32,6 @@ public class Post {
     @Column(nullable = false, length = 255)
     private String content;
 
-    @Column(nullable = false)
-    private Long viewCount;
     @Comment("운영자가 검열했는지 여부 ~ null : in queue, true : 찬성, false : 반대")
     private Boolean isApproved;
 
@@ -48,6 +47,14 @@ public class Post {
     }
     public void updateApprovedFalse() {
         this.isApproved = false;
+    }
+
+    @Builder
+    private Post(Member author, String title, String content, Boolean isApproved) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        this.isApproved = isApproved;
     }
 }
 

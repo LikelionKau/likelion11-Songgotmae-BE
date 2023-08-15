@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/agreements")
+@RequestMapping("/api/v1")
 public class AgreementController {
     private final AgreementService agreementService;
 
-    @PostMapping
+    @PostMapping("/agreements/new")
     public AgreementDto.Response create(@RequestBody AgreementDto.Create agreementDto) {
         AgreementDto.Response response = agreementService.submitAgreement(agreementDto);
         return response;

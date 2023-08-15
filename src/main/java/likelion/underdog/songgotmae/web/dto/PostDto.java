@@ -6,19 +6,24 @@ import lombok.Data;
 public class PostDto {
 
     @Data
-    public static class UpdateResponseDto {
+    public static class CreateRequestDto {
+        private String title;
+        private String content;
+    }
+
+
+
+    @Data
+    public static class ResponseDto {
         private Long postId;
         private String message;
 
         @Builder
-        public UpdateResponseDto(Long postId, String message) {
+        public ResponseDto(Long postId, String message) {
             this.postId = postId;
             this.message = message;
         }
     }
 
-    @Data
-    public static class approvalStatusDto {
-        private Boolean approved;
-    }
+
 }
