@@ -9,7 +9,6 @@ import org.hibernate.annotations.Comment;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -43,4 +42,16 @@ public class Post {
     @LastModifiedDate
     @Column(nullable = false)
     private LocalDateTime modifiedAt;
+
+    @Column(nullable = false)
+    private Boolean isApproved;  // isApproved 필드 추가
+
+    public Post(Member author, String title, String content) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        this.viewCount = 0L;
+        this.isApproved = null;  //생성자 생성 후 초기화
+    }     //파라미터 없이 함수 설정
 }
+
