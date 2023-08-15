@@ -81,14 +81,11 @@ public class SecurityConfig{
                     .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
                     .anyRequest().permitAll()
 
-                .and()
-                    .logout()
-                    .logoutSuccessUrl("/")
 
 //                .and()
 //                    .oauth2Login()
 //                    .userInfoEndpoint()
-//                    .userService(customOAuth2UserService)
+//                    .userService()
         ;
 
         return http.build();
