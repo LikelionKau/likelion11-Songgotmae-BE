@@ -33,6 +33,14 @@ public class MemberRequestDto {
                     .role(MemberRole.USER)
                     .build();
         }
+        public Member toAdminEntity(BCryptPasswordEncoder passwordEncoder) {
+            return Member.builder()
+                    .nickname(nickname)
+                    .password(passwordEncoder.encode(password))
+                    .kauEmail(kauEmail)
+                    .role(MemberRole.ADMIN)
+                    .build();
+        }
     }
 
     @Data

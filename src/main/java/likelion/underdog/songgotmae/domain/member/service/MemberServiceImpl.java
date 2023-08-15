@@ -20,7 +20,6 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-
     @Override
     @Transactional
     public MemberResponseDto.JoinResponseDto joinMember(MemberRequestDto.JoinRequestDto joinRequest) {
@@ -33,5 +32,16 @@ public class MemberServiceImpl implements MemberService{
         return new MemberResponseDto.JoinResponseDto(memberPC);
     }
 
+    @Override
+    @Transactional
+    public MemberResponseDto.JoinResponseDto joinAdminMember(MemberRequestDto.JoinRequestDto joinRequest) {
+        log.info("INFO : 관리자 회원가입 진행");
+        Optional<Member> findMember = memberRepository.findByKauEmail(joinRequest.getKauEmail());
+        if (findMember.isPresent()) {
+            throw new MemberAlreadyExistException("이미 가입된 이메일입니다.");
+        }
+        Member memberPC = memberRepository.save(joinRequest.toAdminEntity(passwordEncoder));
+        return new MemberResponseDto.JoinResponseDto(memberPC);
+    }
 
 }

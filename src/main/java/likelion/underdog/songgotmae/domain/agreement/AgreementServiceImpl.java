@@ -4,13 +4,17 @@ import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
 import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.domain.post.PostRepository;
+import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
 import likelion.underdog.songgotmae.web.dto.AgreementDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AgreementServiceImpl implements AgreementService {
 
@@ -18,37 +22,22 @@ public class AgreementServiceImpl implements AgreementService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
+
     @Override
-    @Transactional
-    public AgreementDto.Response submitAgreement(AgreementDto.Create request) {
-        if (request.getIsAgree() == null) {
-            AgreementDto.Response response = AgreementDto.Response.builder()
-                    .msg("문제가 있다.")
-                    .build();
-            return response;
-        }
-
-        if (request.getIsAgree()) {
-            Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
-            Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
-
-            Agreement saveAgreement = agreementRepository.save(new Agreement(member, post, true));
-
-            AgreementDto.Response response = AgreementDto.Response.builder()
-                    .agreementId(saveAgreement.getId())
-                    .build();
-            return response;
-        } else {
-            Post post = postRepository.findById(request.getPostId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
-            Member member = memberRepository.findById(request.getMemberId()).orElseThrow(() -> new IllegalArgumentException("찾을 수 없음"));
-
-            Agreement saveAgreement = agreementRepository.save(new Agreement(member, post, false));
-
-            AgreementDto.Response response = AgreementDto.Response.builder()
-                    .agreementId(saveAgreement.getId())
-                    .build();
-            return response;
-        }
+    public AgreementDto.Response createAgreement(Long postId, AgreementDto.Create request) {
+        Long memberId = request.getMemberId();
+        Member findMember = memberRepository.findById(memberId).orElseThrow(() -> new CustomNotFoundException("회원을 찾을 수 없습니다."));
+        Post findPost = postRepository.findById(postId).orElseThrow(() -> new CustomNotFoundException("게시글을 찾을 수 없습니다."));
+        Agreement newAgreement = Agreement.builder()
+                .post(findPost)
+                .member(findMember)
+                .isAgree(request.getIsAgree())
+                .build();
+        Agreement saveAgreement = agreementRepository.save(newAgreement);
+        return AgreementDto.Response.builder()
+                .agreementId(saveAgreement.getId())
+                .message("게시글에 대한 반응이 정상적으로 반영되었습니다.")
+                .build();
     }
 
     @Override
@@ -59,5 +48,6 @@ public class AgreementServiceImpl implements AgreementService {
                 .build();
         return response;
     }
+
 
 }

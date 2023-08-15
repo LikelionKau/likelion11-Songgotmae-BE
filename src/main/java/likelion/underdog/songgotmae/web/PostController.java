@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Tag(name = "Post API", description = "게시글 관련 API입니다.")
 @Slf4j
 @RestController
@@ -21,19 +23,33 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostServiceImpl postService;
 
-    @Operation(summary = "게시글 작성 api 입니다.")
+    @Operation(summary = "게시글 작성 api 입니다. - 테스트 완료 (황제철)")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "게시글 작성 완료"),
             @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
             @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
     })
-    @PostMapping("/posts/new/{userId}")
-    public ResponseEntity<?> createPost(@PathVariable Long userId, @RequestBody PostDto.CreateRequestDto requestBody) {
-        PostDto.ResponseDto responseDto = postService.createPost(userId, requestBody);
-        CommonResponseDto<PostDto.ResponseDto> response = new CommonResponseDto<>(1, "게시글 작성 성공", responseDto);
+    @PostMapping("/posts/new")
+    public ResponseEntity<?> createPost(@RequestBody PostDto.CreateRequestDto requestBody) {
+        PostDto.SaveResponseDto saveResponseDto = postService.createPost(requestBody);
+        CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 작성 성공", saveResponseDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    @Operation(summary = "게시글 조회 api 입니다. - 테스트 완료 (황제철)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "게시글 조회 완료"),
+            @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
+            @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
+    })
+    @GetMapping("/posts")
+    public ResponseEntity<?> findAllPosts() {
+        List<PostDto.FindResponseDto> allPosts = postService.findAllPosts();
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(allPosts);
     }
 
 }

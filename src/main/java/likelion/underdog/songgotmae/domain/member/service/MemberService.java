@@ -5,4 +5,6 @@ import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto;
 
 public interface MemberService {
     public MemberResponseDto.JoinResponseDto joinMember(MemberRequestDto.JoinRequestDto joinRequest);
+    public MemberResponseDto.JoinResponseDto joinAdminMember(MemberRequestDto.JoinRequestDto joinRequest);
+
 }

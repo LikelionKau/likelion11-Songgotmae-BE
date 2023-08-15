@@ -28,7 +28,7 @@ import javax.validation.Valid;
 public class MemberController {
     private final MemberService memberService;
 
-    @Operation(summary = "회원가입 (테스트 완료, 황제철)")
+    @Operation(summary = "회원가입 - 테스트 완료 (황제철)")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "회원가입 완료"),
             @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
@@ -36,11 +36,28 @@ public class MemberController {
 
     })
     @PostMapping("/join")
-    public ResponseEntity<?> join(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
+    public ResponseEntity<?> joinUser(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
         MemberResponseDto.JoinResponseDto responseDto = memberService.joinMember(joinRequest);
         CommonResponseDto<MemberResponseDto.JoinResponseDto> response = new CommonResponseDto<>(1, "회원가입 성공", responseDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
     }
+
+    @Operation(summary = "관리자 계정 생성 API (임시) - 테스트 완료 (황제철)")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "회원가입 완료"),
+            @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
+            @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
+
+    })
+    @PostMapping("/join/admin")
+    public ResponseEntity<?> joinAdmin(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
+        MemberResponseDto.JoinResponseDto responseDto = memberService.joinAdminMember(joinRequest);
+        CommonResponseDto<MemberResponseDto.JoinResponseDto> response = new CommonResponseDto<>(1, "관리자 회원가입 성공", responseDto);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(response);
+    }
+
 }
