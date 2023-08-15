@@ -13,43 +13,44 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@Tag(name = "Post API", description = "게시글 관련 API입니다.")
+@Tag(name = "Admin API", description = "어드민 페이지 관련 API입니다.")
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
-public class PostController {
+@RequestMapping("/admin/v1")
+public class AdminController {
     private final PostServiceImpl postService;
 
-    @Operation(summary = "게시글 작성 api 입니다. - 테스트 완료 (황제철)")
+    @Operation(summary = "(관리자) 포스트 게시 허용 - 테스트 완료 (황제철)")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "게시글 작성 완료"),
+            @ApiResponse(responseCode = "200", description = "게시 허용 완료"),
             @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
             @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
     })
-    @PostMapping("/posts/new")
-    public ResponseEntity<?> createPost(@RequestBody PostDto.CreateRequestDto requestBody) {
-        PostDto.SaveResponseDto saveResponseDto = postService.createPost(requestBody);
-        CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 작성 성공", saveResponseDto);
+    @PatchMapping("/posts/{postId}/approve")
+    public ResponseEntity<?> approvePost(@PathVariable Long postId) {
+
+        PostDto.SaveResponseDto saveResponseDto = postService.approvePostTrue(postId);
+        CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 찬성 성공", saveResponseDto);
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.OK)
                 .body(response);
     }
 
-    @Operation(summary = "게시글 조회 api 입니다. - 테스트 완료 (황제철)")
+    @Operation(summary = "(관리자) 포스트 게시 불허 - 테스트 완료 (황제철)")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "게시글 조회 완료"),
+            @ApiResponse(responseCode = "200", description = "게시 불허 완료"),
             @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
             @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
     })
-    @GetMapping("/posts")
-    public ResponseEntity<?> findAllPosts() {
-        List<PostDto.FindResponseDto> allPosts = postService.findAllPosts();
+    @PatchMapping("/posts/{postId}/disapprove")
+    public ResponseEntity<?> disapprovePost(@PathVariable Long postId) {
+        PostDto.SaveResponseDto saveResponseDto = postService.approvePostFalse(postId);
+        CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 반대 성공", saveResponseDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(allPosts);
+                .body(response);
     }
+
 
 }

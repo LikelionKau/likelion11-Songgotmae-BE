@@ -3,26 +3,30 @@ package likelion.underdog.songgotmae.web.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AgreementDto {
 
     @Data
     public static class Create {
+        @NotNull
         private Long memberId;
-        private Long postId;
+        @NotNull
         private Boolean isAgree;
     }
 
     @Data
     public static class Response {
         private Long agreementId;
-        private String msg;
+        private String message;
 
         @Builder
-        public Response(Long agreementId, String msg) {
+        public Response(Long agreementId, String message) {
             this.agreementId = agreementId;
-            this.msg = msg;
+            this.message = message;
         }
 
     }
