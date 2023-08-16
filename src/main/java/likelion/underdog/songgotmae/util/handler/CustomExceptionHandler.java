@@ -39,4 +39,5 @@ public class CustomExceptionHandler {
         // code는 성공하면 1, 실패하면 -1이므로 -1 반환 && data는 줄 게 없으므로 null
         return new ResponseEntity<>(new CommonResponseDto<>(-1, e.getMessage(), e), HttpStatus.FORBIDDEN); // 403
     }
+
 }
