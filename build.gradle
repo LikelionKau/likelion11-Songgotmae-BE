@@ -46,3 +46,8 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+// plain jar 비활
+jar {
+    enabled = false
+}

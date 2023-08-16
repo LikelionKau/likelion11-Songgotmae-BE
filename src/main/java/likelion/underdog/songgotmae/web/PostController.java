@@ -11,8 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Tag(name = "Post API", description = "게시글 관련 API입니다.")
@@ -30,7 +32,7 @@ public class PostController {
             @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
     })
     @PostMapping("/posts/new")
-    public ResponseEntity<?> createPost(@RequestBody PostDto.CreateRequestDto requestBody) {
+    public ResponseEntity<?> createPost(@RequestBody @Valid PostDto.CreateRequestDto requestBody, BindingResult bindingResult) {
         PostDto.SaveResponseDto saveResponseDto = postService.createPost(requestBody);
         CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 작성 성공", saveResponseDto);
         return ResponseEntity
