@@ -14,4 +14,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post p join fetch p.author where p.isApproved = false")
     public List<Post> findNotApprovedPosts();
+
+    @Query("select p from Post p join fetch p.author where p.author.id = :authorId")
+    public List<Post> findPostsByMemberId(Long authorId);
 }

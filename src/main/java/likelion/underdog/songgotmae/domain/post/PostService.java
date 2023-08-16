@@ -1,2 +1,14 @@
-package likelion.underdog.songgotmae.domain.post;public interface PostService {
+package likelion.underdog.songgotmae.domain.post;
+
+import likelion.underdog.songgotmae.web.dto.PostDto;
+
+import java.util.List;
+
+public interface PostService {
+    PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody);
+    PostDto.SaveResponseDto approvePostTrue(Long id);
+    PostDto.SaveResponseDto approvePostFalse(Long id);
+    List<PostDto.FindResponseDto> findAllPosts();
+    List<PostDto.FindResponseDto> findApprovedPosts();
+    List<PostDto.FindResponseDto> findMemberPosts(Long memberId);
 }

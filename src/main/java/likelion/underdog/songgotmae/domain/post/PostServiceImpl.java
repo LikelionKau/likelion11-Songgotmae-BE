@@ -15,10 +15,11 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class PostServiceImpl {
+public class PostServiceImpl implements PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
+    @Override
     public PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody) {
         Optional<Member> optionalMember = memberRepository.findById(requestBody.getUserId());
         if (optionalMember.isPresent()) {
@@ -39,11 +40,7 @@ public class PostServiceImpl {
         }
     }
 
-    public List<Post> getPosts() {
-        return postRepository.findAll();
-    }
-
-
+    @Override
     public PostDto.SaveResponseDto approvePostTrue(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
@@ -59,6 +56,7 @@ public class PostServiceImpl {
         }
     }
 
+    @Override
     public PostDto.SaveResponseDto approvePostFalse(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
@@ -74,15 +72,32 @@ public class PostServiceImpl {
         }
     }
 
+    @Override
     @Transactional(readOnly = true)
     public List<PostDto.FindResponseDto> findAllPosts() {
         List<Post> findPosts = postRepository.findAllPosts();
-
-        List<PostDto.FindResponseDto> findResponseDtoList = findPosts.stream()
-                .map(p -> PostDto.FindResponseDto.builder().post(p).build())
-                .toList();
-        return findResponseDtoList;
+        return getDtoList(findPosts);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<PostDto.FindResponseDto> findApprovedPosts() {
+        List<Post> approvedPosts = postRepository.findApprovedPosts();
+        return getDtoList(approvedPosts);
+    }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<PostDto.FindResponseDto> findMemberPosts(Long memberId) {
+        List<Post> memberPosts = postRepository.findPostsByMemberId(memberId);
+        return getDtoList(memberPosts);
+
+    }
+
+    /* ----- 반복 메서드 ----- */
+    private static List<PostDto.FindResponseDto> getDtoList(List<Post> posts) {
+        return posts.stream()
+                .map(p -> PostDto.FindResponseDto.builder().post(p).build())
+                .toList();
+    }
 }
