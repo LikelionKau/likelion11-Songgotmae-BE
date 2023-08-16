@@ -100,4 +100,6 @@ public class PostServiceImpl implements PostService {
                 .map(p -> PostDto.FindResponseDto.builder().post(p).build())
                 .toList();
     }
+
+
 }

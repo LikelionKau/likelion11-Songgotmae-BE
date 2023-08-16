@@ -26,14 +26,24 @@ public class AgreementServiceImpl implements AgreementService {
     @Override
     public AgreementDto.Response createAgreement(Long postId, AgreementDto.Create request) {
         Long memberId = request.getMemberId();
+        Boolean isAgree = request.getIsAgree();
         Member findMember = memberRepository.findById(memberId).orElseThrow(() -> new CustomNotFoundException("회원을 찾을 수 없습니다."));
         Post findPost = postRepository.findById(postId).orElseThrow(() -> new CustomNotFoundException("게시글을 찾을 수 없습니다."));
+
+        Optional<Agreement> existingAgreement = agreementRepository.findByMemberAndPost(findMember, findPost);
+        existingAgreement.ifPresent(agreement -> agreementRepository.delete(agreement));
+
         Agreement newAgreement = Agreement.builder()
                 .post(findPost)
                 .member(findMember)
                 .isAgree(request.getIsAgree())
                 .build();
         Agreement saveAgreement = agreementRepository.save(newAgreement);
+
+        long agreementCount = agreementRepository.countByPostAndIsAgree(findPost, true);
+        long disagreementCount = agreementRepository.countByPostAndIsAgree(findPost, false);
+
+
         return AgreementDto.Response.builder()
                 .agreementId(saveAgreement.getId())
                 .message("게시글에 대한 반응이 정상적으로 반영되었습니다.")
