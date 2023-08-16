@@ -75,7 +75,7 @@ public class PostController {
             @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
             @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
     })
-    @GetMapping
+    @GetMapping("/posts/{memberId}")
     public ResponseEntity<?> findMemberPosts(@PathVariable Long memberId) {
         List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts(memberId);
         return ResponseEntity
