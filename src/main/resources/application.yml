@@ -1,6 +1,4 @@
 spring:
-  profiles:
-    include: test
   security:
     oauth2:
       client:
@@ -14,7 +12,7 @@ spring:
               - email
               - openid
 
-# swagger configuration
+### swagger configuration
 springdoc:
   default-produces-media-type: application/json
   default-consumes-media-type: application/json
@@ -22,10 +20,7 @@ springdoc:
     groups:
       enabled: true
 
-# OIDC testing...
-#logging:
-#  level:
-#    org.springframework.web.client.RestTemplate: DEBUG
+### encoding
 server:
   servlet:
     encoding:

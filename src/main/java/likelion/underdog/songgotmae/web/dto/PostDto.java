@@ -5,6 +5,7 @@ import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 public class PostDto {
@@ -12,7 +13,9 @@ public class PostDto {
     @Data
     public static class CreateRequestDto {
         private Long userId;
+        @NotEmpty
         private String title;
+        @NotEmpty
         private String content;
     }
 
