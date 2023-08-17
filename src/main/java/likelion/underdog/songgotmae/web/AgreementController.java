@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class AgreementController {
     private final PostService postService;
     private final AgreementService agreementService;
-    private final MemberService memberService; // MemberService가 필요한 경우
+    private final MemberService memberService;
 
     public AgreementController(PostService postService, AgreementService agreementService, MemberService memberService) {
         this.postService = postService;
         this.agreementService = agreementService;
-        this.memberService = memberService; // MemberService 주입
+        this.memberService = memberService;
     }
 
     @PostMapping("/create-agreement")
@@ -30,7 +30,7 @@ public class AgreementController {
         Post post = postService.findById(postId);
         Member member = memberService.findById(memberId);
 
-        Agreement agreement = new Agreement(member, post, isSupport);
+        Agreement agreement = new Agreement(member, post, true);
         agreementService.saveAgreement(agreement);
 
         return new AgreementDto(agreement);

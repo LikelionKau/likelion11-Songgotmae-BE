@@ -14,7 +14,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "agreement_tb")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Agreement {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "agreement_id")
     private Long id;
 
@@ -27,5 +28,19 @@ public class Agreement {
     private Post post;
 
     @Column(nullable = false)
-    private Boolean isSupport;
+    private boolean isSupport; //isSupport가 true면 찬성 false면 반대
+
+    public Agreement(Member member, Post post, Boolean isSupport) {
+        this.member = member;
+        this.post = post;
+        this.isSupport = isSupport; // isSupport(찬성,반대)의 초기값을 null로 할당
+    }
+
+    public Boolean getIsSupport() {
+        return isSupport;
+    }
+
+    public void setIsSupport(boolean isSupport) {
+        this.isSupport = isSupport;
+    }
 }

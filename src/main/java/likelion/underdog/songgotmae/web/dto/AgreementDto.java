@@ -2,7 +2,6 @@ package likelion.underdog.songgotmae.web.dto;
 
 import likelion.underdog.songgotmae.domain.agreement.Agreement;
 import likelion.underdog.songgotmae.domain.member.Member;
-import likelion.underdog.songgotmae.web.dto.PostDto;
 
 public class AgreementDto {
     private Long id;
@@ -15,11 +14,11 @@ public class AgreementDto {
 
     public AgreementDto(Agreement agreement) {
         this.id = agreement.getId();
-        this.member = agreement.getMember(); // 수정: Agreement 객체의 Member를 가져옴
+        this.member = agreement.getMember();
         this.postId = agreement.getPost().getId();
         this.title = agreement.getPost().getTitle();
         this.content = agreement.getPost().getContent();
-        this.approved = agreement.getIsSupport(); // 수정: Agreement에서 isSupport 가져옴
+        this.approved = agreement.getIsSupport();
         this.message = null;
     }
     public void setMessage(String message) {
