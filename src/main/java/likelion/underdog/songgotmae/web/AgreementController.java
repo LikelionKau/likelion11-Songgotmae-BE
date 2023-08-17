@@ -30,7 +30,7 @@ public class AgreementController {
         Post post = postService.findById(postId);
         Member member = memberService.findById(memberId);
 
-        Agreement agreement = new Agreement(member, post, true);
+        Agreement agreement = new Agreement(member, post, isSupport);
         agreementService.saveAgreement(agreement);
 
         return new AgreementDto(agreement);

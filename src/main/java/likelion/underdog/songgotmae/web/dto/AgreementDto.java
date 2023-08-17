@@ -22,24 +22,6 @@ public class AgreementDto {
         this.approved = agreement.getIsSupport(); // 수정: Agreement에서 isSupport 가져옴
         this.message = null;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public Member getAuthor() {return author;}
-
-    public Boolean getApproved() {
-        return approved;
-    }
     public void setMessage(String message) {
         this.message = message;
     }
