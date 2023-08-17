@@ -39,12 +39,6 @@ public class PostDto {
     public Boolean getApproved() {
         return approved;
     }
-    public void setApprovedTrue() {
-        isApproved = true;
-    }
-    public void setApprovedFalse() {
-        isApproved = false;
-    }
     public void setMessage(String message) {
         this.message = message;
     }
