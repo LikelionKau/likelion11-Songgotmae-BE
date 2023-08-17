@@ -1,34 +1,30 @@
 package likelion.underdog.songgotmae.web;
 
+import likelion.underdog.songgotmae.domain.agreement.Agreement;
+import likelion.underdog.songgotmae.domain.agreement.AgreementService;
+import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
+import likelion.underdog.songgotmae.domain.post.PostService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PostController {
     private final PostService postService;
+    private final AgreementService agreementService;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, AgreementService agreementService) {
         this.postService = postService;
+        this.agreementService = agreementService;
     }
 
-    @PostMapping
-    public PostDto createPost(@RequestBody PostDto postDto) {
-        Post post = new Post(postDto.getAuthor(), postDto.getTitle(), postDto.getContent());
-        return new PostDto(post);
-    }
+    @PostMapping("/post/create-agreement")
+    public String createPostAgreement(@RequestParam Long postId, @RequestParam Long memberId) {
+        Post post = postService.findById(postId);
+        Member member = memberService.findById(memberId);
 
-    @GetMapping("/{postId}")
-    public PostDto getPostDtoById(@PathVariable Long postId) {
-        return postService.getPostDtoById(postId);
-    }
+        Agreement agreement = new Agreement(member, post, true);
+        agreementService.saveAgreement(agreement);
 
-    @PatchMapping("/{postId}/approve")
-    public PostDto approvePost(@PathVariable Long postId) {
-        return postService.approvePostTrue(postId);
-    }
-
-    @PatchMapping("/{postId}/disapprove")
-    public PostDto disapprovePost(@PathVariable Long postId) {
-        return postService.approvePostFalse(postId);
+        return "Agreement created successfully";
     }
 }

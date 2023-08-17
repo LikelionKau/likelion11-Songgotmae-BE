@@ -1,6 +1,7 @@
 package likelion.underdog.songgotmae.domain.post;
 
 import jakarta.persistence.*;
+import likelion.underdog.songgotmae.domain.agreement.Agreement;
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,6 +11,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -52,5 +55,8 @@ public class Post {
         this.viewCount = 0L;
         this.isApproved = null;  //생성자 생성 후 초기화
     }
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Agreement> agreements = new ArrayList<>();
 
 }

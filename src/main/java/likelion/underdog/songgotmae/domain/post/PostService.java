@@ -1,19 +1,17 @@
 package likelion.underdog.songgotmae.domain.post;
 
-import java.util.List;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class PostService {
     private final PostRepository postRepository;
 
-    public List<Post> getPosts() {
-        return postRepository.findAll();
+    public PostService(PostRepository postRepository) {
+        this.postRepository = postRepository;
     }
 
-    public PostDto getPostDtoById(Long id) {
-        PostDto postDto = findPostDtoById(id);
-        if (postDto != null) {
-            return postDto;
-        } else {
-            return null;
-        }
+    public Post findById(Long id) {
+        return postRepository.findById(id).orElse(null);
+    }
 }
