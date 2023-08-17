@@ -2,6 +2,7 @@ package likelion.underdog.songgotmae.web.dto;
 
 import likelion.underdog.songgotmae.domain.agreement.Agreement;
 import likelion.underdog.songgotmae.domain.member.Member;
+import likelion.underdog.songgotmae.web.dto.PostDto;
 
 public class AgreementDto {
     private Long id;
