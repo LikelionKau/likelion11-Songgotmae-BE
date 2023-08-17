@@ -1,6 +1,7 @@
 package likelion.underdog.songgotmae.domain.agreement;
 
 import likelion.underdog.songgotmae.web.dto.AgreementDto;
+<<<<<<< HEAD
 import org.springframework.stereotype.Service;
 
 @Service
@@ -45,3 +46,12 @@ public class AgreementService {
     }
 
 }
+=======
+
+public interface AgreementService {
+     AgreementDto.Response createAgreement(Long postId, AgreementDto.Create agreementDto);
+
+    AgreementDto.Response getAgreementById(Long agreementId);
+
+}
+>>>>>>> dev

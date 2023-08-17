@@ -1,15 +1,20 @@
 package likelion.underdog.songgotmae.domain.post;
 
+<<<<<<< HEAD
 import jakarta.persistence.*;
 import likelion.underdog.songgotmae.domain.agreement.Agreement;
+=======
+import javax.persistence.*;
+>>>>>>> dev
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Comment;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +29,6 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
     private Member author;
@@ -35,8 +39,8 @@ public class Post {
     @Column(nullable = false, length = 255)
     private String content;
 
-    @Column(nullable = false)
-    private Long viewCount;
+    @Comment("운영자가 검열했는지 여부 ~ null : in queue, true : 찬성, false : 반대")
+    private Boolean isApproved;
 
     @CreatedDate
     @Column(nullable = false)
@@ -45,6 +49,7 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime modifiedAt;
 
+<<<<<<< HEAD
     @Column(nullable = false)
     private Boolean isApproved;  // isApproved 필드 추가
 
@@ -59,4 +64,21 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Agreement> agreements = new ArrayList<>();
 
+=======
+    public void updateApprovedTrue() {
+        this.isApproved = true;
+    }
+    public void updateApprovedFalse() {
+        this.isApproved = false;
+    }
+
+    @Builder
+    private Post(Member author, String title, String content, Boolean isApproved) {
+        this.author = author;
+        this.title = title;
+        this.content = content;
+        this.isApproved = isApproved;
+    }
+>>>>>>> dev
 }
+

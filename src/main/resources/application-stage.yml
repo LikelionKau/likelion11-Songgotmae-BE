@@ -1,0 +1,30 @@
+## 배포환경 기본 세팅
+server:
+  port: 8080
+
+spring:
+  config:
+    activate:
+      on-profile: stage # 프로파일 설정
+
+  datasource:
+    url: jdbc:mysql://${RDS_ENDPOINT}:${RDS_PORT}/${RDS_DB_NAME}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+#    open-in-view: false
+    properties:
+      hibernate:
+        default_batch_fetch_size: 100
+
+logging:
+  level:
+    root: INFO
+
+app:
+  auth:
+    token:
+      secret-key: ${SECRET_KEY}

@@ -1,12 +1,17 @@
 package likelion.underdog.songgotmae.domain.agreement;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -28,6 +33,7 @@ public class Agreement {
     private Post post;
 
     @Column(nullable = false)
+<<<<<<< HEAD
     private boolean isSupport; //isSupport가 true면 찬성 false면 반대
 
     public Agreement(Member member, Post post, Boolean isSupport) {
@@ -42,5 +48,22 @@ public class Agreement {
 
     public void setIsSupport(boolean isSupport) {
         this.isSupport = isSupport;
+=======
+    private Boolean isAgree;
+
+    @CreatedDate
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime modifiedAt;
+
+    @Builder
+    public Agreement(Member member, Post post, Boolean isAgree) {
+        this.member = member;
+        this.post = post;
+        this.isAgree = isAgree;
+>>>>>>> dev
     }
 }

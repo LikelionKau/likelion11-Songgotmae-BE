@@ -1,5 +1,6 @@
 package likelion.underdog.songgotmae.web.dto;
 
+<<<<<<< HEAD
 import likelion.underdog.songgotmae.domain.agreement.Agreement;
 import likelion.underdog.songgotmae.domain.member.Member;
 
@@ -23,5 +24,36 @@ public class AgreementDto {
     }
     public void setMessage(String message) {
         this.message = message;
+=======
+
+import lombok.*;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+@Data
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class AgreementDto {
+
+    @Data
+    public static class Create {
+        @NotNull
+        private Long memberId;
+        @NotNull
+        private Boolean isAgree;
+    }
+
+    @Data
+    public static class Response {
+        private Long agreementId;
+        private String message;
+
+        @Builder
+        public Response(Long agreementId, String message) {
+            this.agreementId = agreementId;
+            this.message = message;
+        }
+
+>>>>>>> dev
     }
 }
