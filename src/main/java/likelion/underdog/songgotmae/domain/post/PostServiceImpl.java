@@ -93,11 +93,6 @@ public class PostServiceImpl implements PostService {
 
     }
 
-    @Override
-    public Post findById(Long postId) {
-        return null;
-    }
-
     /* ----- 반복 메서드 ----- */
     private static List<PostDto.FindResponseDto> getDtoList(List<Post> posts) {
         return posts.stream()

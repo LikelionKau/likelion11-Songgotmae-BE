@@ -31,7 +31,7 @@ public class AgreementServiceImpl implements AgreementService {
         Agreement newAgreement = Agreement.builder()
                 .post(findPost)
                 .member(findMember)
-                .isSupport(request.getIsAgree())
+                .isSupport(request.getIsSupport())
                 .build();
         Agreement saveAgreement = agreementRepository.save(newAgreement);
         return AgreementDto.Response.builder()

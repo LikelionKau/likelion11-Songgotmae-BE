@@ -23,8 +23,6 @@ public class AgreementDto {
         this.id = agreement.getId();
         this.member = agreement.getMember();
         this.postId = agreement.getPost().getId();
-        this.title = agreement.getPost().getTitle();
-        this.content = agreement.getPost().getContent();
         this.approved = agreement.getIsSupport();
         this.message = null;
     }
@@ -38,10 +36,10 @@ public class AgreementDto {
                 @NotNull
                 private Long memberId;
                 @NotNull
-                private Boolean isAgree;
+                private Boolean isSupport;
 
-                public boolean isAgree() {
-                    return isAgree;
+                public boolean isSupport() {
+                    return isSupport;
                 }
             }
 
