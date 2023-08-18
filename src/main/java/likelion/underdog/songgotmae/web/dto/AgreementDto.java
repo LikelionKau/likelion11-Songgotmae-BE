@@ -3,7 +3,6 @@ package likelion.underdog.songgotmae.web.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -28,6 +27,5 @@ public class AgreementDto {
             this.agreementId = agreementId;
             this.message = message;
         }
-
     }
 }

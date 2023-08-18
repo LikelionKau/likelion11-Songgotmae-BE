@@ -1,12 +1,10 @@
 package likelion.underdog.songgotmae.web.dto;
 
-import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
 
 public class PostDto {
 
@@ -44,9 +42,6 @@ public class PostDto {
         private String title;
         private String content;
         private Boolean isApproved;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
-
         @Builder
         public FindResponseDto(Post post) {
             this.postId = post.getId();
@@ -54,11 +49,6 @@ public class PostDto {
             this.title = post.getTitle();
             this.content = post.getContent();
             this.isApproved = post.getIsApproved();
-            this.createdAt = post.getCreatedAt();
-            this.modifiedAt = post.getModifiedAt();
         }
     }
-
-
-
 }
