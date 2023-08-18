@@ -1,5 +1,7 @@
 package likelion.underdog.songgotmae.domain.post;
 
+import likelion.underdog.songgotmae.domain.agreement.Agreement;
+import likelion.underdog.songgotmae.domain.agreement.AgreementRepository;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
@@ -19,6 +21,8 @@ public class PostServiceImpl implements PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
+    private final AgreementRepository agreementRepository;
+
     @Override
     public PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody) {
         Optional<Member> optionalMember = memberRepository.findById(requestBody.getUserId());
@@ -31,6 +35,9 @@ public class PostServiceImpl implements PostService {
                     .isApproved(false)
                     .build();
             Post savePost = postRepository.save(newPost);
+
+            updateAgreementCountsForPost(savePost);
+
             return PostDto.SaveResponseDto.builder()
                     .postId(savePost.getId())
                     .message("게시글이 성공적으로 생성되었습니다.")
@@ -99,6 +106,21 @@ public class PostServiceImpl implements PostService {
         return posts.stream()
                 .map(p -> PostDto.FindResponseDto.builder().post(p).build())
                 .toList();
+    }
+
+
+
+    private void updateAgreementCountsForPost(Post post) {
+        List<Agreement> agreements = agreementRepository.findByPost(post);
+
+        long agreementCount = agreements.stream().filter(agreement -> agreement.getIsAgree()).count();
+        long disagreementCount = agreements.size() - agreementCount;
+
+        post.updateAgreementCounts(agreementCount, disagreementCount);
+
+        for (Agreement agreement : agreements) {
+            agreement.updateAgreementCounts(agreementCount, disagreementCount);
+        }
     }
 
 

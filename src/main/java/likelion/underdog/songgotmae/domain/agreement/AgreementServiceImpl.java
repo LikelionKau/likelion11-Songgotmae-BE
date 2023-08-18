@@ -41,8 +41,6 @@ public class AgreementServiceImpl implements AgreementService {
                 .build();
         Agreement saveAgreement = agreementRepository.save(newAgreement);
 
-        updateAgreementCounts(findPost);
-
         return AgreementDto.Response.builder()
                 .agreementId(saveAgreement.getId())
                 .message("게시글에 대한 반응이 정상적으로 반영되었습니다.")
@@ -50,15 +48,11 @@ public class AgreementServiceImpl implements AgreementService {
 
     }
 
-    private void updateAgreementCounts(Post post) {
-        List<Agreement> agreements = agreementRepository.findByPost(post);
+    private void updateAgreementCountsForPost(Post post) {
+        long agreementCount = agreementRepository.countByPostAndIsAgree(post, true);
+        long disagreementCount = agreementRepository.countByPostAndIsAgree(post, false);
 
-        long agreementCount = agreements.stream().filter(agreement -> agreement.getIsAgree()).count();
-        long disagreementCount = agreements.size() - agreementCount;
-
-        for (Agreement agreement : agreements) {
-            agreement.updateAgreementCounts(agreementCount, disagreementCount);
-        }
+        post.updateAgreementCounts(agreementCount, disagreementCount);
     }
 
     @Override

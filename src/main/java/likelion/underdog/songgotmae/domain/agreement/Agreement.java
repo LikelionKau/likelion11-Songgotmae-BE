@@ -42,21 +42,15 @@ public class Agreement {
     @Column(nullable = false)
     private LocalDateTime modifiedAt;
 
-    private Long agreementCount;
-    private Long disagreementCount;
 
-    public void updateAgreementCounts(long agreementCount, long disagreementCount) {
-        if (isAgree) {
-            this.agreementCount = agreementCount;
-        } else {
-            this.disagreementCount = disagreementCount;
-        }
-    }
 
     @Builder
     public Agreement(Member member, Post post, Boolean isAgree) {
         this.member = member;
         this.post = post;
         this.isAgree = isAgree;
+    }
+
+    public void updateAgreementCounts(long agreementCount, long disagreementCount) {
     }
 }
