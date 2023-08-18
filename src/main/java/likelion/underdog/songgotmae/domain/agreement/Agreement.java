@@ -42,10 +42,14 @@ public class Agreement {
     @Column(nullable = false)
     private LocalDateTime modifiedAt;
 
+
+
     @Builder
     public Agreement(Member member, Post post, Boolean isAgree) {
         this.member = member;
         this.post = post;
         this.isAgree = isAgree;
     }
+
+
 }
