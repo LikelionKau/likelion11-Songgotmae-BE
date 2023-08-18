@@ -1,6 +1,7 @@
 package likelion.underdog.songgotmae.web.dto;
 
 
+import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.*;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +13,7 @@ public class AgreementDto {
     @Data
     public static class Create {
         @NotNull
-        private Long memberId;
+        private Post post;
         @NotNull
         private Boolean isAgree;
     }
