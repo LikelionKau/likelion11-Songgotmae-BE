@@ -22,20 +22,6 @@ public class AgreementServiceImpl implements AgreementService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
-    @Override
-    public void saveAgreement(Agreement agreement) {
-
-    }
-
-    @Override
-    public AgreementDto createPostAgreement(Long id) {
-        return null;
-    }
-
-    @Override
-    public AgreementDto createPostDisAgreement(Long id) {
-        return null;
-    }
 
     @Override
     public AgreementDto.Response createAgreement(Long postId, AgreementDto.Create request) {
