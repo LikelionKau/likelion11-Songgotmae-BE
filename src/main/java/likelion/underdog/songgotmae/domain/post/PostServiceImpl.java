@@ -93,6 +93,13 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public Post findById(Long postId) {
+        return postRepository.findById(postId)
+                .orElseThrow(() -> new CustomNotFoundException("게시글을 찾을 수 없습니다."));
+    }
+
+
     /* ----- 반복 메서드 ----- */
     private static List<PostDto.FindResponseDto> getDtoList(List<Post> posts) {
         return posts.stream()
