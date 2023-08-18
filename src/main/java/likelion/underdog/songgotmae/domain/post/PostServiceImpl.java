@@ -113,14 +113,11 @@ public class PostServiceImpl implements PostService {
     private void updateAgreementCountsForPost(Post post) {
         List<Agreement> agreements = agreementRepository.findByPost(post);
 
-        long agreementCount = agreements.stream().filter(agreement -> agreement.getIsAgree()).count();
+        long agreementCount = agreements.stream().filter(Agreement::getIsAgree).count();
         long disagreementCount = agreements.size() - agreementCount;
 
         post.updateAgreementCounts(agreementCount, disagreementCount);
 
-        for (Agreement agreement : agreements) {
-            agreement.updateAgreementCounts(agreementCount, disagreementCount);
-        }
     }
 
 

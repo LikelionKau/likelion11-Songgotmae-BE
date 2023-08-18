@@ -51,6 +51,5 @@ public class Agreement {
         this.isAgree = isAgree;
     }
 
-    public void updateAgreementCounts(long agreementCount, long disagreementCount) {
-    }
+
 }
