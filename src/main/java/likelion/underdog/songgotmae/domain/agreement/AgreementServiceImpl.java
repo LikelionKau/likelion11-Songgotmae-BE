@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -40,14 +41,24 @@ public class AgreementServiceImpl implements AgreementService {
                 .build();
         Agreement saveAgreement = agreementRepository.save(newAgreement);
 
-        long agreementCount = agreementRepository.countByPostAndIsAgree(findPost, true);
-        long disagreementCount = agreementRepository.countByPostAndIsAgree(findPost, false);
-
+        updateAgreementCounts(findPost);
 
         return AgreementDto.Response.builder()
                 .agreementId(saveAgreement.getId())
                 .message("게시글에 대한 반응이 정상적으로 반영되었습니다.")
                 .build();
+
+    }
+
+    private void updateAgreementCounts(Post post) {
+        List<Agreement> agreements = agreementRepository.findByPost(post);
+
+        long agreementCount = agreements.stream().filter(agreement -> agreement.getIsAgree()).count();
+        long disagreementCount = agreements.size() - agreementCount;
+
+        for (Agreement agreement : agreements) {
+            agreement.updateAgreementCounts(agreementCount, disagreementCount);
+        }
     }
 
     @Override
@@ -58,6 +69,4 @@ public class AgreementServiceImpl implements AgreementService {
                 .build();
         return response;
     }
-
-
 }
