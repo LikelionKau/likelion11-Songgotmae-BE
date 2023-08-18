@@ -1,12 +1,9 @@
 package likelion.underdog.songgotmae.domain.member;
 
-<<<<<<< HEAD
-import jakarta.persistence.*;
 import likelion.underdog.songgotmae.domain.agreement.Agreement;
-=======
+
 import javax.persistence.*;
 
->>>>>>> dev
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,11 +13,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-<<<<<<< HEAD
+
 import java.util.List;
-=======
+
 import java.time.LocalDateTime;
->>>>>>> dev
+
 
 @Entity
 @Getter
@@ -34,14 +31,12 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-<<<<<<< HEAD
     @Column(unique = true, nullable = false)
     private String email;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Agreement> agreements; //cascade와 orphanRemoval 옵션을 설정하여
-                                        // Member가 삭제될 때 관련된 모든 Agreement 인스턴스도 삭제되도록 하였다.
-=======
+    // Member가 삭제될 때 관련된 모든 Agreement 인스턴스도 삭제되도록 하였다.
     @Comment("영문/숫자 2~20자 이내")
     @Column(name = "nickname", unique = true, nullable = false, length = 20)
     private String nickname;
@@ -80,7 +75,6 @@ public class Member {
         this.socialEmail = socialEmail;
         this.role = role;
     }
+}
 
     // TODO : (1) 구글 로그인 시 유저 정보 입력 빌더, (2) 일반 로그인 시, 추후 구글 아이디 연결
->>>>>>> dev
-}

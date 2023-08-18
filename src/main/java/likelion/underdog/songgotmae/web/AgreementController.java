@@ -35,4 +35,15 @@ public class AgreementController {
 
         return new AgreementDto(agreement);
     }
+
+    @PostMapping("/create-disagreement")
+    public AgreementDto createPostDisAgreement(@RequestParam Long postId, @RequestParam Long memberId) {
+        Post post = postService.findById(postId);
+        Member member = memberService.findById(memberId);
+
+        Agreement agreement = new Agreement(member, post, false);
+        agreementService.saveAgreement(agreement);
+
+        return new AgreementDto(agreement);
+    }
 }

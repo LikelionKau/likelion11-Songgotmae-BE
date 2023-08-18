@@ -6,15 +6,15 @@ import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.domain.post.PostRepository;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
 import likelion.underdog.songgotmae.web.dto.AgreementDto;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 
 @Service
 @Transactional
+@Builder
 @RequiredArgsConstructor
 public class AgreementServiceImpl implements AgreementService {
 
@@ -22,6 +22,20 @@ public class AgreementServiceImpl implements AgreementService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
 
+    @Override
+    public void saveAgreement(Agreement agreement) {
+
+    }
+
+    @Override
+    public AgreementDto createPostAgreement(Long id) {
+        return null;
+    }
+
+    @Override
+    public AgreementDto createPostDisAgreement(Long id) {
+        return null;
+    }
 
     @Override
     public AgreementDto.Response createAgreement(Long postId, AgreementDto.Create request) {
@@ -31,7 +45,7 @@ public class AgreementServiceImpl implements AgreementService {
         Agreement newAgreement = Agreement.builder()
                 .post(findPost)
                 .member(findMember)
-                .isAgree(request.getIsAgree())
+                .isSupport(request.getIsAgree())
                 .build();
         Agreement saveAgreement = agreementRepository.save(newAgreement);
         return AgreementDto.Response.builder()
@@ -48,6 +62,4 @@ public class AgreementServiceImpl implements AgreementService {
                 .build();
         return response;
     }
-
-
 }

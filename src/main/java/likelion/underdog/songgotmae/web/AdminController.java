@@ -51,6 +51,4 @@ public class AdminController {
                 .status(HttpStatus.OK)
                 .body(response);
     }
-
-
 }

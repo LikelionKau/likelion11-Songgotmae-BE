@@ -5,8 +5,5 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class CommonResponseDto<T> {
-    private final Integer code;
-    private final String message;
-    private final T data;
+public record CommonResponseDto<T>(Integer code, String message, T data) {
 }

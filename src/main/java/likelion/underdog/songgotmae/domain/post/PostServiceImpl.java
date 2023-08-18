@@ -7,7 +7,6 @@ import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -92,6 +91,11 @@ public class PostServiceImpl implements PostService {
         List<Post> memberPosts = postRepository.findPostsByMemberId(memberId);
         return getDtoList(memberPosts);
 
+    }
+
+    @Override
+    public Post findById(Long postId) {
+        return null;
     }
 
     /* ----- 반복 메서드 ----- */

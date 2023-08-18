@@ -1,6 +1,5 @@
 package likelion.underdog.songgotmae.web.dto;
 
-import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.Builder;
 import lombok.Data;
@@ -58,7 +57,4 @@ public class PostDto {
             this.modifiedAt = post.getModifiedAt();
         }
     }
-
-
-
 }

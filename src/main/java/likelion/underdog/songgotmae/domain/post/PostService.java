@@ -1,31 +1,26 @@
 package likelion.underdog.songgotmae.domain.post;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
-
-
-@Service
-public class PostService {
-    private final PostRepository postRepository;
-
-    public PostService(PostRepository postRepository) {
-        this.postRepository = postRepository;
-    }
-
-    public Post findById(Long id) {
-        return postRepository.findById(id).orElse(null);
-    }
-=======
 import likelion.underdog.songgotmae.web.dto.PostDto;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public interface PostService {
     PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody);
+
     PostDto.SaveResponseDto approvePostTrue(Long id);
+
     PostDto.SaveResponseDto approvePostFalse(Long id);
+
+    @Transactional(readOnly = true)
     List<PostDto.FindResponseDto> findAllPosts();
+
+    @Transactional(readOnly = true)
     List<PostDto.FindResponseDto> findApprovedPosts();
+
+    @Transactional(readOnly = true)
     List<PostDto.FindResponseDto> findMemberPosts(Long memberId);
->>>>>>> dev
+
+    @Transactional(readOnly = true)
+    Post findById(Long postId);
 }

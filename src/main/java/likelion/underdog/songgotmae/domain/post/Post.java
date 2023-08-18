@@ -1,11 +1,7 @@
 package likelion.underdog.songgotmae.domain.post;
 
-<<<<<<< HEAD
-import jakarta.persistence.*;
 import likelion.underdog.songgotmae.domain.agreement.Agreement;
-=======
 import javax.persistence.*;
->>>>>>> dev
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -25,6 +21,8 @@ import java.util.List;
 @Table(name = "post_tb")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post {
+
+    private int viewCount;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
@@ -49,22 +47,18 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime modifiedAt;
 
-<<<<<<< HEAD
-    @Column(nullable = false)
-    private Boolean isApproved;  // isApproved 필드 추가
-
     public Post(Member author, String title, String content) {
         this.author = author;
         this.title = title;
         this.content = content;
-        this.viewCount = 0L;
+        this.viewCount = 0;
         this.isApproved = null;  //생성자 생성 후 초기화
     }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Agreement> agreements = new ArrayList<>();
 
-=======
+
     public void updateApprovedTrue() {
         this.isApproved = true;
     }
@@ -79,6 +73,5 @@ public class Post {
         this.content = content;
         this.isApproved = isApproved;
     }
->>>>>>> dev
 }
 
