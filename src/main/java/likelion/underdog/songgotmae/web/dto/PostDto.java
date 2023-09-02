@@ -58,7 +58,4 @@ public class PostDto {
             this.modifiedAt = post.getModifiedAt();
         }
     }
-
-
-
 }

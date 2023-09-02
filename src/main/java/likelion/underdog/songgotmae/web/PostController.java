@@ -10,6 +10,9 @@ import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -83,6 +86,11 @@ public class PostController {
                 .body(memberPosts);
     }
 
+    @GetMapping("/posts/orderedByCreatedAt")
+    public ResponseEntity<Page<PostDto.FindResponseDto>> findAllPostsOrderByCreatedAtDesc(Pageable pageable) {
+        Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), 10); //페이지당 게시글 수 10개로 제한
 
-
+        Page<PostDto.FindResponseDto> posts = postService.findAllPostsOrderByCreatedAt(pageable);
+        return ResponseEntity.ok(posts);
+    }
 }
