@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,18 +27,32 @@ public class AgreementServiceImpl implements AgreementService {
     @Override
     public AgreementDto.Response createAgreement(Long postId, AgreementDto.Create request) {
         Long memberId = request.getMemberId();
+        Boolean isAgree = request.getIsAgree();
         Member findMember = memberRepository.findById(memberId).orElseThrow(() -> new CustomNotFoundException("회원을 찾을 수 없습니다."));
         Post findPost = postRepository.findById(postId).orElseThrow(() -> new CustomNotFoundException("게시글을 찾을 수 없습니다."));
+
+        Optional<Agreement> existingAgreement = agreementRepository.findByMemberAndPost(findMember, findPost);
+        existingAgreement.ifPresent(agreement -> agreementRepository.delete(agreement));
+
         Agreement newAgreement = Agreement.builder()
                 .post(findPost)
                 .member(findMember)
                 .isAgree(request.getIsAgree())
                 .build();
         Agreement saveAgreement = agreementRepository.save(newAgreement);
+
         return AgreementDto.Response.builder()
                 .agreementId(saveAgreement.getId())
                 .message("게시글에 대한 반응이 정상적으로 반영되었습니다.")
                 .build();
+
+    }
+
+    private void updateAgreementCountsForPost(Post post) {
+        long agreementCount = agreementRepository.countByPostAndIsAgree(post, true);
+        long disagreementCount = agreementRepository.countByPostAndIsAgree(post, false);
+
+        post.updateAgreementCounts(agreementCount, disagreementCount);
     }
 
     @Override
@@ -48,6 +63,4 @@ public class AgreementServiceImpl implements AgreementService {
                 .build();
         return response;
     }
-
-
 }

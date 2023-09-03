@@ -11,6 +11,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,6 +37,14 @@ public class Post {
     @Comment("운영자가 검열했는지 여부 ~ null : in queue, true : 찬성, false : 반대")
     private Boolean isApproved;
 
+    private Long agreementCount;
+    private Long disagreementCount;
+
+    public void updateAgreementCounts(long agreementCount, long disagreementCount) {
+        this.agreementCount = agreementCount;
+        this.disagreementCount = disagreementCount;
+    }
+
     @CreatedDate
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -55,6 +65,8 @@ public class Post {
         this.title = title;
         this.content = content;
         this.isApproved = isApproved;
+        this.agreementCount = 0L; //초기값 0 설정
+        this.disagreementCount = 0L; //초기값 0 설정
     }
 }
 

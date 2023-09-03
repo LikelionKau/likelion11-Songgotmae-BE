@@ -59,6 +59,11 @@ public class PostDto {
         }
     }
 
-
+    @Data
+    public static class PostSearchRequestDto {
+        private String keyword;
+        private int page;
+        private int size;
+    }
 
 }
