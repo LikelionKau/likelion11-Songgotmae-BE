@@ -90,7 +90,10 @@ public class PostController {
     }
 
     @GetMapping("/entities")
-    public Page<Post> searchPost(@ModelAttribute @Valid PostDto.PostSearchRequestDto requestDto) {
+    public Page<Post> searchPost(@RequestParam(required = false) String keyword,
+                                    @RequestParam int page,
+                                    @RequestParam int size) {
+        PostDto.PostSearchRequestDto requestDto = new PostDto.PostSearchRequestDto(keyword, page, size);
 
         return postService.searchPost(requestDto);
     }
