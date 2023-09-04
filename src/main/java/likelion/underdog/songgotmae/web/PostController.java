@@ -87,7 +87,7 @@ public class PostController {
     }
 
     @GetMapping("/posts/orderedByCreatedAt")
-    public ResponseEntity<Page<PostDto.FindResponseDto>> findAllPostsOrderByCreatedAtDesc(Pageable pageable) {
+    public ResponseEntity<Page<PostDto.FindResponseDto>> findAllPostsOrderByCreatedAt(Pageable pageable) {
         Pageable fixedPageable = PageRequest.of(pageable.getPageNumber(), 10); //페이지당 게시글 수 10개로 제한
 
         Page<PostDto.FindResponseDto> posts = postService.findAllPostsOrderByCreatedAt(pageable);
