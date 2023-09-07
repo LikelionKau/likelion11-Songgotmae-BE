@@ -129,4 +129,10 @@ public class PostServiceImpl implements PostService {
         return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PostDto.FindResponseDto> findAllPostsOrderByOpinionCount(Pageable pageable) {
+        Page<Post> posts = postRepository.findAllByOrderByOpinionCount(pageable);
+        return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
+    }
 }

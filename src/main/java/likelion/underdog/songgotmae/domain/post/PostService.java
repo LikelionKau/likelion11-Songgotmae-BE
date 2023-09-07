@@ -12,6 +12,7 @@ public interface PostService {
     PostDto.SaveResponseDto approvePostFalse(Long id);
     List<PostDto.FindResponseDto> findAllPosts();
     Page<PostDto.FindResponseDto> findAllPostsOrderByCreatedAt(Pageable pageable);
+    Page<PostDto.FindResponseDto> findAllPostsOrderByOpinionCount(Pageable pageable);
     List<PostDto.FindResponseDto> findApprovedPosts();
     List<PostDto.FindResponseDto> findMemberPosts(Long memberId);
 }
