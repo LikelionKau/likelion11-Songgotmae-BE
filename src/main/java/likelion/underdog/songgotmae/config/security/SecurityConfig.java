@@ -77,15 +77,10 @@ public class SecurityConfig{
                 .authorizeHttpRequests() // 5.6 버전 이후 authorizeRequests 보다 authorizeHttpRequests 권장
                     .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
                     .antMatchers(H2_URL_PATTERNS).permitAll()
-                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
-                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
+//                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
+//                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
                     .anyRequest().permitAll()
 
-
-//                .and()
-//                    .oauth2Login()
-//                    .userInfoEndpoint()
-//                    .userService()
         ;
 
         return http.build();
