@@ -45,27 +45,30 @@ public class PostController {
     @GetMapping("posts/all")
     public ResponseEntity<?> findAllPosts() {
         List<PostDto.FindResponseDto> allPosts = postService.findAllPosts();
+        CommonResponseDto<List<PostDto.FindResponseDto>> response = new CommonResponseDto<>(1, "(for Admin) 게시글 전체 조회 성공", allPosts);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(allPosts);
+                .body(response);
     }
 
     @Operation(summary = "검열 통과된 게시글 전체 조회 api 입니다.")
     @GetMapping("posts/approved")
     public ResponseEntity<?> findApprovedPosts() {
         List<PostDto.FindResponseDto> approvedPosts = postService.findApprovedPosts();
+        CommonResponseDto<List<PostDto.FindResponseDto>> response = new CommonResponseDto<>(1, "(for User) 게시글 전체 조회 성공", approvedPosts);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(approvedPosts);
+                .body(response);
     }
 
     @Operation(summary = "멤버가 자신이 작성한 게시글을 조회할 수 있는 api 입니다.")
     @GetMapping("posts/{memberId}")
     public ResponseEntity<?> findMemberPosts(@PathVariable Long memberId) {
         List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts(memberId);
+        CommonResponseDto<List<PostDto.FindResponseDto>> response = new CommonResponseDto<>(1, "멤버별 작성 게시글 조회 성공", memberPosts);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(memberPosts);
+                .body(response);
     }
 
     @GetMapping("entities")
