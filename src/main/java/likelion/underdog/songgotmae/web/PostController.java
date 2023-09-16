@@ -35,40 +35,36 @@ public class PostController {
     @PostMapping("posts/new")
     public ResponseEntity<?> createPost(@RequestBody @Valid PostDto.CreateRequestDto requestBody, BindingResult bindingResult) {
         PostDto.SaveResponseDto saveResponseDto = postService.createPost(requestBody);
-        CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 작성 성공", saveResponseDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(response);
+                .body(saveResponseDto);
     }
 
     @Operation(summary = "게시글 전체 조회 api 입니다. - 테스트 완료 (황제철)")
     @GetMapping("posts/all")
     public ResponseEntity<?> findAllPosts() {
         List<PostDto.FindResponseDto> allPosts = postService.findAllPosts();
-        CommonResponseDto<List<PostDto.FindResponseDto>> response = new CommonResponseDto<>(1, "(for Admin) 게시글 전체 조회 성공", allPosts);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(response);
+                .body(allPosts);
     }
 
     @Operation(summary = "검열 통과된 게시글 전체 조회 api 입니다.")
     @GetMapping("posts/approved")
     public ResponseEntity<?> findApprovedPosts() {
         List<PostDto.FindResponseDto> approvedPosts = postService.findApprovedPosts();
-        CommonResponseDto<List<PostDto.FindResponseDto>> response = new CommonResponseDto<>(1, "(for User) 게시글 전체 조회 성공", approvedPosts);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(response);
+                .body(approvedPosts);
     }
 
     @Operation(summary = "멤버가 자신이 작성한 게시글을 조회할 수 있는 api 입니다.")
     @GetMapping("posts/{memberId}")
     public ResponseEntity<?> findMemberPosts(@PathVariable Long memberId) {
         List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts(memberId);
-        CommonResponseDto<List<PostDto.FindResponseDto>> response = new CommonResponseDto<>(1, "멤버별 작성 게시글 조회 성공", memberPosts);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(response);
+                .body(memberPosts);
     }
 
     @GetMapping("/posts/orderedByCreatedAt")
