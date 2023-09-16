@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.domain.post.PostRepository;
 import likelion.underdog.songgotmae.domain.post.PostService;
-import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

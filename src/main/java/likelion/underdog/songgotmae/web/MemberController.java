@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import likelion.underdog.songgotmae.domain.member.service.MemberService;
-import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
