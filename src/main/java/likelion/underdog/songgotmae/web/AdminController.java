@@ -22,11 +22,6 @@ public class AdminController {
     private final PostServiceImpl postService;
 
     @Operation(summary = "(관리자) 포스트 게시 허용 - 테스트 완료 (황제철)")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "게시 허용 완료"),
-            @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
-            @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
-    })
     @PatchMapping("/posts/{postId}/approve")
     public ResponseEntity<?> approvePost(@PathVariable Long postId) {
 
@@ -38,11 +33,6 @@ public class AdminController {
     }
 
     @Operation(summary = "(관리자) 포스트 게시 불허 - 테스트 완료 (황제철)")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "게시 불허 완료"),
-            @ApiResponse(responseCode = "400", description = "BAD_REQUEST"),
-            @ApiResponse(responseCode = "500", description = "Internal_Serer_Error")
-    })
     @PatchMapping("/posts/{postId}/disapprove")
     public ResponseEntity<?> disapprovePost(@PathVariable Long postId) {
         PostDto.SaveResponseDto saveResponseDto = postService.approvePostFalse(postId);

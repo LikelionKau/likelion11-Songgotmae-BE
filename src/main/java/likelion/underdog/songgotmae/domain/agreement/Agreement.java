@@ -1,6 +1,8 @@
 package likelion.underdog.songgotmae.domain.agreement;
 
 import javax.persistence.*;
+
+import likelion.underdog.songgotmae.domain.common.BaseTimeEntity;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
 import lombok.AccessLevel;
@@ -18,7 +20,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "agreement_tb")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Agreement {
+public class Agreement extends BaseTimeEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "agreement_id")
     private Long id;
@@ -33,15 +35,6 @@ public class Agreement {
 
     @Column(nullable = false)
     private Boolean isAgree;
-
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt;
-
 
 
     @Builder

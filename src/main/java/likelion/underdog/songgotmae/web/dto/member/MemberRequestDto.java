@@ -14,7 +14,7 @@ public class MemberRequestDto {
     public static class JoinRequestDto {
 
         @NotEmpty
-        @Pattern(regexp = "^[a-zA-Z0-9]{2,20}$", message = "영문/숫자 2~20자 이내로 작성해주세요.")
+        @Pattern(regexp = "^[가-힣a-zA-Z0-9]{2,20}$", message = "한글/영문/숫자 2~20자 이내로 작성해주세요.")
         private String nickname;
 
         @NotEmpty

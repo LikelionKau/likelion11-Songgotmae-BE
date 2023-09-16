@@ -1,22 +1,29 @@
 
 version: "3"
 services:
-  spring-app:
-    container_name: spring-app
+  server-app:
+    container_name: songgotmae
     image: ghkdwp018/songgotmae:latest
     env_file:
       - "./.env"
-    hostname : spring-app
+    environment:
+      - SECRET_KEY: ${SECRET_KEY}
+      - RDS_ENDPOINT: ${RDS_ENDPOINT}
+      - RDS_PORT: ${RDS_PORT}
+      - RDS_DB_NAME: ${RDS_DB_NAME}
+      - RDS_USERNAME: ${RDS_USERNAME}
+      - RDS_PASSWORD: ${RDS_PASSWORD}
+    hostname : server-app
     expose:
       - "8080"
     restart: always
 
   nginx:
     depends_on:
-      - spring-app
+      - server-app
     restart: always
     build:
       dockerfile: Dockerfile
-      context: ./nginx
+      context: ../songgotmae-deploy/nginx
     ports:
       - "80:80"
