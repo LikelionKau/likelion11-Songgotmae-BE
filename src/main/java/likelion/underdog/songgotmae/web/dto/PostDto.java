@@ -80,5 +80,4 @@ public class PostDto {
             this.size = size;
         }
     }
-
 }

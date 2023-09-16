@@ -8,7 +8,9 @@ import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+
 import org.springframework.data.domain.PageRequest;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -113,6 +115,13 @@ public class PostServiceImpl implements PostService {
             return postRepository.findByTitleContaining(requestDto.getKeyword(), pageable);
         }
     }
+  
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PostDto.FindResponseDto> findAllPostsOrderByCreatedAt(Pageable pageable) {
+        Page<Post> posts = postRepository.findAllByOrderByCreatedAt(pageable);
+        return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
+    }
 
     /* ----- 반복 메서드 ----- */
     private void updateAgreementCountsForPost(Post post) {
@@ -125,12 +134,10 @@ public class PostServiceImpl implements PostService {
 
     }
 
-    private static List<PostDto.FindResponseDto> getDtoList(List<Post> posts) {
+    private List<PostDto.FindResponseDto> getDtoList(List<Post> posts) {
         return posts.stream()
                 .map(p -> PostDto.FindResponseDto.builder().post(p).build())
                 .toList();
     }
-
-
 
 }

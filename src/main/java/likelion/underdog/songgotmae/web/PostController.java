@@ -71,6 +71,26 @@ public class PostController {
                 .body(response);
     }
 
+    @GetMapping("/posts/orderedByCreatedAt")
+    public ResponseEntity<Page<PostDto.FindResponseDto>> findAllPostsOrderByCreatedAt(
+            @RequestParam(name = "pageNumber") int pageNumber,
+            @RequestParam(name = "pageSize") int pageSize) {
+
+        // 페이지 번호나 페이지 크기가 유효하지 않은 경우의 예외처리
+        if (pageNumber < 0 || pageSize <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<PostDto.FindResponseDto> posts = postService.findAllPostsOrderByCreatedAt(pageable);
+
+        // 조회된 게시글이 없는 경우의 예외처리
+        if (posts.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(posts);
+
     @GetMapping("entities")
     public Page<Post> searchPost(@RequestParam String keyword, @RequestParam String page, @RequestParam String size) {
         PostDto.PostSearchRequestDto requestDto = getRequestDtoBy(keyword, page, size);
