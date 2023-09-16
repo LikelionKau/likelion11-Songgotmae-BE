@@ -105,4 +105,25 @@ public class PostController {
                 .size(Integer.parseInt(size))
                 .build();
     }
+
+    @GetMapping("/posts/orderedByOpinionCount")
+    public ResponseEntity<Page<PostDto.FindResponseDto>> findAllPostsOrderByOpinionCount(
+            @RequestParam(name = "pageNumber") int pageNumber,
+            @RequestParam(name = "pageSize") int pageSize) {
+
+        // 페이지 번호나 페이지 크기가 유효하지 않은 경우의 예외처리
+        if (pageNumber < 0 || pageSize <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<PostDto.FindResponseDto> posts = postService.findAllPostsOrderByOpinionCount(pageable);
+
+        // 조회된 게시글이 없는 경우의 예외처리
+        if (posts.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(posts);
+    }
 }

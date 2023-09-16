@@ -39,6 +39,7 @@ public class Post extends BaseTimeEntity {
 
     private Long agreementCount;
     private Long disagreementCount;
+    private Long opinionCount;
 
     public void updateAgreementCounts(long agreementCount, long disagreementCount) {
         this.agreementCount = agreementCount;
@@ -61,6 +62,7 @@ public class Post extends BaseTimeEntity {
         this.isApproved = isApproved;
         this.agreementCount = 0L; //초기값 0 설정
         this.disagreementCount = 0L; //초기값 0 설정
+        this.opinionCount = this.agreementCount + this.disagreementCount;
     }
 }
 
