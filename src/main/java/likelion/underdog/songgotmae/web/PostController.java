@@ -90,20 +90,6 @@ public class PostController {
         }
 
         return ResponseEntity.ok(posts);
-
-    @GetMapping("entities")
-    public Page<Post> searchPost(@RequestParam String keyword, @RequestParam String page, @RequestParam String size) {
-        PostDto.PostSearchRequestDto requestDto = getRequestDtoBy(keyword, page, size);
-        return postService.searchPost(requestDto);
-    }
-
-    /* 편의 메서드 */
-    private static PostDto.PostSearchRequestDto getRequestDtoBy(String keyword, String page, String size) {
-        return PostDto.PostSearchRequestDto.builder()
-                .keyword(keyword)
-                .page(Integer.parseInt(page))
-                .size(Integer.parseInt(size))
-                .build();
     }
 
     @GetMapping("/posts/orderedByOpinionCount")
@@ -126,4 +112,21 @@ public class PostController {
 
         return ResponseEntity.ok(posts);
     }
+
+    @GetMapping("posts")
+    public Page<Post> searchPost(@RequestParam String keyword, @RequestParam String page, @RequestParam String size) {
+        PostDto.PostSearchRequestDto requestDto = getRequestDtoBy(keyword, page, size);
+        return postService.searchPost(requestDto);
+    }
+
+    /* 편의 메서드 */
+    private static PostDto.PostSearchRequestDto getRequestDtoBy(String keyword, String page, String size) {
+        return PostDto.PostSearchRequestDto.builder()
+                .keyword(keyword)
+                .page(Integer.parseInt(page))
+                .size(Integer.parseInt(size))
+                .build();
+    }
+
+
 }

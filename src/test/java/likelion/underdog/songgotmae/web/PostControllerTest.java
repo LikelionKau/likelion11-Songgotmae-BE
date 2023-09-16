@@ -76,6 +76,8 @@ class PostControllerTest {
                         .param("size", size)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
+
                 .andDo(print());
     }
+
 }
