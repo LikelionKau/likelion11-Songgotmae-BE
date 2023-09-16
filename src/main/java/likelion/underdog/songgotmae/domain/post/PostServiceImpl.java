@@ -120,6 +120,12 @@ public class PostServiceImpl implements PostService {
         Page<Post> posts = postRepository.findAllByOrderByCreatedAt(pageable);
         return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
     }
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PostDto.FindResponseDto> findAllPostsOrderByOpinionCount(Pageable pageable) {
+        Page<Post> posts = postRepository.findAllByOrderByOpinionCount(pageable);
+        return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
+    }
 
     /* ----- 반복 메서드 ----- */
     private void updateAgreementCountsForPost(Post post) {
@@ -138,10 +144,4 @@ public class PostServiceImpl implements PostService {
                 .toList();
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Page<PostDto.FindResponseDto> findAllPostsOrderByOpinionCount(Pageable pageable) {
-        Page<Post> posts = postRepository.findAllByOrderByOpinionCount(pageable);
-        return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
-    }
 }
