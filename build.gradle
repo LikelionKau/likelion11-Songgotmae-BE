@@ -41,6 +41,7 @@ dependencies {
 
     // swagger - 1.7.0이 springboot 2.x 을 지원하는 가장 최신 버전 (출처 : springdoc.org/#properties)
     implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
+
 }
 
 test {

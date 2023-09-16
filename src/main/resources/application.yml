@@ -1,16 +1,16 @@
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: ${CLIENT_ID}
-            client-secret: ${CLIENT_SECRET}
-            redirect-uri: http://localhost:8080/login/oauth2/code/google
-            scope:
-              - profile
-              - email
-              - openid
+#spring:
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: ${CLIENT_ID}
+#            client-secret: ${CLIENT_SECRET}
+#            redirect-uri: http://localhost:8080/login/oauth2/code/google
+#            scope:
+#              - profile
+#              - email
+#              - openid
 
 ### swagger configuration
 springdoc:
