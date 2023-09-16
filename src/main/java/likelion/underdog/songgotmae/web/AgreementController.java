@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import likelion.underdog.songgotmae.domain.agreement.AgreementService;
 import likelion.underdog.songgotmae.web.dto.AgreementDto;
-import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
