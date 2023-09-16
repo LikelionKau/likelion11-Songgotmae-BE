@@ -1,6 +1,8 @@
 package likelion.underdog.songgotmae.domain.post;
 
 import javax.persistence.*;
+
+import likelion.underdog.songgotmae.domain.common.BaseTimeEntity;
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -19,7 +21,7 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "post_tb")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
@@ -45,12 +47,6 @@ public class Post {
         this.disagreementCount = disagreementCount;
     }
 
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt;
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt;
 
     public void updateApprovedTrue() {
         this.isApproved = true;
