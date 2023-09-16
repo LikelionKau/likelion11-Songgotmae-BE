@@ -2,6 +2,7 @@ package likelion.underdog.songgotmae.web.dto;
 
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.post.Post;
+import likelion.underdog.songgotmae.domain.post.PostService;
 import lombok.Builder;
 import lombok.Data;
 
@@ -59,6 +60,17 @@ public class PostDto {
         }
     }
 
+    @Data
+    public static class PostSearchRequestDto {
+        private String keyword;
+        private int page;
+        private int size;
 
+        public PostSearchRequestDto(String keyword, int page, int size) {
+            this.keyword = keyword;
+            this.page = page;
+            this.size = size;
+        }
+    }
 
 }

@@ -4,12 +4,17 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import likelion.underdog.songgotmae.domain.post.Post;
+import likelion.underdog.songgotmae.domain.post.PostRepository;
 import likelion.underdog.songgotmae.domain.post.PostService;
 import likelion.underdog.songgotmae.domain.post.PostServiceImpl;
 import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -25,6 +30,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class PostController {
     private final PostService postService;
+    private final PostRepository postRepository;
 
     @Operation(summary = "게시글 작성 api 입니다. - 테스트 완료 (황제철)")
     @ApiResponses({
@@ -83,6 +89,12 @@ public class PostController {
                 .body(memberPosts);
     }
 
+    @GetMapping("/entities")
+    public Page<Post> searchPost(@RequestParam(required = false) String keyword,
+                                    @RequestParam int page,
+                                    @RequestParam int size) {
+        PostDto.PostSearchRequestDto requestDto = new PostDto.PostSearchRequestDto(keyword, page, size);
 
-
+        return postService.searchPost(requestDto);
+    }
 }

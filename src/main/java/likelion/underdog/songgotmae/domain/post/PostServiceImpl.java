@@ -7,6 +7,9 @@ import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -120,5 +123,13 @@ public class PostServiceImpl implements PostService {
 
     }
 
-
+    @Override
+    public Page<Post> searchPost(PostDto.PostSearchRequestDto requestDto) {
+        Pageable pageable = PageRequest.of(requestDto.getPage(), requestDto.getSize());
+        if (requestDto.getKeyword() == null || requestDto.getKeyword().isEmpty()) {
+            return postRepository.findAll(pageable);
+        } else {
+            return postRepository.findByTitleContaining(requestDto.getKeyword(), pageable);
+        }
+    }
 }
