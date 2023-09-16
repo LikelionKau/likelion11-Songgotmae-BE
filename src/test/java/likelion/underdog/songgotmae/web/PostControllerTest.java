@@ -59,7 +59,7 @@ class PostControllerTest {
     @WithMockUser
     void searchPost() throws Exception {
         // given
-        String keyword = "키워드";
+        String keyword = "string";
         String page = "0";
         String size = "8";
         MultiValueMap<String, String> info = new LinkedMultiValueMap<>();
@@ -68,15 +68,14 @@ class PostControllerTest {
         info.add("size", size);
 
         // then
-        mockMvc.perform(get("http://localhost:8080/api/v1/entities")
-                        .header("accept", "application/json")
+        mockMvc.perform(get("http://localhost:8080/api/v1/posts")
+                                .header("accept", "application/json")
 //                        .params(info)
-                        .param("keyword", keyword)
-                        .param("page", page)
-                        .param("size", size)
+                                .param("keyword", keyword)
+                                .param("page", page)
+                                .param("size", size)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
-
                 .andDo(print());
     }
 

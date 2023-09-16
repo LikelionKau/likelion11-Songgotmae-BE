@@ -20,7 +20,7 @@ import java.util.Optional;
 
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final MemberRepository memberRepository;
@@ -29,6 +29,7 @@ public class PostServiceImpl implements PostService {
     private final AgreementRepository agreementRepository;
 
     @Override
+    @Transactional
     public PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody) {
         Optional<Member> optionalMember = memberRepository.findById(requestBody.getUserId());
         if (optionalMember.isPresent()) {
@@ -53,6 +54,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public PostDto.SaveResponseDto approvePostTrue(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
@@ -69,6 +71,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public PostDto.SaveResponseDto approvePostFalse(Long id) {
         Optional<Post> optionalPost = postRepository.findById(id);
         if (optionalPost.isPresent()) {
@@ -85,28 +88,24 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<PostDto.FindResponseDto> findAllPosts() {
         List<Post> findPosts = postRepository.findAllPosts();
         return getDtoList(findPosts);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<PostDto.FindResponseDto> findApprovedPosts() {
         List<Post> approvedPosts = postRepository.findApprovedPosts();
         return getDtoList(approvedPosts);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public List<PostDto.FindResponseDto> findMemberPosts(Long memberId) {
         List<Post> memberPosts = postRepository.findPostsByMemberId(memberId);
         return getDtoList(memberPosts);
     }
 
     @Override
-    @Transactional(readOnly = true) // edited
     public Page<Post> searchPost(PostDto.PostSearchRequestDto requestDto) {
         Pageable pageable = PageRequest.of(requestDto.getPage(), requestDto.getSize());
         if (requestDto.getKeyword() == null || requestDto.getKeyword().isEmpty()) {
@@ -115,9 +114,8 @@ public class PostServiceImpl implements PostService {
             return postRepository.findByTitleContaining(requestDto.getKeyword(), pageable);
         }
     }
-  
+
     @Override
-    @Transactional(readOnly = true)
     public Page<PostDto.FindResponseDto> findAllPostsOrderByCreatedAt(Pageable pageable) {
         Page<Post> posts = postRepository.findAllByOrderByCreatedAt(pageable);
         return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
