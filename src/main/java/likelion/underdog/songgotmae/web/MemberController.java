@@ -32,20 +32,18 @@ public class MemberController {
     @PostMapping("/join")
     public ResponseEntity<?> joinUser(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
         MemberResponseDto.JoinResponseDto responseDto = memberService.joinMember(joinRequest);
-        CommonResponseDto<MemberResponseDto.JoinResponseDto> response = new CommonResponseDto<>(1, "회원가입 성공", responseDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(response);
+                .body(responseDto);
     }
 
     @Operation(summary = "관리자 계정 생성 API (임시) - 테스트 완료 (황제철)")
     @PostMapping("/join/admin")
     public ResponseEntity<?> joinAdmin(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
         MemberResponseDto.JoinResponseDto responseDto = memberService.joinAdminMember(joinRequest);
-        CommonResponseDto<MemberResponseDto.JoinResponseDto> response = new CommonResponseDto<>(1, "관리자 회원가입 성공", responseDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(response);
+                .body(responseDto);
     }
 
 }

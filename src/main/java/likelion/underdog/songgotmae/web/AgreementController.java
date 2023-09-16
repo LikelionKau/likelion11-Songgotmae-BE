@@ -24,9 +24,8 @@ public class AgreementController {
     @PostMapping("/agreements/new/{postId}")
     public ResponseEntity<?> create(@PathVariable Long postId, @RequestBody @Valid AgreementDto.Create request, BindingResult bindingResult) {
         AgreementDto.Response responseDto = agreementService.createAgreement(postId, request);
-        CommonResponseDto<AgreementDto.Response> response = new CommonResponseDto<>(1, "게시글에 대한 반응(찬성/반대) 생성이 완료되었습니다.", responseDto);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(response);
+                .body(responseDto);
     }
 }

@@ -26,20 +26,18 @@ public class AdminController {
     public ResponseEntity<?> approvePost(@PathVariable Long postId) {
 
         PostDto.SaveResponseDto saveResponseDto = postService.approvePostTrue(postId);
-        CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 찬성 성공", saveResponseDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(response);
+                .body(saveResponseDto);
     }
 
     @Operation(summary = "(관리자) 포스트 게시 불허 - 테스트 완료 (황제철)")
     @PatchMapping("/posts/{postId}/disapprove")
     public ResponseEntity<?> disapprovePost(@PathVariable Long postId) {
         PostDto.SaveResponseDto saveResponseDto = postService.approvePostFalse(postId);
-        CommonResponseDto<PostDto.SaveResponseDto> response = new CommonResponseDto<>(1, "게시글 반대 성공", saveResponseDto);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(response);
+                .body(saveResponseDto);
     }
 
 
