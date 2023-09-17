@@ -10,10 +10,10 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
-        default_batch_fetch_size: 100
+        default_batch_fetch_size: 1000
         format_sql: true
     show-sql: true
   output:

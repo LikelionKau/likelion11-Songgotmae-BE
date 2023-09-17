@@ -49,7 +49,7 @@ public class PostController {
     }
 
     @Operation(summary = "검열 통과된 게시글 전체 조회 api 입니다.")
-    @GetMapping("posts/approved")
+    @GetMapping("posts/all/approved")
     public ResponseEntity<?> findApprovedPosts() {
         List<PostDto.FindResponseDto> approvedPosts = postService.findApprovedPosts();
         return ResponseEntity
@@ -58,7 +58,7 @@ public class PostController {
     }
 
     @Operation(summary = "멤버가 자신이 작성한 게시글을 조회할 수 있는 api 입니다.")
-    @GetMapping("posts/{memberId}")
+    @GetMapping("posts/wroteBy/{memberId}")
     public ResponseEntity<?> findMemberPosts(@PathVariable Long memberId) {
         List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts(memberId);
         return ResponseEntity
@@ -108,18 +108,18 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    @GetMapping("posts")
-    public Page<Post> searchPost(@RequestParam String keyword, @RequestParam String page, @RequestParam String size) {
+    @GetMapping("posts/search")
+    public Page<Post> searchPost(@RequestParam String keyword, @RequestParam int page, @RequestParam int size) {
         PostDto.PostSearchRequestDto requestDto = getRequestDtoBy(keyword, page, size);
         return postService.searchPost(requestDto);
     }
 
     /* 편의 메서드 */
-    private static PostDto.PostSearchRequestDto getRequestDtoBy(String keyword, String page, String size) {
+    private static PostDto.PostSearchRequestDto getRequestDtoBy(String keyword, int page, int size) {
         return PostDto.PostSearchRequestDto.builder()
                 .keyword(keyword)
-                .page(Integer.parseInt(page))
-                .size(Integer.parseInt(size))
+                .page(page)
+                .size(size)
                 .build();
     }
 

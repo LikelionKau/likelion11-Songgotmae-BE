@@ -102,7 +102,8 @@ class PostServiceTest {
         Post p10 = getPost("키워드를 포함한 제목", saved, "내용10");
         postRepository.saveAll(List.of(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10));
 
-        String keyword = "포함";
+        String keyword = "키워드";
+
         int page = 0;
         int size = 3;
         PostDto.PostSearchRequestDto pageRequest = PostDto.PostSearchRequestDto.builder()

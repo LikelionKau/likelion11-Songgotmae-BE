@@ -21,10 +21,13 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select p from Post p join fetch p.author where p.author.id = :authorId")
     public List<Post> findPostsByMemberId(Long authorId);
-  
-  
+
+    Page<Post> findAll(Pageable pageable);
+
     Page<Post> findAllByOrderByCreatedAt(Pageable pageable);
     Page<Post> findAllByOrderByOpinionCount(Pageable pageable);
+
+
     Page<Post> findByTitleContaining(String keyword, Pageable pageable);
 
 

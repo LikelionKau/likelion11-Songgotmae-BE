@@ -54,7 +54,7 @@ class PostControllerTest {
     void findMemberPosts() {
     }
 
-    @DisplayName("유저가 입력한 키워드, 그리고 클라이언트에서 전해주는 page=0++, size=8으로 게시글을 검색/조회한다.")
+    @DisplayName("유저가 입력한 키워드, 그리고 클라이언트에서 전해주는 page=0++, size=8으로 게시글 제목을 검색/조회한다.")
     @Test
     @WithMockUser
     void searchPost() throws Exception {
@@ -70,10 +70,10 @@ class PostControllerTest {
         // then
         mockMvc.perform(get("http://localhost:8080/api/v1/posts")
                                 .header("accept", "application/json")
-//                        .params(info)
-                                .param("keyword", keyword)
-                                .param("page", page)
-                                .param("size", size)
+                                .params(info)
+//                                .param("keyword", keyword)
+//                                .param("page", page)
+//                                .param("size", size)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(print());
