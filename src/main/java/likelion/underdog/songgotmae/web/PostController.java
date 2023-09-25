@@ -108,10 +108,21 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+
     @GetMapping("posts/search")
-    public Page<Post> searchPost(@RequestParam String keyword, @RequestParam int page, @RequestParam int size) {
-        PostDto.PostSearchRequestDto requestDto = getRequestDtoBy(keyword, page, size);
-        return postService.searchPost(requestDto);
+    public ResponseEntity<Page<PostDto.PostSearchRequestDto>> searchPost(
+            @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
+
+        if (page < 0 || size <= 0) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        PostDto.PostSearchRequestDto requestDto = new PostDto.PostSearchRequestDto(keyword, page, size);
+        Page<PostDto.PostSearchRequestDto> posts = postService.searchPost(requestDto);
+
+        return ResponseEntity.ok(posts);
     }
 
     /* 편의 메서드 */

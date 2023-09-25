@@ -18,5 +18,6 @@ public interface PostService {
     List<PostDto.FindResponseDto> findApprovedPosts();
     List<PostDto.FindResponseDto> findMemberPosts(Long memberId);
 
-    Page<Post> searchPost(PostDto.PostSearchRequestDto requestDto);
+    //Page<Post> searchPost(PostDto.PostSearchRequestDto requestDto);
+    Page<PostDto.PostSearchRequestDto> searchPost(PostDto.PostSearchRequestDto requestDto);
 }
