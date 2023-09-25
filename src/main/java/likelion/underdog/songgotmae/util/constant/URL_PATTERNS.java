@@ -3,11 +3,6 @@ package likelion.underdog.songgotmae.util.constant;
 public class URL_PATTERNS {
     /* swagger urls */
     public static final String[] SWAGGER_URL_PATTERNS = {
-//            "/swagger-resources",
-//            "/swagger-resources/**",
-//            "/configuration/ui",
-//            "/configuration/security",
-//            "/webjars/**",
             "/v3/api-docs/**",
             "/swagger-ui/**",
 //            "/swagger-ui/index.html",

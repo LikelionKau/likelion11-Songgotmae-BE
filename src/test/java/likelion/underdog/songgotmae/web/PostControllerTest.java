@@ -71,9 +71,6 @@ class PostControllerTest {
         mockMvc.perform(get("http://localhost:8080/api/v1/posts")
                                 .header("accept", "application/json")
                                 .params(info)
-//                                .param("keyword", keyword)
-//                                .param("page", page)
-//                                .param("size", size)
                 )
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(print());

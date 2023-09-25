@@ -15,11 +15,15 @@ import java.util.Date;
 public class JwtProcess {
 
     public static String create(LoginMember loginMember) {
+        Date twoHoursAfterNow = new Date(System.currentTimeMillis() + JwtVO.EXPIRATION_TIME);
+        Long loginMemberId = loginMember.getMember().getId();
+        String loginMemberRole = String.valueOf(loginMember.getMember().getRole());
+
         String jwtToken = JWT.create()
                 .withSubject("Songgotmae")
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtVO.EXPIRATION_TIME))
-                .withClaim("id", loginMember.getMember().getId())
-                .withClaim("role", String.valueOf(loginMember.getMember().getRole()))
+                .withExpiresAt(twoHoursAfterNow)
+                .withClaim("id", loginMemberId)
+                .withClaim("role", loginMemberRole)
                 .sign(Algorithm.HMAC512(JwtVO.SECRET_KEY));
         return JwtVO.TOKEN_PREFIX + jwtToken;
     }

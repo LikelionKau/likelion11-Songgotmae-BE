@@ -62,7 +62,6 @@ public class EmailService {
 
 
     // 메일 반환
-
     private MimeMessage createEmailForm(String email) throws MessagingException {
 
         String authCode = createdCode();
