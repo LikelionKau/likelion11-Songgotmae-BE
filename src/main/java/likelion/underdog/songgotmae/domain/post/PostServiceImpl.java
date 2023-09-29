@@ -106,13 +106,24 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<Post> searchPost(PostDto.PostSearchRequestDto requestDto) {
-        Pageable pageable = PageRequest.of(requestDto.getPage(), requestDto.getSize());
-        if (requestDto.getKeyword() == null || requestDto.getKeyword().isEmpty()) {
-            return postRepository.findAll(pageable);
-        } else {
-            return postRepository.findByTitleContaining(requestDto.getKeyword(), pageable);
+    public Page<PostDto.PostSearchRequestDto> searchPost(PostDto.PostSearchRequestDto requestDto) {
+        if (requestDto.getPage() < 0 || requestDto.getSize() <= 0) {
+            throw new IllegalArgumentException("");
         }
+
+        Pageable pageable = PageRequest.of(requestDto.getPage(), requestDto.getSize());
+        Page<Post> posts;
+
+        if (requestDto.getKeyword() == null || requestDto.getKeyword().isEmpty()) {
+            posts = postRepository.findAll(pageable);
+        } else {
+            posts = postRepository.findByTitleContaining(requestDto.getKeyword(), pageable);
+        }
+
+        Page<PostDto.PostSearchRequestDto> postDtos = posts.map(post ->
+                new PostDto.PostSearchRequestDto(requestDto.getKeyword(), requestDto.getPage(), requestDto.getSize()));
+
+        return postDtos;
     }
 
     @Override
