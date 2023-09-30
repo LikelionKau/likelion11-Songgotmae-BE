@@ -49,8 +49,8 @@ dependencies {
     implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.7.0'
 
     // redis
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.7.14'
-    implementation 'io.lettuce:lettuce-core:6.2.5.RELEASE'
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.7.14'
+//    implementation 'io.lettuce:lettuce-core:6.2.5.RELEASE'
 
     // thymeleaf
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'

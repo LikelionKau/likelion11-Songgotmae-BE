@@ -108,6 +108,7 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+
     @GetMapping("posts/search")
     public ResponseEntity<Page<PostDto.PostSearchRequestDto>> searchPost(
             @RequestParam(name = "keyword", required = false, defaultValue = "") String keyword,
