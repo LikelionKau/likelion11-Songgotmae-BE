@@ -104,7 +104,6 @@ public class PostController {
         if (posts.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(posts);
     }
 
