@@ -53,8 +53,9 @@ public class MemberServiceImpl implements MemberService {
         log.info("INFO : 로그인 진행");
         Member findMember = memberRepository.findByKauEmail(request.getUsername()).get();
         if (!request.match(passwordEncoder, findMember.getPassword())) {
-            throw new NoSuchElementException("로그인 패스워드 안맞는건데, 안맞는 예외를 던지고있으니 수정해라.");
+            throw new NoSuchElementException("패스워드 터짐. (현재 예외가 올바르지 못하니 추가작업 필요함).");
         }
+
         return new MemberResponseDto.LoginResponseDto(findMember);
     }
 }
