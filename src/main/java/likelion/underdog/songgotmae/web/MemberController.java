@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import likelion.underdog.songgotmae.domain.member.service.MemberService;
+import likelion.underdog.songgotmae.web.dto.member.LoginRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +24,13 @@ import javax.validation.Valid;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/members")
 public class MemberController {
     private final MemberService memberService;
 
     @Operation(summary = "회원가입 - 테스트 완료 (황제철)")
     @PostMapping("/join")
-    public ResponseEntity<?> joinUser(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
+    public ResponseEntity<?> joinMember(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
         MemberResponseDto.JoinResponseDto responseDto = memberService.joinMember(joinRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -43,6 +44,14 @@ public class MemberController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(responseDto);
+    }
+
+    @Operation(summary = "로그인")
+    @PostMapping("/login")
+    public ResponseEntity<?> loginMember(@RequestBody @Valid LoginRequestDto request, BindingResult bindingResult) {
+        MemberResponseDto.LoginResponseDto response = memberService.loginMember(request);
+        return ResponseEntity
+                .ok(response);
     }
 
 }
