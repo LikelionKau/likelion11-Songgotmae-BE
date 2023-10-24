@@ -18,7 +18,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
-.idea
+*.idea
 *.iws
 *.iml
 *.ipr
@@ -37,7 +37,7 @@ out/
 .vscode/
 
 ### 환경변수 파일 ###
-.env
+*.env
 
 ### 로그인 관련 파일 ###
 application-oauth.yml

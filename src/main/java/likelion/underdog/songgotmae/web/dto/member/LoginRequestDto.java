@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Data
 @NoArgsConstructor
 public class LoginRequestDto {
-    private String username;
+    private String kauEmailId;
     private String password;
 
     public boolean match(BCryptPasswordEncoder passwordEncoder, String encodedPassword) {

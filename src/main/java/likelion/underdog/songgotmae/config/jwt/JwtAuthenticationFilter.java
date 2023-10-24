@@ -58,7 +58,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         LoginMember loginMember = (LoginMember) authResult.getPrincipal();
         String accessToken = JwtProcess.create(loginMember);
         response.addHeader(JwtVO.HEADER, accessToken);
-        LoginResponseDto loginResponseDto = new LoginResponseDto(loginMember.getMember());
+        LoginResponseDto loginResponseDto = new LoginResponseDto(loginMember);
         CustomResponseFormatter.success(response, loginResponseDto);
     }
 }

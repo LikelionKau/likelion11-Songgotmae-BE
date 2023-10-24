@@ -23,12 +23,12 @@ import org.springframework.web.client.RestTemplate;
 public class LoginService implements UserDetailsService {
     private final MemberRepository memberRepository;
     @Override
-    public UserDetails loadUserByUsername(String kauEmail) throws UsernameNotFoundException {
+    public LoginMember loadUserByUsername(String kauEmail) throws UsernameNotFoundException {
         log.debug("DEBUG : loadUserByUsername 호출됨");
-        Member memberPC = memberRepository.findByKauEmail(kauEmail).orElseThrow(
+        Member loginMember = memberRepository.findByKauEmail(kauEmail).orElseThrow(
                 () -> new CustomNotFoundException("해당 이메일이 존재하지 않습니다.")
         );
-        return new LoginMember(memberPC);
+        return new LoginMember(loginMember);
     }
 
 //    public void socialLogin(String code, String registrationId) {

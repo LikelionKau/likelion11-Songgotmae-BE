@@ -1,5 +1,7 @@
 package likelion.underdog.songgotmae.domain.member.service;
 
+import likelion.underdog.songgotmae.config.auth.LoginMember;
+import likelion.underdog.songgotmae.config.auth.LoginService;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
 import likelion.underdog.songgotmae.util.exception.MemberAlreadyExistException;
@@ -8,6 +10,7 @@ import likelion.underdog.songgotmae.web.dto.member.MemberRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +25,7 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final LoginService loginService;
 
     @Override
     @Transactional
@@ -51,11 +55,12 @@ public class MemberServiceImpl implements MemberService {
     @Transactional
     public MemberResponseDto.LoginResponseDto loginMember(LoginRequestDto request) {
         log.info("INFO : 로그인 진행");
-        Member findMember = memberRepository.findByKauEmail(request.getUsername()).get();
+        Member findMember = memberRepository.findByKauEmail(request.getKauEmailId()).get();
         if (!request.match(passwordEncoder, findMember.getPassword())) {
             throw new NoSuchElementException("패스워드 터짐. (현재 예외가 올바르지 못하니 추가작업 필요함).");
         }
+        LoginMember loginMember = loginService.loadUserByUsername(request.getKauEmailId());
 
-        return new MemberResponseDto.LoginResponseDto(findMember);
+        return new MemberResponseDto.LoginResponseDto(loginMember);
     }
 }
