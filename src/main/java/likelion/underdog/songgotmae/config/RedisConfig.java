@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.config.redis;
+package likelion.underdog.songgotmae.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -1,10 +1,8 @@
 package likelion.underdog.songgotmae.web.dto.member;
 
-import likelion.underdog.songgotmae.config.auth.LoginMember;
+import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.domain.member.Member;
-import likelion.underdog.songgotmae.util.formatter.CustomDateFormatter;
 import lombok.Data;
-import org.springframework.security.core.userdetails.UserDetails;
 
 public class MemberResponseDto {
 

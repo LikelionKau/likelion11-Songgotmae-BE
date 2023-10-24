@@ -3,11 +3,10 @@ package likelion.underdog.songgotmae.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import likelion.underdog.songgotmae.config.auth.LoginMember;
+import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.MemberRole;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 

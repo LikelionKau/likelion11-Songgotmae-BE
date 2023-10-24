@@ -1,6 +1,6 @@
 package likelion.underdog.songgotmae.config.jwt;
 
-import likelion.underdog.songgotmae.config.auth.LoginMember;
+import likelion.underdog.songgotmae.domain.member.LoginMember;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

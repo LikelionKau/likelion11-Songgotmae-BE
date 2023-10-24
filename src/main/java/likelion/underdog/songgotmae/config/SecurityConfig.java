@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.config.security;
+package likelion.underdog.songgotmae.config;
 
 import likelion.underdog.songgotmae.config.jwt.JwtAuthenticationFilter;
 import likelion.underdog.songgotmae.config.jwt.JwtAuthorizationFilter;

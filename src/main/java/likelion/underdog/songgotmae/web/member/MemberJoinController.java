@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.web;
+package likelion.underdog.songgotmae.web.member;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
