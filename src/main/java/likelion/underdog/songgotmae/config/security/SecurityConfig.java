@@ -93,7 +93,7 @@ public class SecurityConfig{
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*"); // GET, POST, PUT, DELETE (javascript 요청 허용)
-        configuration.addAllowedOriginPattern("*"); // 모든 IP 주소 허용 (항후 프론트엔트 IP만 허용해야함)
+        configuration.addAllowedOriginPattern("*"); // 모든 IP 주소 허용 -> TODO: 항후 프론트엔트 IP만 허용해야함
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
