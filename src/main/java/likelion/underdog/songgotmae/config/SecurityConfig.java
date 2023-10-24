@@ -1,8 +1,7 @@
 package likelion.underdog.songgotmae.config;
 
-import likelion.underdog.songgotmae.config.jwt.JwtAuthenticationFilter;
-import likelion.underdog.songgotmae.config.jwt.JwtAuthorizationFilter;
-import likelion.underdog.songgotmae.domain.member.MemberRole;
+import likelion.underdog.songgotmae.util.jwt.JwtAuthenticationFilter;
+import likelion.underdog.songgotmae.util.jwt.JwtAuthorizationFilter;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;

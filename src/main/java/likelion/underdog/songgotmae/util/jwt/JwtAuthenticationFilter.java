@@ -1,7 +1,8 @@
-package likelion.underdog.songgotmae.config.jwt;
+package likelion.underdog.songgotmae.util.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import likelion.underdog.songgotmae.domain.member.LoginMember;
+import likelion.underdog.songgotmae.util.constant.JWT_VO;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import likelion.underdog.songgotmae.web.dto.member.MemberRequestDto.LoginRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.LoginResponseDto;
@@ -57,7 +58,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.debug("DEBUG : successfulAuthentication 호출됨");
         LoginMember loginMember = (LoginMember) authResult.getPrincipal();
         String accessToken = JwtProcess.create(loginMember);
-        response.addHeader(JwtVO.HEADER, accessToken);
+        response.addHeader(JWT_VO.HEADER, accessToken);
         LoginResponseDto loginResponseDto = new LoginResponseDto(loginMember);
         CustomResponseFormatter.success(response, loginResponseDto);
     }

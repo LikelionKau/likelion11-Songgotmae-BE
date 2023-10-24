@@ -1,6 +1,7 @@
-package likelion.underdog.songgotmae.config.jwt;
+package likelion.underdog.songgotmae.util.jwt;
 
 import likelion.underdog.songgotmae.domain.member.LoginMember;
+import likelion.underdog.songgotmae.util.constant.JWT_VO;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +22,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (isHeaderVerify(request, response)) {
-            String token = request.getHeader(JwtVO.HEADER).replace(JwtVO.TOKEN_PREFIX, "");
+            String token = request.getHeader(JWT_VO.HEADER).replace(JWT_VO.TOKEN_PREFIX, "");
             LoginMember loginMember = JwtProcess.verify(token);
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginMember, null, loginMember.getAuthorities());
@@ -31,8 +32,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     }
 
     private boolean isHeaderVerify(HttpServletRequest request, HttpServletResponse response) {
-        String header = request.getHeader(JwtVO.HEADER);
-        if (header == null || !header.startsWith(JwtVO.TOKEN_PREFIX)) {
+        String header = request.getHeader(JWT_VO.HEADER);
+        if (header == null || !header.startsWith(JWT_VO.TOKEN_PREFIX)) {
             return false;
         } else {
             return true;
