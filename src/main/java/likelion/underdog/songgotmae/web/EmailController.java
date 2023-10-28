@@ -11,18 +11,18 @@ import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("email")
+@RequestMapping("/api/v1/email")
 public class EmailController {
 
     private final EmailService emailService;
 
-    @GetMapping("authcode")
+    @GetMapping("/authcode")
     public ResponseEntity<String> sendEmailPath(@RequestParam String emailAddress) throws MessagingException {
         emailService.sendEmail(emailAddress);
         return ResponseEntity.ok("이메일을 확인하세요");
     }
 
-    @PostMapping("authcode")
+    @PostMapping("/authcode")
     public ResponseEntity<String> sendEmailAndCode(@RequestParam String emailAddress, @RequestBody EmailRequestDto dto) throws NoSuchAlgorithmException {
         if (emailService.verifyEmailCode(emailAddress, dto.getCode())) {
             return ResponseEntity.ok(emailService.makeMemberId(emailAddress));

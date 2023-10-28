@@ -15,12 +15,12 @@ server:
 ### default profile
 spring:
   profiles:
-    default: test
+    default: prod
   redis:
     host: localhost
     port: 6379
   mail:
-    host: smtp.naver.com # TODO : google smtp로 구현하기
+    host: smtp.naver.com
     port: 465
     username: ${MAIL_USERNAME}
     password: ${MAIL_PASSWORD}
