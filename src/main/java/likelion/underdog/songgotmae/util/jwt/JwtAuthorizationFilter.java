@@ -22,7 +22,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (isHeaderVerify(request, response)) {
-            String token = request.getHeader(JWT_VO.HEADER).replace(JWT_VO.TOKEN_PREFIX, "");
+            String token = request.getHeader(JWT_VO.HEADER).replace(JWT_VO.BEARER_PREFIX, "");
             LoginMember loginMember = JwtProcess.verify(token);
 
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginMember, null, loginMember.getAuthorities());
@@ -33,7 +33,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private boolean isHeaderVerify(HttpServletRequest request, HttpServletResponse response) {
         String header = request.getHeader(JWT_VO.HEADER);
-        if (header == null || !header.startsWith(JWT_VO.TOKEN_PREFIX)) {
+        if (header == null || !header.startsWith(JWT_VO.BEARER_PREFIX)) {
             return false;
         } else {
             return true;

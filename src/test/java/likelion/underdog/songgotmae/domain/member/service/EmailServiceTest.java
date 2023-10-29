@@ -22,7 +22,7 @@ class EmailServiceTest {
     @WithMockUser
     public void sendMail() throws Exception {
         //given
-        String address = "ghkdwp018@kau.kr";
+        String address = "ghkdwp018@naver.com";
 
         //when
         emailService.sendEmail(address);

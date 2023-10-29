@@ -25,7 +25,7 @@ public class JwtProcess {
                 .withClaim("id", loginMemberId)
                 .withClaim("role", loginMemberRole)
                 .sign(Algorithm.HMAC512(JWT_VO.SECRET_KEY));
-        return JWT_VO.TOKEN_PREFIX + jwtToken;
+        return JWT_VO.BEARER_PREFIX + jwtToken;
     }
 
     public static LoginMember verify(String token) {
