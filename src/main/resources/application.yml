@@ -1,0 +1,35 @@
+### swagger configuration
+springdoc:
+  default-produces-media-type: application/json
+  default-consumes-media-type: application/json
+  api-docs:
+    groups:
+      enabled: true
+
+### encoding
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+### default profile
+spring:
+  profiles:
+    default: stage
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: false
+          auth: true
+          ssl:
+            enable: true # 필요
+            trust: smtp.naver.com
