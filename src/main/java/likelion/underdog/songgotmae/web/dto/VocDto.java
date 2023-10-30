@@ -35,4 +35,17 @@ public class VocDto {
             this.message = message;
         }
     }
+
+
+    @Data
+    public static class DeleteResponseDto {
+        private Long deletedVocId;
+        private String message;
+
+        @Builder
+        public DeleteResponseDto(Long deletedVocId, String message) {
+            this.deletedVocId = deletedVocId;
+            this.message = "게시물을 삭제하였습니다.";
+        }
+    }
 }

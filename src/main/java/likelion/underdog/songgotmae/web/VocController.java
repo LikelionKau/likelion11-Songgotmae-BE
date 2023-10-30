@@ -29,5 +29,13 @@ public class VocController {
                 .status(HttpStatus.CREATED)
                 .body(saveResponseDto);
     }
+
+    @DeleteMapping("/vocs/{postId}")
+    public ResponseEntity<VocDto.DeleteResponseDto> deletePost(@PathVariable Long postId) {
+        VocDto.DeleteResponseDto deleteResponseDto = vocService.deletePost(postId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(deleteResponseDto);
+    }
 }
 
