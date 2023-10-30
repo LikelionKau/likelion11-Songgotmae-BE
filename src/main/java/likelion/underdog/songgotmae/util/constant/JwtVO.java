@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.config.jwt;
+package likelion.underdog.songgotmae.util.constant;
 
 public interface JwtVO {
     public static final String SECRET_KEY = "임시언더독"; // 임시키

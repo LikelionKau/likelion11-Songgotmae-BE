@@ -24,12 +24,10 @@ public class EmailService {
     private final JavaMailSender mailSender;
     private final RedisUtil redisUtil;
 
-
-
     @Value("${spring.mail.username}")
     private String configEmail;
 
-    private String createdCode() {
+    private String createdCode() {c
         int leftLimit = 48; // number '0'
         int rightLimit = 122; // alphabet 'z'
         int targetStringLength = 6;

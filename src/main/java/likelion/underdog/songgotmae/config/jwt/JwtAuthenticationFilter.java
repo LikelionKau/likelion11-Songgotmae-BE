@@ -1,9 +1,11 @@
 package likelion.underdog.songgotmae.config.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import likelion.underdog.songgotmae.config.auth.LoginMember;
+import likelion.underdog.songgotmae.domain.member.LoginMember;
+import likelion.underdog.songgotmae.domain.member.service.JwtProcess;
+import likelion.underdog.songgotmae.util.constant.JwtVO;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
-import likelion.underdog.songgotmae.web.dto.member.MemberRequestDto.LoginRequestDto;
+import likelion.underdog.songgotmae.web.dto.member.MemberLoginRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.LoginResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,7 +28,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
-        setFilterProcessesUrl("/api/login");
+        setFilterProcessesUrl("/api/v1/members/login");
         this.authenticationManager = authenticationManager;
     }
 
@@ -35,9 +37,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.debug("DEBUG : attemptAuthentication 호출됨");
         try {
             ObjectMapper om = new ObjectMapper();
-            LoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class);
+            MemberLoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), MemberLoginRequestDto.class);
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getKauEmail(), loginRequestDto.getPassword());
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getKauEmailId(), loginRequestDto.getPassword());
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             return authentication;
         } catch (Exception e) {
