@@ -27,7 +27,7 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String configEmail;
 
-    private String createdCode() {c
+    private String createdCode() {
         int leftLimit = 48; // number '0'
         int rightLimit = 122; // alphabet 'z'
         int targetStringLength = 6;
