@@ -1,9 +1,9 @@
-name: stage-server-deploy
+name: server-deploy
 
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   deploy:
