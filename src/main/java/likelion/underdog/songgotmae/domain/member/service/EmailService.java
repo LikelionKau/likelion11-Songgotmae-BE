@@ -24,8 +24,6 @@ public class EmailService {
     private final JavaMailSender mailSender;
     private final RedisUtil redisUtil;
 
-
-
     @Value("${spring.mail.username}")
     private String configEmail;
 

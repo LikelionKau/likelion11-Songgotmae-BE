@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.config.auditing;
+package likelion.underdog.songgotmae.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

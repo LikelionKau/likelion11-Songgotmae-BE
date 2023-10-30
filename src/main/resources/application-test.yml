@@ -25,7 +25,7 @@ spring:
       name: logs
     level:
       root: DEBUG
-app:
-  auth:
-    token:
-      secret-key: ${SECRET_KEY}
+#app:
+#  auth:
+#    token:
+#      secret-key: ${SECRET_KEY}

@@ -73,6 +73,9 @@ public class PostDto {
         @Positive(message = "페이지 크기는 양수여야 합니다.")
         private int size;
 
+
+
+
         @Builder
         public PostSearchRequestDto(String keyword, int page, int size) {
             this.keyword = keyword;
