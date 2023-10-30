@@ -6,8 +6,10 @@ import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
 import likelion.underdog.songgotmae.web.dto.VocDto;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.Optional;
 
@@ -39,6 +41,23 @@ public class VocServiceImpl implements VocService {
                     .build();
         } else {
             throw new CustomNotFoundException("작성자를 찾을 수 없습니다.");
+        }
+    }
+
+    @Override
+    @Transactional
+    public VocDto.DeleteResponseDto deletePost(Long postId) {
+        Optional<Voc> optionalVoc = vocRepository.findById(postId);
+
+        if (optionalVoc.isPresent()) {
+            vocRepository.deleteById(postId);
+
+            return VocDto.DeleteResponseDto.builder()
+                    .deletedVocId(postId)
+                    .message("게시물이 삭제되었습니다.")
+                    .build();
+        } else {
+            throw new CustomNotFoundException("삭제할 게시물을 찾을 수 없습니다.");
         }
     }
 }
