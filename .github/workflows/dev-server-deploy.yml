@@ -3,7 +3,7 @@ name: stage-server-deploy
 on:
   push:
     branches:
-      - stage
+      - dev
 
 jobs:
   deploy:
