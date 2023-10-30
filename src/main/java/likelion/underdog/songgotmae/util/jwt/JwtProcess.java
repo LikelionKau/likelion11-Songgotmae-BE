@@ -1,13 +1,20 @@
-package likelion.underdog.songgotmae.config.jwt;
+<<<<<<<< HEAD:src/main/java/likelion/underdog/songgotmae/util/jwt/JwtProcess.java
+package likelion.underdog.songgotmae.util.jwt;
+========
+package likelion.underdog.songgotmae.domain.member.service;
+>>>>>>>> dev:src/main/java/likelion/underdog/songgotmae/domain/member/service/JwtProcess.java
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import likelion.underdog.songgotmae.config.auth.LoginMember;
+import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.MemberRole;
+<<<<<<<< HEAD:src/main/java/likelion/underdog/songgotmae/util/jwt/JwtProcess.java
+import likelion.underdog.songgotmae.util.constant.JwtVO;
+========
+>>>>>>>> dev:src/main/java/likelion/underdog/songgotmae/domain/member/service/JwtProcess.java
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
@@ -15,16 +22,18 @@ import java.util.Date;
 public class JwtProcess {
 
     public static String create(LoginMember loginMember) {
+        Date twoHoursAfterNow = new Date(System.currentTimeMillis() + JwtVO.EXPIRATION_TIME);
+        Long loginMemberId = loginMember.getMember().getId();
+        String loginMemberRole = String.valueOf(loginMember.getMember().getRole());
+
         String jwtToken = JWT.create()
                 .withSubject("Songgotmae")
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtVO.EXPIRATION_TIME))
-                .withClaim("id", loginMember.getMember().getId())
-                .withClaim("role", String.valueOf(loginMember.getMember().getRole()))
+                .withExpiresAt(twoHoursAfterNow)
+                .withClaim("id", loginMemberId)
+                .withClaim("role", loginMemberRole)
                 .sign(Algorithm.HMAC512(JwtVO.SECRET_KEY));
-        return JwtVO.TOKEN_PREFIX + jwtToken;
+        return JwtVO.BEARER_PREFIX + jwtToken;
     }
-
-
 
     public static LoginMember verify(String token) {
         DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(JwtVO.SECRET_KEY)).build().verify(token);

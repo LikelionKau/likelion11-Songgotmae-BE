@@ -1,9 +1,7 @@
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
     username: sa
     password:
-#    url: jdbc:h2:tcp://localhost/~/songgotmae
     h2:
       console:
         enabled: true

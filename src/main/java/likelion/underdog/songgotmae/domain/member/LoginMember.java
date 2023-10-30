@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.config.auth;
+package likelion.underdog.songgotmae.domain.member;
 
 import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.Data;
