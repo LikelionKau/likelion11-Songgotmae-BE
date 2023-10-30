@@ -2,11 +2,8 @@ package likelion.underdog.songgotmae.util.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import likelion.underdog.songgotmae.domain.member.LoginMember;
-<<<<<<< HEAD:src/main/java/likelion/underdog/songgotmae/util/jwt/JwtAuthenticationFilter.java
 import likelion.underdog.songgotmae.util.constant.JwtVO;
-=======
 import likelion.underdog.songgotmae.domain.member.service.JwtProcess;
->>>>>>> dev:src/main/java/likelion/underdog/songgotmae/config/jwt/JwtAuthenticationFilter.java
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import likelion.underdog.songgotmae.web.dto.member.MemberLoginRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.LoginResponseDto;
@@ -40,11 +37,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         log.debug("DEBUG : attemptAuthentication 호출됨");
         try {
             ObjectMapper om = new ObjectMapper();
-<<<<<<< HEAD:src/main/java/likelion/underdog/songgotmae/util/jwt/JwtAuthenticationFilter.java
-            LoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), LoginRequestDto.class); // http method : POST
-=======
-            MemberLoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), MemberLoginRequestDto.class);
->>>>>>> dev:src/main/java/likelion/underdog/songgotmae/config/jwt/JwtAuthenticationFilter.java
+            MemberLoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), MemberLoginRequestDto.class); // HTTP method : POST
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getKauEmailId(), loginRequestDto.getPassword());
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
