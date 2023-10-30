@@ -37,7 +37,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PEM_KEY }}
           script: |
-            sudo docker rm -f ${{ secrets.DOCKER_APP_CONTAINER }}
-            sudo docker rmi ${{ secrets.DOCKER_APP_IMAGE }}
-            docker-compose -f ${{ secrets.DOCKER_COMPOSE_DIRECTORY }} up -d
+            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME}}
+            docker-compose up -d
             docker image prune -f
