@@ -9,7 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class MemberRequestDto {
+public class MemberJoinRequestDto {
     @Data
     public static class JoinRequestDto {
 
@@ -42,12 +42,5 @@ public class MemberRequestDto {
                     .build();
         }
     }
-
-    @Data
-    public static class LoginRequestDto {
-        private String kauEmail;
-        private String password;
-    }
-
 
 }

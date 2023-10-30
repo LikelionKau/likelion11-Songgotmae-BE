@@ -1,8 +1,8 @@
-package likelion.underdog.songgotmae.config.security;
+package likelion.underdog.songgotmae.config;
 
-import likelion.underdog.songgotmae.config.jwt.JwtAuthenticationFilter;
-import likelion.underdog.songgotmae.config.jwt.JwtAuthorizationFilter;
 import likelion.underdog.songgotmae.domain.member.MemberRole;
+import likelion.underdog.songgotmae.util.jwt.JwtAuthenticationFilter;
+import likelion.underdog.songgotmae.util.jwt.JwtAuthorizationFilter;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -75,12 +75,11 @@ public class SecurityConfig{
 
         http
                 .authorizeHttpRequests() // 5.6 버전 이후 authorizeRequests 보다 authorizeHttpRequests 권장
-                    .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
-                    .antMatchers(H2_URL_PATTERNS).permitAll()
+//                    .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
+//                    .antMatchers(H2_URL_PATTERNS).permitAll()
 //                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
 //                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
                     .anyRequest().permitAll()
-
         ;
 
         return http.build();
@@ -94,7 +93,7 @@ public class SecurityConfig{
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*"); // GET, POST, PUT, DELETE (javascript 요청 허용)
-        configuration.addAllowedOriginPattern("*"); // 모든 IP 주소 허용 (항후 프론트엔트 IP만 허용해야함)
+        configuration.addAllowedOriginPattern("*"); // 모든 IP 주소 허용 -> TODO: 항후 프론트엔트 IP만 허용해야함
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

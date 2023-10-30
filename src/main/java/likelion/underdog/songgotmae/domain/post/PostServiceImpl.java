@@ -105,6 +105,17 @@ public class PostServiceImpl implements PostService {
         return getDtoList(memberPosts);
     }
 
+//    @Override
+//    public Page<Post> searchPost(PostDto.PostSearchRequestDto requestDto) {
+//        Pageable pageable = PageRequest.of(requestDto.getPage(), requestDto.getSize());
+//        if (requestDto.getKeyword() == null || requestDto.getKeyword().isEmpty()) {
+//            return postRepository.findAll(pageable);
+//        } else {
+//            return postRepository.findByTitleContaining(requestDto.getKeyword(), pageable);
+//        }
+//    }
+
+
     @Override
     public Page<PostDto.PostSearchRequestDto> searchPost(PostDto.PostSearchRequestDto requestDto) {
         if (requestDto.getPage() < 0 || requestDto.getSize() <= 0) {

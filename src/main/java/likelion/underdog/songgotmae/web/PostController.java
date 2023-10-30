@@ -104,9 +104,9 @@ public class PostController {
         if (posts.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(posts);
     }
+
 
     @GetMapping("posts/search")
     public ResponseEntity<Page<PostDto.PostSearchRequestDto>> searchPost(

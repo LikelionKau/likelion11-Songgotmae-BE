@@ -1,7 +1,7 @@
 package likelion.underdog.songgotmae.web.dto.member;
 
+import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.domain.member.Member;
-import likelion.underdog.songgotmae.util.formatter.CustomDateFormatter;
 import lombok.Data;
 
 public class MemberResponseDto {
@@ -21,13 +21,9 @@ public class MemberResponseDto {
     @Data
     public static class LoginResponseDto {
         private Long id;
-//        private String kauEmail;
-        private String createdAt;
 
-        public LoginResponseDto(Member member) {
-            this.id = member.getId();
-//            this.kauEmail = member.getKauEmail();
-            this.createdAt = CustomDateFormatter.toStringFormat(member.getCreatedAt());
+        public LoginResponseDto(LoginMember loginMember) {
+            this.id = loginMember.getMember().getId();
         }
     }
 }

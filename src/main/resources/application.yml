@@ -15,4 +15,21 @@ server:
 ### default profile
 spring:
   profiles:
-    default: test
+    default: stage
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: false
+          auth: true
+          ssl:
+            enable: true # 필요
+            trust: smtp.naver.com
