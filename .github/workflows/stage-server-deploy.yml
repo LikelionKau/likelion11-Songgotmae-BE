@@ -27,11 +27,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: docker build & push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          build-args: PROFILE=stage
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
       - name: ec2-deploy
         uses: appleboy/ssh-action@master
         with:
@@ -39,6 +37,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PEM_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME}}
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME}}
             docker-compose up -d
             docker image prune -f
