@@ -6,7 +6,7 @@ on:
       - stage
 
 jobs:
-  java-jar-build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,28 +20,18 @@ jobs:
       - name: build jar
         run: ./gradlew clean build -x test
 
-
-  docker-image-build-and-push:
-    runs-on: ubuntu-latest
-    steps:
-      - name: login
+      - name: docker login
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: build
+      - name: docker build & push
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest .
-
-      - name: push
-        run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME }}:latest
 
-  ec2-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: deploy
+      - name: ec2-deploy
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
