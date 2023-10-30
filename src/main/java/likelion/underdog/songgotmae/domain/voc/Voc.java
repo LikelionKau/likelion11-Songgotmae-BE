@@ -7,7 +7,7 @@ import likelion.underdog.songgotmae.domain.member.Member;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;N
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
