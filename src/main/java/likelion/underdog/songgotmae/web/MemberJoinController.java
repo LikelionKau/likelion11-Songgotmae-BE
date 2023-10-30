@@ -1,9 +1,9 @@
-package likelion.underdog.songgotmae.web.member;
+package likelion.underdog.songgotmae.web;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import likelion.underdog.songgotmae.domain.member.service.MemberJoinService;
-import likelion.underdog.songgotmae.web.dto.member.MemberRequestDto;
+import likelion.underdog.songgotmae.web.dto.member.MemberJoinRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +27,7 @@ public class MemberJoinController {
 
     @Operation(summary = "회원가입 - 테스트 완료 (황제철)")
     @PostMapping("/join")
-    public ResponseEntity<?> joinMember(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
+    public ResponseEntity<?> joinMember(@RequestBody @Valid MemberJoinRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
         MemberResponseDto.JoinResponseDto responseDto = memberJoinService.joinMember(joinRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -36,11 +36,10 @@ public class MemberJoinController {
 
     @Operation(summary = "관리자 계정 생성 API (임시) - 테스트 완료 (황제철)")
     @PostMapping("/join/admin")
-    public ResponseEntity<?> joinAdmin(@RequestBody @Valid MemberRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
+    public ResponseEntity<?> joinAdmin(@RequestBody @Valid MemberJoinRequestDto.JoinRequestDto joinRequest, BindingResult bindingResult) {
         MemberResponseDto.JoinResponseDto responseDto = memberJoinService.joinAdminMember(joinRequest);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(responseDto);
     }
-
 }

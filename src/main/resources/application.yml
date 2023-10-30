@@ -15,7 +15,7 @@ server:
 ### default profile
 spring:
   profiles:
-    default: prod
+    default: stage
   redis:
     host: ${REDIS_HOST}
     port: ${REDIS_PORT}

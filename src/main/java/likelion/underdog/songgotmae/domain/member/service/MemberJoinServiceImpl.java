@@ -3,7 +3,7 @@ package likelion.underdog.songgotmae.domain.member.service;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
 import likelion.underdog.songgotmae.util.exception.MemberAlreadyExistException;
-import likelion.underdog.songgotmae.web.dto.member.MemberRequestDto;
+import likelion.underdog.songgotmae.web.dto.member.MemberJoinRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ public class MemberJoinServiceImpl implements MemberJoinService {
 
     @Override
     @Transactional
-    public MemberResponseDto.JoinResponseDto joinMember(MemberRequestDto.JoinRequestDto joinRequest) {
+    public MemberResponseDto.JoinResponseDto joinMember(MemberJoinRequestDto.JoinRequestDto joinRequest) {
         log.info("INFO : 회원가입 진행");
         Optional<Member> findMember = memberRepository.findByKauEmail(joinRequest.getKauEmail());
         if (findMember.isPresent()) {
@@ -35,7 +35,7 @@ public class MemberJoinServiceImpl implements MemberJoinService {
 
     @Override
     @Transactional
-    public MemberResponseDto.JoinResponseDto joinAdminMember(MemberRequestDto.JoinRequestDto joinRequest) {
+    public MemberResponseDto.JoinResponseDto joinAdminMember(MemberJoinRequestDto.JoinRequestDto joinRequest) {
         log.info("INFO : 관리자 회원가입 진행");
         Optional<Member> findMember = memberRepository.findByKauEmail(joinRequest.getKauEmail());
         if (findMember.isPresent()) {

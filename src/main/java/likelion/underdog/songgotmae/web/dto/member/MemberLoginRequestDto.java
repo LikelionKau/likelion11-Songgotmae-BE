@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Data
 @NoArgsConstructor
-public class LoginRequestDto {
+public class MemberLoginRequestDto {
     private String kauEmailId;
     private String password;
 
