@@ -1,11 +1,8 @@
 package likelion.underdog.songgotmae.util.jwt;
 
 import likelion.underdog.songgotmae.domain.member.LoginMember;
-<<<<<<< HEAD:src/main/java/likelion/underdog/songgotmae/util/jwt/JwtAuthorizationFilter.java
 import likelion.underdog.songgotmae.util.constant.JwtVO;
-=======
 import likelion.underdog.songgotmae.domain.member.service.JwtProcess;
->>>>>>> dev:src/main/java/likelion/underdog/songgotmae/config/jwt/JwtAuthorizationFilter.java
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
