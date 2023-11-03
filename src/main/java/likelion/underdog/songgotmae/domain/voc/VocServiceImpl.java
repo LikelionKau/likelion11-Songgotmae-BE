@@ -2,10 +2,14 @@ package likelion.underdog.songgotmae.domain.voc;
 
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
+import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
+import likelion.underdog.songgotmae.web.dto.PostDto;
 import likelion.underdog.songgotmae.web.dto.VocDto;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,5 +45,11 @@ public class VocServiceImpl implements VocService {
             throw new CustomNotFoundException("작성자를 찾을 수 없습니다.");
         }
     }
+
+    public Page<PostDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable) {
+        Page<Post> posts = vocRepository.findAllByOrderByCreatedAt(pageable);
+        return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
+    }
+
 }
 
