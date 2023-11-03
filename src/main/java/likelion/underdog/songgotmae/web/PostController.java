@@ -18,8 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Tag(name = "Post API", description = "게시글 관련 API입니다.")
 @Slf4j
@@ -124,13 +126,32 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    /* 편의 메서드 */
-    private static PostDto.PostSearchRequestDto getRequestDtoBy(String keyword, int page, int size) {
-        return PostDto.PostSearchRequestDto.builder()
-                .keyword(keyword)
-                .page(page)
-                .size(size)
-                .build();
+    @PutMapping("/posts/modifypost")
+    @Transactional
+    public ResponseEntity<PostDto.SaveResponseDto> modifyPost(
+            @PathVariable Long postId,
+            @RequestBody PostDto.CreateRequestDto requestBody) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (optionalPost.isPresent()) {
+            Post existingPost = optionalPost.get();
+
+
+            Post modifiedPost = Post.builder()
+                    .author(existingPost.getAuthor())
+                    .title(requestBody.getTitle())
+                    .content(requestBody.getContent())
+                    .isApproved(existingPost.getIsApproved())
+                    .build();
+
+            postRepository.save(modifiedPost);
+
+            return ResponseEntity.ok(PostDto.SaveResponseDto.builder()
+                    .postId(postId)
+                    .message("게시글이 성공적으로 수정되었습니다.")
+                    .build());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 

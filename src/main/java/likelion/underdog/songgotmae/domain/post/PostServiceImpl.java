@@ -12,8 +12,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,6 +54,34 @@ public class PostServiceImpl implements PostService {
                     .build();
         } else {
             throw new CustomNotFoundException("작성자를 찾을 수 없습니다.");
+        }
+    }
+
+
+    @Override
+    @Transactional
+    public PostDto.SaveResponseDto modifyPost(Long postId, PostDto.ModifyRequestDto requestBody) {
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if (optionalPost.isPresent()) {
+            Post existingPost = optionalPost.get();
+
+            // 빌더를 사용하여 게시글 수정
+            Post modifiedPost = Post.builder()
+                    .author(existingPost.getAuthor())
+                    .title(requestBody.getTitle())
+                    .content(requestBody.getContent())
+                    .isApproved(existingPost.getIsApproved())
+                    .build();
+
+            // 기존 게시글을 수정한 내용으로 저장
+            postRepository.save(modifiedPost);
+
+            return PostDto.SaveResponseDto.builder()
+                    .postId(postId)
+                    .message("게시글이 성공적으로 수정되었습니다.")
+                    .build();
+        } else {
+            throw new CustomNotFoundException("해당 게시글을 찾을 수 없습니다.");
         }
     }
 

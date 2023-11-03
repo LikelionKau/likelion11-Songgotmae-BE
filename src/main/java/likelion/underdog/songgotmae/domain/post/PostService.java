@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface PostService {
     PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody);
+    PostDto.SaveResponseDto modifyPost(Long postId, PostDto.ModifyRequestDto requestBody);
     PostDto.SaveResponseDto approvePostTrue(Long id);
     PostDto.SaveResponseDto approvePostFalse(Long id);
     List<PostDto.FindResponseDto> findAllPosts();
