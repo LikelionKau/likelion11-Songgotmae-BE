@@ -1,38 +1,45 @@
 package likelion.underdog.songgotmae.web.dto;
 
-import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.voc.Voc;
+import lombok.Builder;
+import lombok.Data;
 
-import lombok.*;
+import java.time.LocalDateTime;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-
+@Data
 public class VocDto {
 
     @Data
     public static class CreateRequestDto {
-        @NotNull(message = "작성 유저가 있어야 합니다.")
         private Long userId;
-        @NotBlank(message = "제목을 입력해야 합니다.")
         private String title;
-        @NotBlank(message = "내용을 입력해야 합니다.")
         private String content;
     }
 
-
-
     @Data
+    @Builder
     public static class SaveResponseDto {
         private Long vocId;
         private String message;
+    }
+
+    @Data
+    public static class FindResponseDto {
+        private Long vocId;
+        private Long authorId;
+        private String title;
+        private String content;
+        private LocalDateTime createdAt;
+        private LocalDateTime modifiedAt;
 
         @Builder
-        public SaveResponseDto(Long vocId, String message) {
-            this.vocId = vocId;
-            this.message = message;
+        public FindResponseDto(Voc voc) {
+            this.vocId = voc.getId();
+            this.authorId = voc.getAuthor().getId();
+            this.title = voc.getTitle();
+            this.content = voc.getContent();
+            this.createdAt = voc.getCreatedAt();
+            this.modifiedAt = voc.getModifiedAt();
         }
     }
 }

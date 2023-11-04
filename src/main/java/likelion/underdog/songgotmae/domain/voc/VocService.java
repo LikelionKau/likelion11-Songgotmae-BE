@@ -11,6 +11,5 @@ import java.util.List;
 public interface VocService {
     @Transactional
     VocDto.SaveResponseDto createPost(VocDto.CreateRequestDto requestBody);
-    Page<PostDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable);
+    Page<VocDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable);
 }
-

@@ -36,7 +36,6 @@ public class VocServiceImpl implements VocService {
                     .build();
             Voc saveVoc = vocRepository.save(newVoc);
 
-
             return VocDto.SaveResponseDto.builder()
                     .vocId(saveVoc.getId())
                     .message("게시글이 성공적으로 생성되었습니다.")
@@ -46,10 +45,8 @@ public class VocServiceImpl implements VocService {
         }
     }
 
-    public Page<PostDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable) {
-        Page<Post> posts = vocRepository.findAllByOrderByCreatedAt(pageable);
-        return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
+    public Page<VocDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable) {
+        Page<Voc> vocs = vocRepository.findAllByOrderByCreatedAt(pageable);
+        return vocs.map(v -> VocDto.FindResponseDto.builder().voc(v).build());
     }
-
 }
-

@@ -6,7 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface VocRepository extends JpaRepository<Voc, Long> {
-    Page<Post> findAllByOrderByCreatedAt(Pageable pageable);
-
+    Page<Voc> findAllByOrderByCreatedAt(Pageable pageable);
 }
-
