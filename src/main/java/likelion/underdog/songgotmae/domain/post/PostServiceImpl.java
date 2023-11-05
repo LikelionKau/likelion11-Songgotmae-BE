@@ -4,6 +4,7 @@ import likelion.underdog.songgotmae.domain.agreement.Agreement;
 import likelion.underdog.songgotmae.domain.agreement.AgreementRepository;
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
+import likelion.underdog.songgotmae.util.auth.SecurityUtil;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +26,14 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
+    private final SecurityUtil securityUtil;
 
     private final AgreementRepository agreementRepository;
 
     @Override
     @Transactional
     public PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody) {
-        Optional<Member> optionalMember = memberRepository.findById(requestBody.getUserId());
+        Optional<Member> optionalMember = memberRepository.findById(securityUtil.getCurrentUserId());
         if (optionalMember.isPresent()) {
             Member findMember = optionalMember.get();
             Post newPost = Post.builder()
@@ -100,8 +102,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto.FindResponseDto> findMemberPosts(Long memberId) {
-        List<Post> memberPosts = postRepository.findPostsByMemberId(memberId);
+    public List<PostDto.FindResponseDto> findMemberPosts() {
+        List<Post> memberPosts = postRepository.findPostsByMemberId(securityUtil.getCurrentUserId());
         return getDtoList(memberPosts);
     }
 

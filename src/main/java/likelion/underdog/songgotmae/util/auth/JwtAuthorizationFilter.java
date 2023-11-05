@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.util.jwt;
+package likelion.underdog.songgotmae.util.auth;
 
 import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.util.constant.JwtVO;

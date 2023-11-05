@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.util.jwt;
+package likelion.underdog.songgotmae.util.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import likelion.underdog.songgotmae.domain.member.LoginMember;

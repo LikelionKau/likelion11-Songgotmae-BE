@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.util.jwt;
+package likelion.underdog.songgotmae.util.auth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

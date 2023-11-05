@@ -15,8 +15,8 @@ public class PostDto {
 
     @Data
     public static class CreateRequestDto {
-        @NotNull(message = "작성 유저가 있어야 합니다.")
-        private Long userId;
+//        @NotNull(message = "작성 유저가 있어야 합니다.")
+//        private Long userId;
         @NotBlank(message = "제목을 입력해야 합니다.")
         private String title;
         @NotBlank(message = "내용을 입력해야 합니다.")
@@ -25,8 +25,8 @@ public class PostDto {
 
     @Data
     public static class ApproveRequestDto {
-        @NotNull(message = "작성 유저가 있어야 합니다.")
-        private Long userId;
+//        @NotNull(message = "작성 유저가 있어야 합니다.")
+//        private Long userId;
     }
 
 
