@@ -58,9 +58,9 @@ public class PostController {
     }
 
     @Operation(summary = "멤버가 자신이 작성한 게시글을 조회할 수 있는 api 입니다.")
-    @GetMapping("posts/wroteBy/{memberId}")
-    public ResponseEntity<?> findMemberPosts(@PathVariable Long memberId) {
-        List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts(memberId);
+    @GetMapping("posts/wroteBy/me")
+    public ResponseEntity<?> findMemberPosts() {
+        List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberPosts);

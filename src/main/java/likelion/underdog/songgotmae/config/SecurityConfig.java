@@ -1,8 +1,8 @@
 package likelion.underdog.songgotmae.config;
 
 import likelion.underdog.songgotmae.domain.member.MemberRole;
-import likelion.underdog.songgotmae.util.jwt.JwtAuthenticationFilter;
-import likelion.underdog.songgotmae.util.jwt.JwtAuthorizationFilter;
+import likelion.underdog.songgotmae.util.auth.JwtAuthenticationFilter;
+import likelion.underdog.songgotmae.util.auth.JwtAuthorizationFilter;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -75,10 +75,10 @@ public class SecurityConfig{
 
         http
                 .authorizeHttpRequests() // 5.6 버전 이후 authorizeRequests 보다 authorizeHttpRequests 권장
-//                    .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
-//                    .antMatchers(H2_URL_PATTERNS).permitAll()
-//                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
-//                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
+                    .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
+                    .antMatchers(H2_URL_PATTERNS).permitAll()
+                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
+                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
                     .anyRequest().permitAll()
         ;
 
