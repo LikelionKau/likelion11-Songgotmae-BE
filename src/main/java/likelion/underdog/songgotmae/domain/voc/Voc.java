@@ -34,11 +34,40 @@ public class Voc extends BaseTimeEntity {
     private String content;
 
 
-    @Builder
-    private Voc(Member author, String title, String content) {
-        this.author = author;
-        this.title = title;
-        this.content = content;
+    public static class VocBuilder {
+        private Long id;
+        private String title;
+        private String content;
+
+        private VocBuilder() {
+        }
+
+        public VocBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public VocBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public VocBuilder content(String content) {
+            this.content = content;
+            return this;
+        }
+
+        public Voc build() {
+            Voc voc = new Voc();
+            voc.id = id;
+            voc.title = title;
+            voc.content = content;
+            return voc;
+        }
+    }
+
+    public static VocBuilder builder() {
+        return new VocBuilder();
     }
 }
 

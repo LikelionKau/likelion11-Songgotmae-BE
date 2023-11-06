@@ -8,5 +8,7 @@ import java.util.List;
 public interface VocService {
     @Transactional
     VocDto.SaveResponseDto createPost(VocDto.CreateRequestDto requestBody);
+
+    VocDto.SaveResponseDto updatePost(VocDto.UpdateRequestDto updateRequest);
 }
 

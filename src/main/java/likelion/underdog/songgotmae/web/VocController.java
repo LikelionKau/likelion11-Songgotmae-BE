@@ -29,5 +29,14 @@ public class VocController {
                 .status(HttpStatus.CREATED)
                 .body(saveResponseDto);
     }
+
+    @PutMapping("/vocs/update")
+    public ResponseEntity<?> updatePost(@RequestBody @Valid VocDto.UpdateRequestDto updateRequest, BindingResult bindingResult) {
+        VocDto.SaveResponseDto saveResponseDto = vocService.updatePost(updateRequest);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(saveResponseDto);
+    }
+
 }
 

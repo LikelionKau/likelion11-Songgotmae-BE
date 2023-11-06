@@ -26,7 +26,7 @@ public class VocServiceImpl implements VocService {
         if (optionalMember.isPresent()) {
             Member findMember = optionalMember.get();
             Voc newVoc = Voc.builder()
-                    .author(findMember)
+                    .id(findMember.getId())
                     .title(requestBody.getTitle())
                     .content(requestBody.getContent())
                     .build();
@@ -41,5 +41,33 @@ public class VocServiceImpl implements VocService {
             throw new CustomNotFoundException("작성자를 찾을 수 없습니다.");
         }
     }
+
+    @Override
+    @Transactional
+    public VocDto.SaveResponseDto updatePost(VocDto.UpdateRequestDto updateRequest) {
+        Optional<Voc> optionalVoc = vocRepository.findById(updateRequest.getVocId());
+
+        if (optionalVoc.isPresent()) {
+            Voc existingVoc = optionalVoc.get();
+
+            // 엔티티를 빌더 패턴을 이용해 수정
+            Voc updatedVoc = Voc.builder()
+                    .id(existingVoc.getId())
+                    .title(updateRequest.getTitle())
+                    .content(updateRequest.getContent())
+                    .build();
+
+            // 업데이트된 Voc를 저장합니다.
+            updatedVoc = vocRepository.save(updatedVoc);
+
+            return VocDto.SaveResponseDto.builder()
+                    .vocId(updatedVoc.getId())
+                    .message("Voc가 성공적으로 업데이트되었습니다.")
+                    .build();
+        } else {
+            throw new CustomNotFoundException("사용자를 찾을 수 없습니다: " + updateRequest.getVocId());
+        }
+    }
+
 }
 
