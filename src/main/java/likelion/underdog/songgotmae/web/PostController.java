@@ -126,33 +126,15 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    @PutMapping("/posts/modifypost")
-    @Transactional
+    @PutMapping("/posts/{postId}")
+    @Operation(summary = "게시글 수정", description = "게시글을 수정합니다.")
+    @ApiResponse(responseCode = "200", description = "성공적으로 수정된 경우")
+    @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우")
     public ResponseEntity<PostDto.SaveResponseDto> modifyPost(
             @PathVariable Long postId,
-            @RequestBody PostDto.CreateRequestDto requestBody) {
-        Optional<Post> optionalPost = postRepository.findById(postId);
-        if (optionalPost.isPresent()) {
-            Post existingPost = optionalPost.get();
-
-
-            Post modifiedPost = Post.builder()
-                    .author(existingPost.getAuthor())
-                    .title(requestBody.getTitle())
-                    .content(requestBody.getContent())
-                    .isApproved(existingPost.getIsApproved())
-                    .build();
-
-            postRepository.save(modifiedPost);
-
-            return ResponseEntity.ok(PostDto.SaveResponseDto.builder()
-                    .postId(postId)
-                    .message("게시글이 성공적으로 수정되었습니다.")
-                    .build());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+            @RequestBody PostDto.ModifyRequestDto requestBody) {
+        PostDto.SaveResponseDto saveResponseDto = postService.modifyPost(postId, requestBody);
+        return ResponseEntity.ok(saveResponseDto);
     }
-
 
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -198,4 +199,19 @@ public class PostServiceImpl implements PostService {
                 .toList();
     }
 
+    @Transactional
+    public PostDto.SaveResponseDto modifyPost(Long postId, PostDto.CreateRequestDto requestBody) {
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new EntityNotFoundException("게시글을 찾을 수 없습니다."));
+
+        post.setTitle(requestBody.getTitle());
+        post.setContent(requestBody.getContent());
+
+        Post savedPost = postRepository.save(post);
+
+        return PostDto.SaveResponseDto.builder()
+                .postId(savedPost.getId())
+                .message("게시글이 성공적으로 수정되었습니다.")
+                .build();
+    }
 }
