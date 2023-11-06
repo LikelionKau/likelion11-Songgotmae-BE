@@ -50,14 +50,12 @@ public class VocServiceImpl implements VocService {
         if (optionalVoc.isPresent()) {
             Voc existingVoc = optionalVoc.get();
 
-            // 엔티티를 빌더 패턴을 이용해 수정
             Voc updatedVoc = Voc.builder()
                     .id(existingVoc.getId())
                     .title(updateRequest.getTitle())
                     .content(updateRequest.getContent())
                     .build();
 
-            // 업데이트된 Voc를 저장합니다.
             updatedVoc = vocRepository.save(updatedVoc);
 
             return VocDto.SaveResponseDto.builder()
