@@ -9,7 +9,9 @@ import likelion.underdog.songgotmae.web.dto.VocDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,7 @@ import java.util.Optional;
 public class VocServiceImpl implements VocService {
     private final MemberRepository memberRepository;
     private final VocRepository vocRepository;
+
 
     @Override
     @Transactional
@@ -46,7 +49,9 @@ public class VocServiceImpl implements VocService {
     }
 
     public Page<VocDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable) {
-        Page<Voc> vocs = vocRepository.findAllByOrderByCreatedAt(pageable);
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Order.desc("createdAt")));
+
+        Page<Voc> vocs = vocRepository.findAllByOrderByCreatedAt(sortedPageable);
         return vocs.map(v -> VocDto.FindResponseDto.builder().voc(v).build());
     }
 }

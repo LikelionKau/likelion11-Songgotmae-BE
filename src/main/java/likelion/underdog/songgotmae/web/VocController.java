@@ -1,9 +1,14 @@
 package likelion.underdog.songgotmae.web;
 
 import likelion.underdog.songgotmae.domain.voc.Voc;
+import likelion.underdog.songgotmae.domain.voc.VocRepository;
 import likelion.underdog.songgotmae.domain.voc.VocService;
 import likelion.underdog.songgotmae.web.dto.VocDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -28,6 +33,15 @@ public class VocController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(saveResponseDto);
+    }
+
+    @GetMapping("/api/voc")
+    public Page<VocDto.FindResponseDto> getVocsPage(
+            @RequestParam(required = false, defaultValue = "0", value = "page") int pageNo,
+            @RequestParam(required = false, defaultValue = "createdAt", value = "orderby") String criteria,
+            @RequestParam(required = false, defaultValue = "DESC", value = "sort") String sort) {
+        Pageable pageable = PageRequest.of(pageNo, 10, Sort.by(Sort.Order.desc(criteria)));
+        return vocService.findAllVocsOrderByCreatedAt(pageable);
     }
 }
 
