@@ -1,4 +1,4 @@
-package likelion.underdog.songgotmae.util.jwt;
+package likelion.underdog.songgotmae.util.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import likelion.underdog.songgotmae.domain.member.LoginMember;
@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             ObjectMapper om = new ObjectMapper();
             MemberLoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), MemberLoginRequestDto.class); // HTTP method : POST
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getKauEmailId(), loginRequestDto.getPassword());
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getKauEmail(), loginRequestDto.getPassword());
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             return authentication;
         } catch (Exception e) {

@@ -1,8 +1,8 @@
 package likelion.underdog.songgotmae.config;
 
 import likelion.underdog.songgotmae.domain.member.MemberRole;
-import likelion.underdog.songgotmae.util.jwt.JwtAuthenticationFilter;
-import likelion.underdog.songgotmae.util.jwt.JwtAuthorizationFilter;
+import likelion.underdog.songgotmae.util.auth.JwtAuthenticationFilter;
+import likelion.underdog.songgotmae.util.auth.JwtAuthorizationFilter;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,11 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import static likelion.underdog.songgotmae.util.constant.URL_PATTERNS.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static likelion.underdog.songgotmae.util.constant.CORS_PATTERNS.*;
+import static likelion.underdog.songgotmae.util.constant.SECURITY_PATTERNS.*;
 
 
 @Slf4j
@@ -75,10 +79,10 @@ public class SecurityConfig{
 
         http
                 .authorizeHttpRequests() // 5.6 버전 이후 authorizeRequests 보다 authorizeHttpRequests 권장
-//                    .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
-//                    .antMatchers(H2_URL_PATTERNS).permitAll()
-//                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
-//                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
+                    .antMatchers(SWAGGER_URL_PATTERNS).permitAll()
+                    .antMatchers(H2_URL_PATTERNS).permitAll()
+                    .antMatchers(NEED_LOGIN_URL_PATTERNS).authenticated() // post api는 로그인 필요
+                    .antMatchers(ADMIN_PAGE_URL_PATTERNS).hasRole(String.valueOf(MemberRole.ADMIN)) // admin api는 권한 필요
                     .anyRequest().permitAll()
         ;
 
@@ -89,11 +93,15 @@ public class SecurityConfig{
     /* CORS configuration */
     public CorsConfigurationSource configurationSource() {
         log.debug("DEBUG : CorsConfigurationSource CORS 설정이 filterchain에 등록");
+        // temp
+        List<String> exposedHeaders = new ArrayList<>();
+        exposedHeaders.add("Authorization");
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*"); // GET, POST, PUT, DELETE (javascript 요청 허용)
-        configuration.addAllowedOriginPattern("*"); // 모든 IP 주소 허용 -> TODO: 항후 프론트엔트 IP만 허용해야함
+        configuration.setAllowedHeaders(ALLOW_HEADERS);
+        configuration.setAllowedMethods(ALLOW_METHODS); // GET, POST, PUT, DELETE (javascript 요청 허용)
+        configuration.setAllowedOrigins(ALLOW_ORIGINS); // 모든 IP 주소 허용 -> TODO: 항후 프론트엔트 IP만 허용해야함
+        configuration.setExposedHeaders(EXPOSED_HEADERS);
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
