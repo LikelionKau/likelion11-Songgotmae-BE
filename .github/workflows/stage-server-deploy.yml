@@ -40,5 +40,6 @@ jobs:
           key: ${{ secrets.PEM_KEY }}
           script: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME}}
+            cd likelionkau11-songgotmae-deploy
             docker-compose up -d
             docker image prune -f
