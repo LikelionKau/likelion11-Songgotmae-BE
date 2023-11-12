@@ -8,8 +8,14 @@ import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.MemberRole;
 import likelion.underdog.songgotmae.util.constant.JwtVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 public class JwtProcess {
@@ -28,18 +34,13 @@ public class JwtProcess {
         return JwtVO.BEARER_PREFIX + jwtToken;
     }
 
-    public static LoginMember verify(String token) {
+    public static Authentication verify(String token) {
         DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(JwtVO.SECRET_KEY)).build().verify(token);
         Long id = decodedJWT.getClaim("id").asLong();
         String role = decodedJWT.getClaim("role").asString();
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
 
-        /* 보완점 없는지 체크할 부분 */
-        Member member = Member.builder()
-                .id(id)
-                .role(MemberRole.valueOf(role))
-                .build();
-
-        LoginMember loginMember = new LoginMember(member);
-        return loginMember;
+        return new UsernamePasswordAuthenticationToken(id, null, authorities);
     }
 }
