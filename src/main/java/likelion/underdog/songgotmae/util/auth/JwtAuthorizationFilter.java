@@ -5,6 +5,7 @@ import likelion.underdog.songgotmae.util.constant.JwtVO;
 import likelion.underdog.songgotmae.domain.member.service.JwtProcess;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -26,7 +27,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             String token = request.getHeader(JwtVO.HEADER).replace(JwtVO.BEARER_PREFIX, "");
             LoginMember loginMember = JwtProcess.verify(token);
 
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginMember, null, loginMember.getAuthorities());
+
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginMember.getId(), null, loginMember.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(request, response);

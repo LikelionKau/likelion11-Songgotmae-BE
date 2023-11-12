@@ -27,7 +27,6 @@ public class PostServiceImpl implements PostService {
     private final MemberRepository memberRepository;
     private final PostRepository postRepository;
     private final SecurityUtils securityUtils;
-
     private final AgreementRepository agreementRepository;
 
     @Override
