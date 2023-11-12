@@ -13,8 +13,6 @@ public class AgreementDto {
     @Data
     public static class Create {
         @NotNull
-        private Long memberId;
-        @NotNull
         private Boolean isAgree;
     }
 
