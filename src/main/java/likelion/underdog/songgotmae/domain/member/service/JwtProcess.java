@@ -34,13 +34,22 @@ public class JwtProcess {
         return JwtVO.BEARER_PREFIX + jwtToken;
     }
 
-    public static Authentication verify(String token) {
+    public static LoginMember verify(String token) {
         DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(JwtVO.SECRET_KEY)).build().verify(token);
         Long id = decodedJWT.getClaim("id").asLong();
         String role = decodedJWT.getClaim("role").asString();
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//        authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
 
-        return new UsernamePasswordAuthenticationToken(id, null, authorities);
+//        return new UsernamePasswordAuthenticationToken(id, null, authorities);
+
+        /* 보완점 없는지 체크할 부분 */
+        Member member = Member.builder()
+                .id(id)
+                .role(MemberRole.valueOf(role))
+                .build();
+
+        LoginMember loginMember = new LoginMember(member);
+        return loginMember;
     }
 }

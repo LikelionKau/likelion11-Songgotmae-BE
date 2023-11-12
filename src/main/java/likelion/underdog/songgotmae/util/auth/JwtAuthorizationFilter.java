@@ -25,9 +25,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (isHeaderVerify(request, response)) {
             String token = request.getHeader(JwtVO.HEADER).replace(JwtVO.BEARER_PREFIX, "");
-            Authentication loginMember = JwtProcess.verify(token);
+            LoginMember loginMember = JwtProcess.verify(token);
 
-            SecurityContextHolder.getContext().setAuthentication(loginMember);
+
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginMember.getId(), null, loginMember.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(request, response);
     }
