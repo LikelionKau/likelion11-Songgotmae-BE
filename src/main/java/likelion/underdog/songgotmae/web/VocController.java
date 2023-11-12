@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/voc")
+@RequestMapping("/vocs")
 public class VocController {
     private final VocService vocService;
 
@@ -27,7 +27,7 @@ public class VocController {
         this.vocService = vocService;
     }
 
-    @PostMapping("vocs/new")
+    @PostMapping("/new")
     public ResponseEntity<?> createPost(@RequestBody @Valid VocDto.CreateRequestDto requestBody, BindingResult bindingResult) {
         VocDto.SaveResponseDto saveResponseDto = vocService.createPost(requestBody);
         return ResponseEntity
@@ -35,7 +35,7 @@ public class VocController {
                 .body(saveResponseDto);
     }
 
-    @GetMapping("/api/voc")
+    @GetMapping("/all")
     public Page<VocDto.FindResponseDto> getVocsPage(
             @RequestParam(required = false, defaultValue = "0", value = "page") int pageNo,
             @RequestParam(required = false, defaultValue = "createdAt", value = "orderby") String criteria,
