@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/voc")
+@RequestMapping("/vocs")
 public class VocController {
     private final VocService vocService;
 
@@ -22,7 +22,7 @@ public class VocController {
         this.vocService = vocService;
     }
 
-    @PostMapping("vocs/new")
+    @PostMapping("/new")
     public ResponseEntity<?> createPost(@RequestBody @Valid VocDto.CreateRequestDto requestBody, BindingResult bindingResult) {
         VocDto.SaveResponseDto saveResponseDto = vocService.createPost(requestBody);
         return ResponseEntity
