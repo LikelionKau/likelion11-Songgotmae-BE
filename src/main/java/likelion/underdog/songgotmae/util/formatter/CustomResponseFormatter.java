@@ -19,11 +19,11 @@ public class CustomResponseFormatter {
             CommonResponseDto responseDto = new CommonResponseDto(1, "로그인 성공", dto); // 401 인증안됨, 403 권한없음
             String responseBody = om.writeValueAsString(responseDto);
             response.setContentType("application/json; charset=utf-8");
-            response.setStatus(HttpStatus.OK.value()); // 401 인증안됨, 403 권한없음
+            response.setStatus(HttpStatus.OK.value()); // 200
             response.getWriter().println(responseBody); // dto로 반환 가능
         } catch (Exception e) {
             // TODO : handle exception
-            log.error("서버 파싱 에러");
+            log.error("시큐리티 success 반환 에러");
         }
     }
 
@@ -40,9 +40,8 @@ public class CustomResponseFormatter {
             response.getWriter().println(responseBody); // dto로 반환 가능
         } catch (Exception e) {
             // TODO : handle exception
-            log.error("서버 파싱 에러");
+            log.error("시큐리티 fail 반환 에러");
         }
     }
-
 
 }

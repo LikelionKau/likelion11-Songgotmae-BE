@@ -3,7 +3,6 @@ package likelion.underdog.songgotmae.util.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.util.constant.JwtVO;
-import likelion.underdog.songgotmae.domain.member.service.JwtProcess;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import likelion.underdog.songgotmae.web.dto.member.MemberLoginRequestDto;
 import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.LoginResponseDto;
