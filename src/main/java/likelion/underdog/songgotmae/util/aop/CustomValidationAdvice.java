@@ -1,6 +1,7 @@
 package likelion.underdog.songgotmae.util.aop;
 
 import likelion.underdog.songgotmae.util.exception.CustomValidationException;
+import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

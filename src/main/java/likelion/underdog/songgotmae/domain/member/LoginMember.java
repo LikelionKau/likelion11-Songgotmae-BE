@@ -25,6 +25,9 @@ public class LoginMember implements UserDetails {
     public Long getId() {
         return member.getId();
     }
+    public Member getMember() {
+        return member;
+    }
 
     @Override
     public String getPassword() {
