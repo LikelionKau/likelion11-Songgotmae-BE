@@ -1,12 +1,11 @@
-package likelion.underdog.songgotmae.util.jwt;
+package likelion.underdog.songgotmae.util.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.util.constant.JwtVO;
-import likelion.underdog.songgotmae.domain.member.service.JwtProcess;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import likelion.underdog.songgotmae.web.dto.member.MemberLoginRequestDto;
-import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.LoginResponseDto;
+import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.CommonResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +38,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             ObjectMapper om = new ObjectMapper();
             MemberLoginRequestDto loginRequestDto = om.readValue(request.getInputStream(), MemberLoginRequestDto.class); // HTTP method : POST
 
-            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getKauEmailId(), loginRequestDto.getPassword());
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getKauEmail(), loginRequestDto.getPassword());
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
             return authentication;
         } catch (Exception e) {
@@ -60,7 +59,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         LoginMember loginMember = (LoginMember) authResult.getPrincipal();
         String accessToken = JwtProcess.create(loginMember);
         response.addHeader(JwtVO.HEADER, accessToken);
-        LoginResponseDto loginResponseDto = new LoginResponseDto(loginMember);
-        CustomResponseFormatter.success(response, loginResponseDto);
+        CommonResponseDto commonResponseDto = new CommonResponseDto(loginMember);
+        CustomResponseFormatter.success(response, commonResponseDto);
     }
 }

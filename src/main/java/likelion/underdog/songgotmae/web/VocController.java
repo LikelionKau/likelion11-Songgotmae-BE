@@ -42,6 +42,13 @@ public class VocController {
             @RequestParam(required = false, defaultValue = "DESC", value = "sort") String sort) {
         Pageable pageable = PageRequest.of(pageNo, 10, Sort.by(Sort.Order.desc(criteria)));
         return vocService.findAllVocsOrderByCreatedAt(pageable);
+      
+    @DeleteMapping("/vocs/{postId}")
+    public ResponseEntity<VocDto.DeleteResponseDto> deletePost(@PathVariable Long postId) {
+        VocDto.DeleteResponseDto deleteResponseDto = vocService.deletePost(postId);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(deleteResponseDto);
     }
 }
 

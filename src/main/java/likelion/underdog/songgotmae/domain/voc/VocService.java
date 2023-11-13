@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface VocService {
-    @Transactional
     VocDto.SaveResponseDto createPost(VocDto.CreateRequestDto requestBody);
     Page<VocDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable);
+    VocDto.DeleteResponseDto deletePost(Long postId);
 }

@@ -36,9 +36,10 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ubuntu
+          username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.PEM_KEY }}
           script: |
+            cd likelionkau11-songgotmae-deploy
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_IMAGE_NAME}}
             docker-compose up -d
             docker image prune -f
