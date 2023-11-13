@@ -1,5 +1,6 @@
 package likelion.underdog.songgotmae.util.handler;
 
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import likelion.underdog.songgotmae.util.exception.CustomForbiddenException;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
 import likelion.underdog.songgotmae.util.exception.CustomValidationException;
@@ -39,16 +40,4 @@ public class CustomExceptionHandler {
         // code는 성공하면 1, 실패하면 -1이므로 -1 반환 && data는 줄 게 없으므로 null
         return new ResponseEntity<>(new CommonResponseDto<>(-1, e.getMessage(), e), HttpStatus.FORBIDDEN); // 403
     }
-
-<<<<<<< Updated upstream
-=======
-    /*
-    * 이거는 지금 원하는대로 캐치를 못하고있음
-    * */
-    @ExceptionHandler(SignatureVerificationException.class)
-    public ResponseEntity<?> invalidTokenException(InvalidTokenException e) {
-        log.error(e.getMessage());
-        return new ResponseEntity<>(new CommonResponseDto<>(-1, e.getMessage()), HttpStatus.BAD_REQUEST);
-    }
->>>>>>> Stashed changes
 }
