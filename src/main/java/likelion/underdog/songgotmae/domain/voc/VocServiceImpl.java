@@ -2,10 +2,16 @@ package likelion.underdog.songgotmae.domain.voc;
 
 import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
+import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
+import likelion.underdog.songgotmae.web.dto.PostDto;
 import likelion.underdog.songgotmae.web.dto.VocDto;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +27,7 @@ public class VocServiceImpl implements VocService {
     private final MemberRepository memberRepository;
     private final VocRepository vocRepository;
 
+
     @Override
     @Transactional
     public VocDto.SaveResponseDto createPost(VocDto.CreateRequestDto requestBody) {
@@ -33,7 +40,6 @@ public class VocServiceImpl implements VocService {
                     .content(requestBody.getContent())
                     .build();
             Voc saveVoc = vocRepository.save(newVoc);
-
 
             return VocDto.SaveResponseDto.builder()
                     .vocId(saveVoc.getId())
@@ -62,3 +68,10 @@ public class VocServiceImpl implements VocService {
     }
 }
 
+    public Page<VocDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable) {
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by(Sort.Order.desc("createdAt")));
+
+        Page<Voc> vocs = vocRepository.findAllByOrderByCreatedAt(sortedPageable);
+        return vocs.map(v -> VocDto.FindResponseDto.builder().voc(v).build());
+    }
+}
