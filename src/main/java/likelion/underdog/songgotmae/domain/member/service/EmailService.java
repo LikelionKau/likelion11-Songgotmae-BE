@@ -55,7 +55,7 @@ public class EmailService {
 
         templateEngine.setTemplateResolver(templateResolver);
 
-        return templateEngine.process("mail", context);
+        return templateEngine.process("mailOtp", context);
     }
 
 
