@@ -18,8 +18,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Tag(name = "Post API", description = "게시글 관련 API입니다.")
 @Slf4j
@@ -58,9 +60,9 @@ public class PostController {
     }
 
     @Operation(summary = "멤버가 자신이 작성한 게시글을 조회할 수 있는 api 입니다.")
-    @GetMapping("posts/wroteBy/{memberId}")
-    public ResponseEntity<?> findMemberPosts(@PathVariable Long memberId) {
-        List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts(memberId);
+    @GetMapping("posts/wroteBy/me")
+    public ResponseEntity<?> findMemberPosts() {
+        List<PostDto.FindResponseDto> memberPosts = postService.findMemberPosts();
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberPosts);
@@ -124,14 +126,15 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-    /* 편의 메서드 */
-    private static PostDto.PostSearchRequestDto getRequestDtoBy(String keyword, int page, int size) {
-        return PostDto.PostSearchRequestDto.builder()
-                .keyword(keyword)
-                .page(page)
-                .size(size)
-                .build();
+    @PutMapping("/posts/{postId}")
+    @Operation(summary = "게시글 수정", description = "게시글을 수정합니다.")
+    @ApiResponse(responseCode = "200", description = "성공적으로 수정된 경우")
+    @ApiResponse(responseCode = "404", description = "게시글을 찾을 수 없는 경우")
+    public ResponseEntity<PostDto.SaveResponseDto> modifyPost(
+            @PathVariable Long postId,
+            @RequestBody PostDto.ModifyRequestDto requestBody) {
+        PostDto.SaveResponseDto saveResponseDto = postService.modifyPost(postId, requestBody);
+        return ResponseEntity.ok(saveResponseDto);
     }
-
 
 }

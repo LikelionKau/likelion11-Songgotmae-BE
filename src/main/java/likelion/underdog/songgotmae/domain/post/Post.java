@@ -64,5 +64,14 @@ public class Post extends BaseTimeEntity {
         this.disagreementCount = 0L; //초기값 0 설정
         this.opinionCount = this.agreementCount + this.disagreementCount;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
 }
 

@@ -10,13 +10,14 @@ import java.util.List;
 
 public interface PostService {
     PostDto.SaveResponseDto createPost(PostDto.CreateRequestDto requestBody);
+    PostDto.SaveResponseDto modifyPost(Long postId, PostDto.ModifyRequestDto requestBody);
     PostDto.SaveResponseDto approvePostTrue(Long id);
     PostDto.SaveResponseDto approvePostFalse(Long id);
     List<PostDto.FindResponseDto> findAllPosts();
     Page<PostDto.FindResponseDto> findAllPostsOrderByCreatedAt(Pageable pageable);
     Page<PostDto.FindResponseDto> findAllPostsOrderByOpinionCount(Pageable pageable);
     List<PostDto.FindResponseDto> findApprovedPosts();
-    List<PostDto.FindResponseDto> findMemberPosts(Long memberId);
+    List<PostDto.FindResponseDto> findMemberPosts();
 
     Page<PostDto.PostSearchRequestDto> searchPost(PostDto.PostSearchRequestDto requestDto);
 }

@@ -1,7 +1,8 @@
-package likelion.underdog.songgotmae.util.jwt;
+package likelion.underdog.songgotmae.util.auth;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import likelion.underdog.songgotmae.domain.member.LoginMember;
 import likelion.underdog.songgotmae.domain.member.Member;
@@ -28,8 +29,9 @@ public class JwtProcess {
         return JwtVO.BEARER_PREFIX + jwtToken;
     }
 
-    public static LoginMember verify(String token) {
+    public static LoginMember verify(String token) throws SignatureVerificationException{
         DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(JwtVO.SECRET_KEY)).build().verify(token);
+
         Long id = decodedJWT.getClaim("id").asLong();
         String role = decodedJWT.getClaim("role").asString();
 
