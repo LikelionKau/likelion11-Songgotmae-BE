@@ -27,7 +27,14 @@
 <br/>
 
 ## 👩🏻‍💻 팀원 소개
-|황제철|신윤종|김진우|김진영|이희정|안서현|
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:| 
-|[@THLcode](https://github.com/THLcode)|[@Jun-0727](https://github.com/Jun-0727)|[@myqewr](https://github.com/myqewr)|[@dlwlals1289](https://github.com/dlwlals1289)|[@lemoncurdyogurt](https://github.com/lemoncurdyogurt)|[@gahyun02](https://github.com/gahyun02)|[@seulgi99](https://github.com/seulgi99)|[@shinddong](https://github.com/shinddong)|
+## 백엔드 팀 소개
+|황제철|김진우|신윤종|
+|:-:|:-:|:-:| 
+|사진|사진|사진| 
+|[@THLcode](https://github.com/THLcode)|[@rokaf9326](https://github.com/rokaf9326)|[@myqewr](https://github.com/myqewr)|[@dlwlals1289](https://github.com/dlwlals1289)|[@lemoncurdyogurt](https://github.com/lemoncurdyogurt)|[@gahyun02](https://github.com/gahyun02)|[@seulgi99](https://github.com/seulgi99)|[@shinddong](https://github.com/shinddong)|
 <br />
+
+## 프론트엔드 팀 소개
+|김진영|이희정|안서현|
+|:-:|:-:|:-:| 
+|사진|사진|사진| 
