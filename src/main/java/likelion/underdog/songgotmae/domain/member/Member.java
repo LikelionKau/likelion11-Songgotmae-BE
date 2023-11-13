@@ -3,16 +3,13 @@ package likelion.underdog.songgotmae.domain.member;
 import javax.persistence.*;
 
 import likelion.underdog.songgotmae.domain.common.BaseTimeEntity;
+import likelion.underdog.songgotmae.web.dto.member.MemberPwChangeRequestDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -35,7 +32,7 @@ public class Member extends BaseTimeEntity {
     private String password;
 
     @Comment("이메일 형식")
-    @Column(name = "kau_email", unique = true, nullable = false, length = 30)
+    @Column(name = "kau_email", unique = true, nullable = false, length = 30    )
     private String kauEmail;
 
     @Comment("이메일 형식")
@@ -55,6 +52,14 @@ public class Member extends BaseTimeEntity {
         this.kauEmail = kauEmail;
         this.socialEmail = socialEmail;
         this.role = role;
+    }
+
+    /*
+    * setter의 무분별한 사용을 자제하고, setter 생성의 의도를 명확히 하기 위해 파라미터를 활용하여 사용을 제한함
+    * */
+    public Member setPassword(MemberPwChangeRequestDto pwChangeRequestDto) {
+        this.password = pwChangeRequestDto.getNewPassword();
+        return this;
     }
 
     // TODO : (1) 구글 로그인 시 유저 정보 입력 빌더, (2) 일반 로그인 시, 추후 구글 아이디 연결
