@@ -19,11 +19,16 @@ public class MemberResponseDto {
 
 
     @Data
-    public static class LoginResponseDto {
+    public static class CommonResponseDto {
         private Long id;
 
-        public LoginResponseDto(LoginMember loginMember) {
+        public CommonResponseDto(LoginMember loginMember) {
             this.id = loginMember.getMember().getId();
         }
+
+        public CommonResponseDto(Member member) {
+            this.id = member.getId();
+        }
     }
+
 }
