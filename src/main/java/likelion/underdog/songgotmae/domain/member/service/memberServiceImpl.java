@@ -48,7 +48,7 @@ public class memberServiceImpl implements memberService {
         log.info("INFO : 회원 패스워드 변경 진행");
         Member findMember = memberRepository.findByKauEmail(email).orElseThrow(() -> new CustomNotFoundException("가입 정보가 없습니다."));
         Member changeMember = findMember.setPassword(pwChangeRequest.encode(passwordEncoder));
-        memberRepository.flush();
+//        memberRepository.flush();
         return new MemberResponseDto.CommonResponseDto(changeMember);
     }
 
