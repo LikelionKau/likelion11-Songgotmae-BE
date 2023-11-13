@@ -6,7 +6,7 @@ import likelion.underdog.songgotmae.util.constant.JwtVO;
 import likelion.underdog.songgotmae.domain.member.service.JwtProcess;
 import likelion.underdog.songgotmae.util.formatter.CustomResponseFormatter;
 import likelion.underdog.songgotmae.web.dto.member.MemberLoginRequestDto;
-import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.LoginResponseDto;
+import likelion.underdog.songgotmae.web.dto.member.MemberResponseDto.CommonResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -60,7 +60,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         LoginMember loginMember = (LoginMember) authResult.getPrincipal();
         String accessToken = JwtProcess.create(loginMember);
         response.addHeader(JwtVO.HEADER, accessToken);
-        LoginResponseDto loginResponseDto = new LoginResponseDto(loginMember);
-        CustomResponseFormatter.success(response, loginResponseDto);
+        CommonResponseDto commonResponseDto = new CommonResponseDto(loginMember);
+        CustomResponseFormatter.success(response, commonResponseDto);
     }
 }
