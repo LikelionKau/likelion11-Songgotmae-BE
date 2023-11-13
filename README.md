@@ -27,7 +27,18 @@
 <br/>
 
 ## 👩🏻‍💻 팀원 소개
-|이태휘|이준영|김민영|이지민|신수진|이가현|김슬기|신동렬
-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:| 
-|[@THLcode](https://github.com/THLcode)|[@Jun-0727](https://github.com/Jun-0727)|[@myqewr](https://github.com/myqewr)|[@dlwlals1289](https://github.com/dlwlals1289)|[@lemoncurdyogurt](https://github.com/lemoncurdyogurt)|[@gahyun02](https://github.com/gahyun02)|[@seulgi99](https://github.com/seulgi99)|[@shinddong](https://github.com/shinddong)|
+|이희정|황제철|김진영|김진우|안서현|신윤종
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|[]()|[]()|[]()|[]()|[]()|[@Vettel22](https://github.com/Vettel22)|
+<br/>
+
+## 🛠 기술 스택
+|역할|종류|
+|-|-|
+|Framework|![Spring Boot](https://img.shields.io/badge/springboot-6DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)|
+|Deploy|![Amazon EC2](https://img.shields.io/badge/Amazon_EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white)|
+|Database|![MySQL](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white)  ![RDS](https://img.shields.io/badge/Amazon_RDS-527FFF.svg?style=for-the-badge&logo=AmazonRDS&logoColor=white) |
+|Programming Language|![Java](https://img.shields.io/badge/JAVA-007396.svg?&style=for-the-badge&logo=JAVA&logoColor=white)|
+|Cloud Storage|![Amazon S3](https://img.shields.io/badge/-Amazon_S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white)|
+|Version Control|![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) |
 <br />
