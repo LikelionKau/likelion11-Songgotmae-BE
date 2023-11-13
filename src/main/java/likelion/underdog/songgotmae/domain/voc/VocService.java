@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface VocService {
     VocDto.SaveResponseDto createPost(VocDto.CreateRequestDto requestBody);
+
+    VocDto.SaveResponseDto updatePost(VocDto.UpdateRequestDto updateRequest);
     Page<VocDto.FindResponseDto> findAllVocsOrderByCreatedAt(Pageable pageable);
     VocDto.DeleteResponseDto deletePost(Long postId);
 }

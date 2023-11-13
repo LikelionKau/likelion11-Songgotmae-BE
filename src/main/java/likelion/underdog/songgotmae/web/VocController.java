@@ -35,6 +35,14 @@ public class VocController {
                 .body(saveResponseDto);
     }
 
+    @PutMapping("/vocs/update")
+    public ResponseEntity<?> updatePost(@RequestBody @Valid VocDto.UpdateRequestDto updateRequest, BindingResult bindingResult) {
+        VocDto.SaveResponseDto saveResponseDto = vocService.updatePost(updateRequest);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(saveResponseDto);
+    }
+
     @GetMapping("/all")
     public Page<VocDto.FindResponseDto> getVocsPage(
             @RequestParam(required = false, defaultValue = "0", value = "page") int pageNo,
@@ -42,6 +50,7 @@ public class VocController {
             @RequestParam(required = false, defaultValue = "DESC", value = "sort") String sort) {
         Pageable pageable = PageRequest.of(pageNo, 10, Sort.by(Sort.Order.desc(criteria)));
         return vocService.findAllVocsOrderByCreatedAt(pageable);
+    }
       
     @DeleteMapping("/vocs/{postId}")
     public ResponseEntity<VocDto.DeleteResponseDto> deletePost(@PathVariable Long postId) {

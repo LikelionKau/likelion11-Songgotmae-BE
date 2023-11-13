@@ -59,4 +59,15 @@ public class VocDto {
             this.message = "게시물을 삭제하였습니다.";
         }
     }
+
+    @Data
+    public static class UpdateRequestDto {
+        @NotNull(message = "작성 유저가 있어야 합니다.")
+        private Long vocId;
+        @NotBlank(message = "제목을 입력해야 합니다.")
+        private String title;
+        @NotBlank(message = "내용을 입력해야 합니다.")
+        private String content;
+    }
+
 }
