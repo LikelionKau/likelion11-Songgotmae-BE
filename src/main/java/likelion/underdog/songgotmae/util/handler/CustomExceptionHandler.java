@@ -1,10 +1,7 @@
 package likelion.underdog.songgotmae.util.handler;
 
 import com.auth0.jwt.exceptions.SignatureVerificationException;
-import likelion.underdog.songgotmae.util.exception.CustomForbiddenException;
-import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
-import likelion.underdog.songgotmae.util.exception.CustomValidationException;
-import likelion.underdog.songgotmae.util.exception.MemberAlreadyExistException;
+import likelion.underdog.songgotmae.util.exception.*;
 import likelion.underdog.songgotmae.web.dto.CommonResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
