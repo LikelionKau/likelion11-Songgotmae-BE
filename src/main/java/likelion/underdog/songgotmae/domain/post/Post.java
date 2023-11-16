@@ -9,10 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -39,7 +36,7 @@ public class Post extends BaseTimeEntity {
 
     private Long agreementCount;
     private Long disagreementCount;
-    private Long opinionCount;
+    private Long totalOpinionCount; // 동의,비동의 총 카운트
 
     public void updateAgreementCounts(long agreementCount, long disagreementCount) {
         this.agreementCount = agreementCount;
@@ -62,7 +59,7 @@ public class Post extends BaseTimeEntity {
         this.isApproved = isApproved;
         this.agreementCount = 0L; //초기값 0 설정
         this.disagreementCount = 0L; //초기값 0 설정
-        this.opinionCount = this.agreementCount + this.disagreementCount;
+        this.totalOpinionCount = this.agreementCount + this.disagreementCount;
     }
 
     public void setTitle(String title) {

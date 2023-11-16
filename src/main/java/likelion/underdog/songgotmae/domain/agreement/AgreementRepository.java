@@ -13,4 +13,8 @@ public interface AgreementRepository extends JpaRepository<Agreement, Long> {
     Optional<Agreement> findByMemberAndPost(Member member, Post post);
 
     List<Agreement> findByPost(Post post);
+
+    List<Agreement> findByPostAndIsAgreeIsFalse(Post post);
+
+    List<Agreement> findByPostAndIsAgreeIsTrue(Post post);
 }
