@@ -170,3 +170,8 @@
 ![image](https://github.com/LikelionKau/likelion11-Songgotmae-BE/assets/128979289/2780b7bf-c1fb-4881-a866-2ffaec306e5f)
 
 
+##Server Architecture
+
+
+<img width="758" alt="server architecture" src="https://github.com/LikelionKau/likelion11-Songgotmae-BE/assets/128927033/7f8dade6-d9ba-4456-83b2-8c9eae3d0863">
+
