@@ -150,3 +150,8 @@
 └─📂target
 ```
 
+##Server Architecture
+
+
+<img width="758" alt="server architecture" src="https://github.com/LikelionKau/likelion11-Songgotmae-BE/assets/128927033/7f8dade6-d9ba-4456-83b2-8c9eae3d0863">
+
