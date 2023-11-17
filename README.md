@@ -42,9 +42,10 @@
 
 ## API소개
 주로 JIRA를 통해 협력하였고, 각자 맡은 API는 다음과 같다. <br/>
-#### 황제철 :   <br/>
+#### 황제철 :   <br/> ![image](https://github.com/LikelionKau/likelion11-Songgotmae-BE/assets/128979289/b25a44fc-9d6e-4cb5-8abf-eb79634c634e)
 #### 김진우 : <br/><br/> ![image](https://github.com/LikelionKau/likelion11-Songgotmae-BE/assets/128979289/511583be-2158-4666-8004-5c4caccf7f25)
-#### 신윤종 :   <br/>
+#### 신윤종 :   <br/> ![image](https://github.com/LikelionKau/likelion11-Songgotmae-BE/assets/128979289/82938060-9eaf-4632-99fb-d15341ac9fac)
+
 
 ## 프론트엔드 팀 소개
 |김진영|이희정|안서현|
@@ -149,4 +150,7 @@
 │                              
 └─📂target
 ```
+
+## ERD 구조
+<br /> ![image](https://github.com/LikelionKau/likelion11-Songgotmae-BE/assets/128979289/5824f3a7-0464-4d1b-b0a0-c475ba52120f)
 
