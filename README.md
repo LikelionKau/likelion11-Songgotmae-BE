@@ -32,32 +32,37 @@
 |황제철|김진우|신윤종|
 |:-:|:-:|:-:| 
 |사진|사진|사진| 
-|[]()|[]()|[@Vettel22](https://github.com/Vettel22)|
+|[@HwangBaco](https://github.com/HwangBaco)|[@4lazybugs](https://github.com/4lazybugs)|[@Vettel22](https://github.com/Vettel22)|
 <br/>
+
 ## 프론트엔드 팀 소개
-|김진영|이희정|안서현|
-|:-:|:-:|:-:| 
+|이희정|김진영|안서현|
+|:-:|:-:|:-:|
 |사진|사진|사진|
-|[]()|[]()|[]()|
+|[@jjeongee](https://github.com/jjeongee)|[@KIMJINBBANG](https://github.com/KIMJINBBANG)|[@seohyuna](https://github.com/seohyuna)|
 <br/>
 
 
 
-|이희정|황제철|김진영|김진우|안서현|신윤종
-|:-:|:-:|:-:|:-:|:-:|:-:|
-|[]()|[]()|[]()|[]()|[]()|[@Vettel22](https://github.com/Vettel22)|
-<br/>
+
 
 
 ## 🛠 기술 스택
-|역할|종류|
-|-|-|
-|Framework|![Spring Boot](https://img.shields.io/badge/springboot-6DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)|
-|Deploy|![Amazon EC2](https://img.shields.io/badge/Amazon_EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white)|
-|Database|![MySQL](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white)  ![RDS](https://img.shields.io/badge/Amazon_RDS-527FFF.svg?style=for-the-badge&logo=AmazonRDS&logoColor=white) |
-|Programming Language|![Java](https://img.shields.io/badge/JAVA-007396.svg?&style=for-the-badge&logo=JAVA&logoColor=white)|
-|Cloud Storage|![Amazon S3](https://img.shields.io/badge/-Amazon_S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white)|
-|Version Control|![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) |
+![Spring Boot](https://img.shields.io/badge/springboot-6DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)
+![AWS EC2](https://img.shields.io/badge/Amazon_EC2-FF9900?style=for-the-badge&logo=AmazonEC2&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white)  ![AWS RDS](https://img.shields.io/badge/Amazon_RDS-527FFF.svg?style=for-the-badge&logo=AmazonRDS&logoColor=white) 
+![Java](https://img.shields.io/badge/JAVA-007396.svg?&style=for-the-badge&logo=JAVA&logoColor=white)
+![Amazon S3](https://img.shields.io/badge/-Amazon_S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white)
+![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) 
+![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 
+![AWS Route 53](https://img.shields.io/badge/amazonroute53-8C4FFF?style=for-the-badge&logo=amazonroute53&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+![jira](https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=jira&logoColor=white)
+![githubactions](https://img.shields.io/badge/githubactions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white)
+![springsecurity](https://img.shields.io/badge/springsecurity-6DB33F?style=for-the-badge&logo=springsecurity&logoColor=white)
+
+
 
 <br />
 
@@ -140,3 +145,4 @@
 └─📂target
 ```
 
+<img src="/uploads/1848994ad25765da30fa8ef3684c67bc/캡처.PNG"  width="700" height="370">
