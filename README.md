@@ -22,16 +22,32 @@
 송곳매 회원으로 등록된 구성원이 자신의 상세 정보를 열람하거나 수정하고 자신이 작성하거나 좋아요한 게시글과 댓글을 확인할 수 있는 페이지입니다.
 
 ### 6️⃣ 소셜로그인  
-구글, 카카오, 네이버, 깃허브를 통해 회원가입하고 로그인하는 기능입니다.
+구글, 학교 메일을 통해 회원가입하고 로그인하는 기능입니다.
 
 <br/>
 
 ## 👩🏻‍💻 팀원 소개
 
+## 백엔드 팀 소개
+|황제철|김진우|신윤종|
+|:-:|:-:|:-:| 
+|사진|사진|사진| 
+|[]()|[]()|[@Vettel22](https://github.com/Vettel22)|
+<br/>
+## 프론트엔드 팀 소개
+|김진영|이희정|안서현|
+|:-:|:-:|:-:| 
+|사진|사진|사진|
+|[]()|[]()|[]()|
+<br/>
+
+
+
 |이희정|황제철|김진영|김진우|안서현|신윤종
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |[]()|[]()|[]()|[]()|[]()|[@Vettel22](https://github.com/Vettel22)|
 <br/>
+
 
 ## 🛠 기술 스택
 |역할|종류|
@@ -43,15 +59,84 @@
 |Cloud Storage|![Amazon S3](https://img.shields.io/badge/-Amazon_S3-569A31?style=for-the-badge&logo=AmazonS3&logoColor=white)|
 |Version Control|![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) |
 
-## 백엔드 팀 소개
-|황제철|김진우|신윤종|
-|:-:|:-:|:-:| 
-|사진|사진|사진| 
-|[@THLcode](https://github.com/THLcode)|[@rokaf9326](https://github.com/rokaf9326)|[@myqewr](https://github.com/myqewr)|[@dlwlals1289](https://github.com/dlwlals1289)|[@lemoncurdyogurt](https://github.com/lemoncurdyogurt)|[@gahyun02](https://github.com/gahyun02)|[@seulgi99](https://github.com/seulgi99)|[@shinddong](https://github.com/shinddong)|
-
 <br />
 
-## 프론트엔드 팀 소개
-|김진영|이희정|안서현|
-|:-:|:-:|:-:| 
-|사진|사진|사진| 
+## 📂 폴더 구조
+```
+│  📂.gitignore
+│  📂build.gradle
+│  📂Dockerfile
+│  📂gradlew
+│  📂gradlew.bat
+│  📂logs
+│  📂settings.gradle
+│  📂useFlow.md
+│  
+├─📂.github
+│  └─📂workflows
+│          
+├─📂.gradle
+│  │  
+│  ├─📂8.2.1
+│  │  │  
+│  │  ├─📂checksums
+│  │  │      
+│  │  ├─📂dependencies-accessors
+│  │  │      
+│  │  ├─📂executionHistory
+│  │  │      
+│  │  ├─📂fileChanges
+│  │  │      
+│  │  ├─📂fileHashes
+│  │  │      
+│  │  └─📂vcsMetadata
+│  ├─📂buildOutputCleanup
+│  │      
+│  └─📂vcs-1
+│          
+├─📂.idea
+│  │  
+│  └─📂modules
+│          
+├─📂build
+│  │  
+│  ├─📂classes
+│  │  └─📂java
+│  │                          
+│  ├─📂generated
+│  │  └─📂sources
+│  ├─📂libs
+│  │      
+│  ├─📂reports
+│  │  └─📂tests
+│  │                  
+│  ├─📂resources
+│  │  └─📂main
+│  │          
+│  ├─📂test-results
+│  │  └─📂test
+│  │              
+│  └─📂tmp
+│      ├─📂bootJar
+│      │      
+│      ├─📂compileJava
+│      │              
+│      ├─📂compileTestJava
+│      ├─📂jar
+│      │      
+│      └─📂test
+├─📂gradle
+│  └─📂wrapper
+│          
+├─📂src
+│  ├─📂main
+│  │  ├─📂java
+│  │  │                              
+│  │  └─📂resources
+│  │              
+│  └─📂test
+│      └─📂java
+│                              
+└─📂target
+```
+
