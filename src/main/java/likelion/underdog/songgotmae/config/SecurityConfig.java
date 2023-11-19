@@ -98,9 +98,9 @@ public class SecurityConfig{
         exposedHeaders.add("Authorization");
 
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(ALLOW_ORIGINS);
         configuration.setAllowedHeaders(ALLOW_HEADERS);
         configuration.setAllowedMethods(ALLOW_METHODS); // GET, POST, PUT, DELETE (javascript 요청 허용)
-        configuration.setAllowedOrigins(ALLOW_ORIGINS); // 모든 IP 주소 허용 -> TODO: 항후 프론트엔트 IP만 허용해야함
         configuration.setExposedHeaders(EXPOSED_HEADERS);
         configuration.setAllowCredentials(true);
 
