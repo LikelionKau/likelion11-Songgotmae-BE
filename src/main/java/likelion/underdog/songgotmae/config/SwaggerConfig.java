@@ -20,7 +20,7 @@ public class SwaggerConfig {
     public OpenAPI sgmaeAPI() {
         return new OpenAPI()
                 .info(new Info().title("송곳매 API")
-                        .description("항공대 청원서비스 송곳매 API specification")
+                        .description("항공대 청원서비스 송곳매 API specification (수정)")
                         .version("v0.1")
                         .license(new License().name("LikelionKau 깃허브 주소").url("https://github.com/LikelionKau")));
     }
