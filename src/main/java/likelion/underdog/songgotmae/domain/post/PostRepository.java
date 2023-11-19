@@ -24,8 +24,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findAll(Pageable pageable);
 
     Page<Post> findAllByOrderByCreatedAt(Pageable pageable);
-    Page<Post> findAllByOrderByOpinionCount(Pageable pageable);
-
+    Page<Post> findAllByOrderByTotalOpinionCount(Pageable pageable);
 
     Page<Post> findByTitleContaining(String keyword, Pageable pageable);
 

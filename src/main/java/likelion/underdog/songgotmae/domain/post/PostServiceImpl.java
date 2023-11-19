@@ -6,6 +6,8 @@ import likelion.underdog.songgotmae.domain.member.Member;
 import likelion.underdog.songgotmae.domain.member.repository.MemberRepository;
 import likelion.underdog.songgotmae.util.auth.SecurityUtils;
 import likelion.underdog.songgotmae.util.exception.CustomNotFoundException;
+import likelion.underdog.songgotmae.web.dto.PostDetailFindRequestDto;
+import likelion.underdog.songgotmae.web.dto.PostDetailResponseDto;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -122,6 +124,16 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public PostDetailResponseDto findPostById(PostDetailFindRequestDto requestDto) {
+        Long postId = requestDto.postId();
+        Post findPost = postRepository.findById(postId).orElseThrow(() -> new EntityNotFoundException("존재하지 않는 게시글입니다."));
+        Long findDisagreements = Long.valueOf(agreementRepository.findByPostAndIsAgreeIsFalse(findPost).size());
+        Long findAgreements = Long.valueOf(agreementRepository.findByPostAndIsAgreeIsTrue(findPost).size());
+
+        return new PostDetailResponseDto(findPost, findAgreements, findDisagreements);
+    }
+
+    @Override
     public List<PostDto.FindResponseDto> findAllPosts() {
         List<Post> findPosts = postRepository.findAllPosts();
         return getDtoList(findPosts);
@@ -179,7 +191,7 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional(readOnly = true)
     public Page<PostDto.FindResponseDto> findAllPostsOrderByOpinionCount(Pageable pageable) {
-        Page<Post> posts = postRepository.findAllByOrderByOpinionCount(pageable);
+        Page<Post> posts = postRepository.findAllByOrderByTotalOpinionCount(pageable);
         return posts.map(p -> PostDto.FindResponseDto.builder().post(p).build());
     }
 

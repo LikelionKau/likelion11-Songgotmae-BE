@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import likelion.underdog.songgotmae.domain.post.Post;
 import likelion.underdog.songgotmae.domain.post.PostRepository;
 import likelion.underdog.songgotmae.domain.post.PostService;
+import likelion.underdog.songgotmae.web.dto.PostDetailFindRequestDto;
+import likelion.underdog.songgotmae.web.dto.PostDetailResponseDto;
 import likelion.underdog.songgotmae.web.dto.PostDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +69,13 @@ public class PostController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(memberPosts);
+    }
+
+    @Operation(summary = "게시글 하나의 디테일을 조회할 수 있는 api입니다.")
+    @GetMapping("posts/{postId}")
+    public ResponseEntity<?> findPostById(@NotNull @PathVariable Long postId) {
+        PostDetailResponseDto responseBody = postService.findPostById(new PostDetailFindRequestDto(postId));
+        return ResponseEntity.ok(responseBody);
     }
 
     @GetMapping("/posts/orderedByCreatedAt")
